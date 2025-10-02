@@ -1,0 +1,20 @@
+ .news-card {
+     transition: all 0.3s ease;
+ }
+
+ .news-card:hover {
+     transform: translateY(-2px);
+     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+ }
+
+ .category-tag {
+     transition: all 0.2s ease;
+ }
+
+ .category-tag:hover {
+     transform: scale(1.05);
+ }
+
+ .search-input:focus {
+     box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
+ }

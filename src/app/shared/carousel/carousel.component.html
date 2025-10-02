@@ -1,0 +1,47 @@
+<section class="relative h-[640px] overflow-hidden">
+  <!-- Slides container -->
+  <div class="absolute inset-0 transition-all duration-1000">
+    <div *ngFor="let slide of slides; let i = index"
+      class="absolute inset-0 transition-opacity duration-1000 ease-in-out"
+      [ngClass]="{ 'opacity-100 z-10': i === currentIndex, 'opacity-0 z-0': i !== currentIndex }"
+      [ngStyle]="{
+        'background-image': 'url(' + slide.image + ')',
+        'background-size': 'cover',
+        'background-position': 'center'
+      }">
+
+      <!-- Gradient overlay -->
+      <div class="absolute inset-0 bg-gradient-to-r from-white/80 to-white/10"></div>
+
+      <!-- Slide Content -->
+      <div class="relative container mx-auto px-6 py-20 h-full flex items-center">
+        <div class="max-w-2xl">
+          <h1 class="text-5xl font-bold text-gray-900 mb-6">{{ slide.title }}</h1>
+          <p class="text-xl text-gray-700 mb-8">{{ slide.text }}</p>
+          <div class="flex flex-col lg:flex-row gap-4">
+            <button routerLink="/verify-practitioner"
+              class="rounded-lg flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-medium hover:bg-blue-700">
+              <i class="ri-check-line"></i>
+              Verify a Practitioner
+            </button>
+            <button
+              class="rounded-lg flex items-center gap-2 px-6 py-3 border bg-green-500 text-white font-medium hover:bg-green-600">
+              <i class="ri-edit-line"></i>
+              Register as a Practitioner
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Carousel Navigation (optional) -->
+  <div class="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex gap-2">
+    <button
+      *ngFor="let slide of slides; let i = index"
+      (click)="goToSlide(i)"
+      class="w-3 h-3 rounded-full"
+      [ngClass]="{ 'bg-blue-600': i === currentIndex, 'bg-gray-300': i !== currentIndex }">
+    </button>
+  </div>
+</section>

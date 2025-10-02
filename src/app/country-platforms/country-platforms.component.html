@@ -1,0 +1,456 @@
+<div class="bg-white">
+    <app-header/>
+    <main class="pt-16">
+        <section class="relative h-[400px] flex items-center"
+            style="background-image: url('https://readdy.ai/api/search-image?query=Modern%20African%20continent%20map%20with%20digital%20connectivity%20lines%20and%20healthcare%20technology%20elements.%20Professional%20blue%20and%20green%20color%20scheme%20with%20medical%20cross%20symbols%20and%20network%20connections%20across%20different%20countries.%20Clean%20minimalist%20design%20with%20white%20space%20on%20left%20side%20for%20text%20overlay%2C%20continent%20silhouette%20on%20right%20side%20with%20glowing%20connection%20points&width=1920&height=400&seq=16&orientation=landscape'); background-size: cover; background-position: center;">
+            <div class="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent"></div>
+            <div class="container mx-auto px-6 relative">
+                <div class="max-w-2xl">
+                    <h1 class="text-5xl font-bold text-gray-900 mb-4">Explore Our Country Platforms</h1>
+                    <p class="text-xl text-gray-600 mb-6">AMR is connecting Africa — one nation at a time.</p>
+                    <div class="flex items-center gap-8">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-blue-500">10</div>
+                            <div class="text-sm text-gray-600">Active Countries</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-secondary">25,000+</div>
+                            <div class="text-sm text-gray-600">Verified Practitioners</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-gray-900">54</div>
+                            <div class="text-sm text-gray-600">Target Nations</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto text-center mb-16">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Trusted Health Verification Platforms in Every
+                        Region</h2>
+                    <p class="text-lg text-gray-600 mb-8">The African Medical Registry (AMR) works directly with each
+                        country's national councils and health institutions to deploy customized verification platforms.
+                        These country-specific systems are all connected to AMR's secure backbone — ensuring real-time
+                        practitioner validation, national compliance, and continental unity.</p>
+                    <p class="text-blue-500 font-medium">Click on any country below to visit its dedicated platform.</p>
+                </div>
+                <div class="mb-12">
+                    <div class="flex flex-col lg:flex-row items-center justify-center gap-8 mb-8">
+                        <div class="flex items-center gap-3">
+                            <div class="w-4 h-4 rounded-full status-live"></div>
+                            <span class="text-sm font-medium text-gray-700">Live Platforms</span>
+                            <span
+                                class="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">3</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-4 h-4 rounded-full status-development"></div>
+                            <span class="text-sm font-medium text-gray-700">In Development</span>
+                            <span
+                                class="px-2 py-1 bg-orange-100 text-orange-800 text-xs font-medium rounded-full">4</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-4 h-4 rounded-full status-mobilizing"></div>
+                            <span class="text-sm font-medium text-gray-700">Mobilizing</span>
+                            <span class="px-2 py-1 bg-gray-100 text-gray-800 text-xs font-medium rounded-full">3</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-center mb-8">
+                        <div class="flex bg-gray-100 rounded-full p-1">
+                            <button id="gridView"
+                                class="px-4 py-2 rounded-full text-sm font-medium bg-white text-gray-900 shadow-sm">
+                                <i class="ri-grid-line mr-2"></i>Grid View
+                            </button>
+                            <button id="mapView"
+                                class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 hover:text-gray-900">
+                                <i class="ri-map-2-line mr-2"></i>Map View
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="gridContainer">
+                    <div class="mb-12">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+                            <div class="w-8 h-8 flex items-center justify-center bg-green-100 rounded-full">
+                                <i class="ri-map-pin-line text-green-600"></i>
+                            </div>
+                            West Africa
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div
+                                class="country-card bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-lg">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="text-3xl">🇬🇭</div>
+                                    <div class="px-3 py-1 status-live text-white text-xs font-medium rounded-full">Live
+                                    </div>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-2">Ghana Medical Registry</h4>
+                                <p class="text-gray-600 mb-4">Partnered with MDC, TMPC, NMC</p>
+                                <div class="space-y-2 mb-6">
+                                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                                        <i class="ri-user-line w-4 h-4 flex items-center justify-center"></i>
+                                        <span>8,500+ Verified Practitioners</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                                        <i class="ri-shield-check-line w-4 h-4 flex items-center justify-center"></i>
+                                        <span>Real-time Verification</span>
+                                    </div>
+                                </div>
+                                <a href="#"
+                                    class="rounded-lg w-full bg-blue-500 text-white font-medium py-3 text-center block hover:bg-blue-500/90 whitespace-nowrap">
+                                    Visit Platform
+                                </a>
+                            </div>
+                            <div
+                                class="country-card bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-lg">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="text-3xl">🇳🇬</div>
+                                    <div class="px-3 py-1 status-live text-white text-xs font-medium rounded-full">Live
+                                    </div>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-2">Nigeria Medical Registry</h4>
+                                <p class="text-gray-600 mb-4">Partnership with MDCN, NMCN, Pharmacists Council</p>
+                                <div class="space-y-2 mb-6">
+                                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                                        <i class="ri-user-line w-4 h-4 flex items-center justify-center"></i>
+                                        <span>12,000+ Verified Practitioners</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                                        <i class="ri-shield-check-line w-4 h-4 flex items-center justify-center"></i>
+                                        <span>Multi-Council Integration</span>
+                                    </div>
+                                </div>
+                                <a href="#"
+                                    class="rounded-lg w-full bg-blue-500 text-white font-medium py-3 text-center block hover:bg-blue-500/90 whitespace-nowrap">
+                                    Visit Platform
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-12">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+                            <div class="w-8 h-8 flex items-center justify-center bg-blue-100 rounded-full">
+                                <i class="ri-map-pin-line text-blue-600"></i>
+                            </div>
+                            Southern Africa
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div
+                                class="country-card bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-lg">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="text-3xl">🇿🇦</div>
+                                    <div
+                                        class="px-3 py-1 status-development text-white text-xs font-medium rounded-full">
+                                        In Development</div>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-2">South Africa AMR Node</h4>
+                                <p class="text-gray-600 mb-4">Engaging local councils for full launch</p>
+                                <div class="space-y-2 mb-6">
+                                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                                        <i class="ri-time-line w-4 h-4 flex items-center justify-center"></i>
+                                        <span>Planning Phase</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                                        <i class="ri-government-line w-4 h-4 flex items-center justify-center"></i>
+                                        <span>Council Engagement</span>
+                                    </div>
+                                </div>
+                                <a href="#"
+                                    class="rounded-lg w-full bg-gray-100 text-gray-600 font-medium py-3 text-center block hover:bg-gray-200 whitespace-nowrap">
+                                    View Details
+                                </a>
+                            </div>
+                            <div
+                                class="country-card bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-lg">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="text-3xl">🇳🇦</div>
+                                    <div
+                                        class="px-3 py-1 status-mobilizing text-white text-xs font-medium rounded-full">
+                                        Mobilizing</div>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-2">Namibia Medical Registry</h4>
+                                <p class="text-gray-600 mb-4">Onboarding with health regulators</p>
+                                <div class="space-y-2 mb-6">
+                                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                                        <i class="ri-settings-line w-4 h-4 flex items-center justify-center"></i>
+                                        <span>System Setup</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                                        <i class="ri-team-line w-4 h-4 flex items-center justify-center"></i>
+                                        <span>Stakeholder Alignment</span>
+                                    </div>
+                                </div>
+                                <a href="#"
+                                    class="rounded-lg w-full bg-gray-100 text-gray-600 font-medium py-3 text-center block hover:bg-gray-200 whitespace-nowrap">
+                                    View Details
+                                </a>
+                            </div>
+                            <div
+                                class="country-card bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-lg">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="text-3xl">🇧🇼</div>
+                                    <div
+                                        class="px-3 py-1 status-mobilizing text-white text-xs font-medium rounded-full">
+                                        Mobilizing</div>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-2">Botswana Medical Registry</h4>
+                                <p class="text-gray-600 mb-4">Initial mobilization phase</p>
+                                <div class="space-y-2 mb-6">
+                                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                                        <i class="ri-rocket-line w-4 h-4 flex items-center justify-center"></i>
+                                        <span>Launch Preparation</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                                        <i class="ri-file-list-line w-4 h-4 flex items-center justify-center"></i>
+                                        <span>Regulatory Review</span>
+                                    </div>
+                                </div>
+                                <a href="#"
+                                    class="rounded-lg w-full bg-gray-100 text-gray-600 font-medium py-3 text-center block hover:bg-gray-200 whitespace-nowrap">
+                                    View Details
+                                </a>
+                            </div>
+                            <div
+                                class="country-card bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-lg">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="text-3xl">🇿🇼</div>
+                                    <div
+                                        class="px-3 py-1 status-development text-white text-xs font-medium rounded-full">
+                                        Planning</div>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-2">Zimbabwe Medical Registry</h4>
+                                <p class="text-gray-600 mb-4">Supported by diaspora lead in UAE</p>
+                                <div class="space-y-2 mb-6">
+                                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                                        <i class="ri-global-line w-4 h-4 flex items-center justify-center"></i>
+                                        <span>Diaspora Support</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                                        <i class="ri-roadmap-line w-4 h-4 flex items-center justify-center"></i>
+                                        <span>Strategic Planning</span>
+                                    </div>
+                                </div>
+                                <a href="#"
+                                    class="rounded-lg w-full bg-gray-100 text-gray-600 font-medium py-3 text-center block hover:bg-gray-200 whitespace-nowrap">
+                                    View Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-12">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+                            <div class="w-8 h-8 flex items-center justify-center bg-orange-100 rounded-full">
+                                <i class="ri-map-pin-line text-orange-600"></i>
+                            </div>
+                            East Africa
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div
+                                class="country-card bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-lg">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="text-3xl">🇰🇪</div>
+                                    <div
+                                        class="px-3 py-1 status-development text-white text-xs font-medium rounded-full">
+                                        In Development</div>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-2">Kenya Medical Registry</h4>
+                                <p class="text-gray-600 mb-4">Scouting local representation</p>
+                                <div class="space-y-2 mb-6">
+                                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                                        <i class="ri-search-line w-4 h-4 flex items-center justify-center"></i>
+                                        <span>Partner Identification</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                                        <i class="ri-building-line w-4 h-4 flex items-center justify-center"></i>
+                                        <span>Infrastructure Planning</span>
+                                    </div>
+                                </div>
+                                <a href="#"
+                                    class="rounded-lg w-full bg-gray-100 text-gray-600 font-medium py-3 text-center block hover:bg-gray-200 whitespace-nowrap">
+                                    View Details
+                                </a>
+                            </div>
+                            <div
+                                class="country-card bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-lg">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="text-3xl">🇺🇬</div>
+                                    <div
+                                        class="px-3 py-1 status-development text-white text-xs font-medium rounded-full">
+                                        Planning</div>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-2">Uganda Medical Registry</h4>
+                                <p class="text-gray-600 mb-4">Engaging with Ministry of Health</p>
+                                <div class="space-y-2 mb-6">
+                                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                                        <i class="ri-government-line w-4 h-4 flex items-center justify-center"></i>
+                                        <span>Ministry Engagement</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                                        <i class="ri-calendar-line w-4 h-4 flex items-center justify-center"></i>
+                                        <span>Timeline Development</span>
+                                    </div>
+                                </div>
+                                <a href="#"
+                                    class="rounded-lg w-full bg-gray-100 text-gray-600 font-medium py-3 text-center block hover:bg-gray-200 whitespace-nowrap">
+                                    View Details
+                                </a>
+                            </div>
+                            <div
+                                class="country-card bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-lg">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="text-3xl">🇹🇿</div>
+                                    <div
+                                        class="px-3 py-1 status-mobilizing text-white text-xs font-medium rounded-full">
+                                        Mobilizing</div>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-2">Tanzania Medical Registry</h4>
+                                <p class="text-gray-600 mb-4">Early mobilization stage</p>
+                                <div class="space-y-2 mb-6">
+                                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                                        <i class="ri-compass-line w-4 h-4 flex items-center justify-center"></i>
+                                        <span>Market Assessment</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                                        <i class="ri-handshake-line w-4 h-4 flex items-center justify-center"></i>
+                                        <span>Partnership Building</span>
+                                    </div>
+                                </div>
+                                <a href="#"
+                                    class="rounded-lg w-full bg-gray-100 text-gray-600 font-medium py-3 text-center block hover:bg-gray-200 whitespace-nowrap">
+                                    View Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-12">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+                            <div class="w-8 h-8 flex items-center justify-center bg-purple-100 rounded-full">
+                                <i class="ri-map-pin-line text-purple-600"></i>
+                            </div>
+                            North Africa
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div
+                                class="country-card bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-lg">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="text-3xl">🇪🇬</div>
+                                    <div class="px-3 py-1 status-live text-white text-xs font-medium rounded-full">Live
+                                    </div>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-2">Egypt Medical Registry</h4>
+                                <p class="text-gray-600 mb-4">Partnership with Egyptian Medical Syndicate</p>
+                                <div class="space-y-2 mb-6">
+                                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                                        <i class="ri-user-line w-4 h-4 flex items-center justify-center"></i>
+                                        <span>4,200+ Verified Practitioners</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                                        <i class="ri-ancient-gate-line w-4 h-4 flex items-center justify-center"></i>
+                                        <span>Historic Medical Heritage</span>
+                                    </div>
+                                </div>
+                                <a href="#"
+                                    class="rounded-lg w-full bg-blue-500 text-white font-medium py-3 text-center block hover:bg-blue-500/90 whitespace-nowrap">
+                                    Visit Platform
+                                </a>
+                            </div>
+                            <div
+                                class="country-card bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-lg">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="text-3xl">🇲🇦</div>
+                                    <div
+                                        class="px-3 py-1 status-development text-white text-xs font-medium rounded-full">
+                                        Pending</div>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-2">Morocco Medical Registry</h4>
+                                <p class="text-gray-600 mb-4">Pending regulatory onboarding</p>
+                                <div class="space-y-2 mb-6">
+                                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                                        <i class="ri-hourglass-line w-4 h-4 flex items-center justify-center"></i>
+                                        <span>Awaiting Approval</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                                        <i class="ri-file-paper-line w-4 h-4 flex items-center justify-center"></i>
+                                        <span>Documentation Review</span>
+                                    </div>
+                                </div>
+                                <a href="#"
+                                    class="rounded-lg w-full bg-gray-100 text-gray-600 font-medium py-3 text-center block hover:bg-gray-200 whitespace-nowrap">
+                                    View Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-12">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+                            <div class="w-8 h-8 flex items-center justify-center bg-red-100 rounded-full">
+                                <i class="ri-global-line text-red-600"></i>
+                            </div>
+                            Diaspora Network
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div
+                                class="country-card bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-lg">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="text-3xl">🇦🇪</div>
+                                    <div class="px-3 py-1 status-live text-white text-xs font-medium rounded-full">Live
+                                    </div>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-2">UAE Diaspora Node</h4>
+                                <p class="text-gray-600 mb-4">Led by Dr. Nare - Verifies African practitioners in Middle
+                                    East</p>
+                                <div class="space-y-2 mb-6">
+                                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                                        <i class="ri-user-line w-4 h-4 flex items-center justify-center"></i>
+                                        <span>850+ Diaspora Practitioners</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                                        <i class="ri-global-line w-4 h-4 flex items-center justify-center"></i>
+                                        <span>Cross-Border Verification</span>
+                                    </div>
+                                </div>
+                                <a href="#"
+                                    class="rounded-lg w-full bg-blue-500 text-white font-medium py-3 text-center block hover:bg-blue-500/90 whitespace-nowrap">
+                                    Visit Platform
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="mapContainer" class="hidden">
+                    <div
+                        class="map-container rounded-2xl h-96 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black/20"></div>
+                        <div class="relative z-10 text-center text-white">
+                            <h3 class="text-2xl font-bold mb-2">Interactive Map Coming Soon</h3>
+                            <p class="text-white/80">Click and explore AMR presence across Africa</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-16 bg-gradient-to-br from-blue-500/5 to-secondary/5">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Want to Launch AMR in Your Country?</h2>
+                    <p class="text-lg text-gray-600 mb-8">We're expanding AMR into all 54 African nations. If you are a
+                        healthcare professional, policy leader, or regulator interested in launching AMR in your country
+                        — reach out to us.</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                        <a href="mailto:contact@africanmedicalregistry.com"
+                            class="rounded-lg px-8 py-4 bg-blue-500 text-white font-medium hover:bg-blue-500/90 whitespace-nowrap">
+                            <i class="ri-mail-line mr-2"></i>
+                            Become a Country Partner
+                        </a>
+                        <a href="mailto:contact@africanmedicalregistry.com"
+                            class="text-blue-500 hover:text-blue-500/80 font-medium">
+                            {{'contact@africanmedicalregistry.com'}}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <app-footer/>
+</div>

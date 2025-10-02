@@ -1,0 +1,354 @@
+<div class="bg-white">
+    <app-header />
+    <main class="pt-16">
+        <section class="relative h-[320px] flex items-center"
+            style="background-image: url('https://readdy.ai/api/search-image?query=Modern%20African%20healthcare%20professionals%20including%20doctors%20nurses%20and%20medical%20staff%20in%20a%20bright%20contemporary%20medical%20facility%20with%20registration%20and%20verification%20technology%20elements.%20Clean%20professional%20environment%20with%20white%20and%20blue%20color%20scheme%2C%20digital%20interfaces%20and%20medical%20equipment%20in%20background.%20Left%20side%20has%20white%20space%20for%20text%20overlay%2C%20right%20side%20shows%20diverse%20medical%20professionals%20working%20together&width=1920&height=320&seq=15&orientation=landscape'); background-size: cover; background-position: center;">
+            <div class="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent"></div>
+            <div class="container mx-auto px-6 relative">
+                <div class="max-w-2xl">
+                    <h1 class="text-4xl font-bold text-gray-900 mb-4">Register as a Healthcare Practitioner</h1>
+                    <p class="text-xl text-gray-600">Get Verified. Be Visible. Build Trust Across Africa.</p>
+                </div>
+            </div>
+        </section>
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-4">Are You a Licensed Healthcare Practitioner?
+                        </h2>
+                        <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-6">Join the official African Medical
+                            Registry and become part of the continent's most trusted healthcare network. Whether you are
+                            a doctor, nurse, pharmacist, herbalist, or allied health worker, AMR makes your professional
+                            identity verifiable across Africa and the world.</p>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
+                            <div class="flex items-center gap-2 text-sm text-gray-600">
+                                <i class="ri-check-line text-secondary"></i>
+                                <span>Verified AMR profile</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-600">
+                                <i class="ri-check-line text-secondary"></i>
+                                <span>Dynamic QR Code</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-600">
+                                <i class="ri-check-line text-secondary"></i>
+                                <span>Instant credibility</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-600">
+                                <i class="ri-check-line text-secondary"></i>
+                                <span>Fraud protection</span>
+                            </div>
+                        </div>
+                        <p class="text-blue-500 font-medium mt-4">Registration is free during pilot phase.</p>
+                    </div>
+                    <div class="bg-gradient-to-r from-blue-500/5 to-secondary/5 rounded-2xl p-8 mb-12">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-6">Who Can Register?</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 flex items-center justify-center bg-blue-500/10 rounded-full">
+                                    <i class="ri-stethoscope-line text-blue-500"></i>
+                                </div>
+                                <span class="text-gray-700">Medical Doctors & Dentists (licensed by national Medical
+                                    Councils)</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 flex items-center justify-center bg-blue-500/10 rounded-full">
+                                    <i class="ri-nurse-line text-blue-500"></i>
+                                </div>
+                                <span class="text-gray-700">Nurses & Midwives (registered with national Nursing
+                                    Boards)</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 flex items-center justify-center bg-blue-500/10 rounded-full">
+                                    <i class="ri-capsule-line text-blue-500"></i>
+                                </div>
+                                <span class="text-gray-700">Pharmacists (licensed by Pharmacy Councils)</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 flex items-center justify-center bg-blue-500/10 rounded-full">
+                                    <i class="ri-leaf-line text-blue-500"></i>
+                                </div>
+                                <span class="text-gray-700">Medical Herbalists & Traditional Medicine
+                                    Practitioners</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 flex items-center justify-center bg-blue-500/10 rounded-full">
+                                    <i class="ri-microscope-line text-blue-500"></i>
+                                </div>
+                                <span class="text-gray-700">Allied Health Professionals (Lab Technologists,
+                                    Physiotherapists, Radiographers)</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 flex items-center justify-center bg-blue-500/10 rounded-full">
+                                    <i class="ri-heart-pulse-line text-blue-500"></i>
+                                </div>
+                                <span class="text-gray-700">Other certified health workers with regulatory board
+                                    approval</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white border border-gray-200 rounded-2xl shadow-sm">
+                        <div class="p-8">
+                            <div class="flex items-center justify-between mb-8">
+                                <h3 class="text-2xl font-bold text-gray-900">Practitioner Registration Form</h3>
+                            </div>
+                            <form id="registrationForm">
+                                <div id="personalInfo" class="space-y-6">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Full Name (as on
+                                                license) *</label>
+                                            <sc-input />
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Date of Birth
+                                                *</label>
+                                            <sc-date-picker />
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Gender *</label>
+                                            <sc-select placeholder="Select Gender">
+                                                <sc-select-option value="Male" label="Male" />
+                                                <sc-select-option value="Female" label="Female" />
+                                            </sc-select>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Country of
+                                                Practice *</label>
+                                            <sc-select placeholder="Select Country">
+                                                <sc-select-option value="Ghana" label="Ghana" />
+                                                <sc-select-option value="Nigeria" label="Nigeria" />
+                                            </sc-select>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Email Address
+                                                *</label>
+                                            <sc-input type="email" />
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Phone
+                                                Number</label>
+                                            <sc-phone-input [disableCountrySelection]="true" />
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">National ID
+                                                *</label>
+                                            <sc-input />
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Profession
+                                                *</label>
+                                            <sc-input />
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">License Number
+                                                *</label>
+                                            <sc-input />
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Regulatory
+                                                *</label>
+                                            <sc-select placeholder="Select Regulatory">
+                                                <sc-select-option value="Ghana Health Service"
+                                                    label="Ghana Health Service" />
+                                                <sc-select-option value="Nigeria Health Service"
+                                                    label="Nigeria Health Service" />
+                                            </sc-select>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Profile Photo
+                                            (Optional)</label>
+                                        <div
+                                            class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-500/50 transition-colors">
+                                            <div
+                                                class="w-12 h-12 flex items-center justify-center bg-gray-100 rounded-full mx-auto mb-4">
+                                                <i class="ri-camera-line text-xl text-gray-400"></i>
+                                            </div>
+                                            <p class="text-gray-600 mb-2">Upload a passport-style photo</p>
+                                            <p class="text-sm text-gray-500 mb-4">JPG, PNG up to 5MB</p>
+                                            <input type="file" name="photo" accept="image/*" class="hidden"
+                                                id="photoUpload">
+                                            <button type="button"
+                                                onclick="document.getElementById('photoUpload').click()"
+                                                class="rounded-lg px-4 py-2 bg-gray-100 text-gray-700 font-medium hover:bg-gray-200 whitespace-nowrap">
+                                                Choose File
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between pt-6 border-t border-gray-200">
+                                    <button type="button" id="prevBtn"
+                                        class="rounded-lg px-6 py-3 border border-gray-200 text-gray-700 font-medium hover:bg-gray-50 whitespace-nowrap hidden">
+                                        <i class="ri-arrow-left-line mr-2"></i>
+                                        Previous
+                                    </button>
+                                    <div class="flex gap-4">
+                                        <button type="button" id="nextBtn"
+                                            class="rounded-lg px-6 py-3 bg-blue-500 text-white font-medium hover:bg-blue-500/90 whitespace-nowrap">
+                                            Next Step
+                                            <i class="ri-arrow-right-line ml-2"></i>
+                                        </button>
+                                        <button type="submit" id="submitBtn"
+                                            class="rounded-lg px-6 py-3 bg-gradient-to-r from-blue-500 to-secondary text-white font-medium hover:from-blue-500/90 hover:to-secondary/90 whitespace-nowrap hidden">
+                                            <i class="ri-shield-check-line mr-2"></i>
+                                            Submit Application for Verification
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-16 bg-gray-50 hidden lg:flex">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-4">What Happens After I Register?</h2>
+                        <p class="text-lg text-gray-600">Your journey to verified professional status</p>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gray-200 rounded-full">
+                        </div>
+                        <div class="space-y-12">
+                            <div class="flex items-center gap-8">
+                                <div class="flex-1 text-right">
+                                    <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                                        <h3 class="font-semibold text-gray-900 mb-2">Credential Verification</h3>
+                                        <p class="text-gray-600">AMR verifies your license with your national council
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="relative z-10">
+                                    <div
+                                        class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">
+                                        <i class="ri-search-line text-xl"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-1"></div>
+                            </div>
+                            <div class="flex items-center gap-8">
+                                <div class="flex-1"></div>
+                                <div class="relative z-10">
+                                    <div
+                                        class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">
+                                        <i class="ri-shield-line text-xl"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                                        <h3 class="font-semibold text-gray-900 mb-2">Secure Processing</h3>
+                                        <p class="text-gray-600">Your credentials are hashed and secured in the system
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-8">
+                                <div class="flex-1 text-right">
+                                    <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                                        <h3 class="font-semibold text-gray-900 mb-2">Profile Activation</h3>
+                                        <p class="text-gray-600">You receive your unique QR code and AMR profile link
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="relative z-10">
+                                    <div
+                                        class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">
+                                        <i class="ri-check-line text-xl"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-1"></div>
+                            </div>
+                            <div class="flex items-center gap-8">
+                                <div class="flex-1"></div>
+                                <div class="relative z-10">
+                                    <div
+                                        class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">
+                                        <i class="ri-smartphone-line text-xl"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                                        <h3 class="font-semibold text-gray-900 mb-2">Go Live</h3>
+                                        <p class="text-gray-600">You become instantly searchable on the AMR platform</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-16 bg-gray-50 lg:hidden flex">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-4">What Happens After I Register?</h2>
+                        <p class="text-lg text-gray-600">Your journey to verified professional status</p>
+                    </div>
+                    <div class="relative">
+                        <div class="space-y-6">
+                            <div class="flex-1">
+                                <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                                    <h3 class="font-semibold text-gray-900 mb-2">Credential Verification</h3>
+                                    <p class="text-gray-600">AMR verifies your license with your national council
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                                    <h3 class="font-semibold text-gray-900 mb-2">Secure Processing</h3>
+                                    <p class="text-gray-600">Your credentials are hashed and secured in the system
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                                    <h3 class="font-semibold text-gray-900 mb-2">Profile Activation</h3>
+                                    <p class="text-gray-600">You receive your unique QR code and AMR profile link
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                                    <h3 class="font-semibold text-gray-900 mb-2">Go Live</h3>
+                                    <p class="text-gray-600">You become instantly searchable on the AMR platform</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div id="successModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden">
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg bg-white rounded-2xl shadow-xl">
+                <div class="p-8 text-center">
+                    <div class="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="ri-check-line text-3xl text-secondary"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Application Submitted Successfully!</h3>
+                    <p class="text-gray-600 mb-6">Thank you! Your application has been received. We will verify your
+                        credentials with your national regulatory body and send a confirmation email within 5–10 working
+                        days.</p>
+                    <button id="closeModal"
+                        class="rounded-lg w-full bg-blue-500 text-white font-medium py-3 hover:bg-blue-500/90 whitespace-nowrap">
+                        Continue to Dashboard
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <app-footer />
+</div>

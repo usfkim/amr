@@ -1,0 +1,20 @@
+.dashboard-card {
+    transition: all 0.3s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.secure-gradient {
+    background: linear-gradient(135deg, #1e40af, #3b82f6);
+}
+
+.compliance-gradient {
+    background: linear-gradient(135deg, #059669, #10b981);
+}
+
+.audit-gradient {
+    background: linear-gradient(135deg, #7c3aed, #8b5cf6);
+}

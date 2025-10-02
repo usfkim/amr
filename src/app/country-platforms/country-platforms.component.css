@@ -1,0 +1,26 @@
+country-card {
+    transition: all 0.3s ease;
+}
+
+.country-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.status-live {
+    background: linear-gradient(135deg, #10B981, #059669);
+}
+
+.status-development {
+    background: linear-gradient(135deg, #F59E0B, #D97706);
+}
+
+.status-mobilizing {
+    background: linear-gradient(135deg, #6B7280, #4B5563);
+}
+
+.map-container {
+    background-image: url('https://public.readdy.ai/gen_page/map_placeholder_1280x720.png');
+    background-size: cover;
+    background-position: center;
+}
