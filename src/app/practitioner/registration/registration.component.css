@@ -1,0 +1,40 @@
+.step-active {
+    background: linear-gradient(135deg, #0066FF, #00CC88);
+}
+
+.step-completed {
+    background: #00CC88;
+}
+
+.step-inactive {
+    background: #E5E7EB;
+    color: #6B7280;
+}
+
+.form-section {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.file-upload-area {
+    transition: all 0.3s ease;
+}
+
+.file-upload-area:hover {
+    border-color: #3B82F6;
+    background-color: #F8FAFC;
+}
+
+.progress-line {
+    transition: width 0.5s ease-in-out;
+}

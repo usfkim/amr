@@ -1,0 +1,30 @@
+.profile-card {
+  transition: all 0.3s ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.profile-photo {
+  transition: all 0.3s ease;
+}
+
+.profile-photo:hover {
+  transform: scale(1.05);
+}
+
+.edit-mode input:focus,
+.edit-mode select:focus,
+.edit-mode textarea:focus {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.privacy-setting {
+  transition: all 0.2s ease;
+}
+
+.privacy-setting:hover {
+  background-color: #f8fafc;
+}

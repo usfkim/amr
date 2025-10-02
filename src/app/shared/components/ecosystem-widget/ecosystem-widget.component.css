@@ -1,0 +1,65 @@
+.ecosystem-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.ecosystem-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #3B82F6, #10B981, #8B5CF6);
+  animation: trustFlow 4s linear infinite;
+}
+
+@keyframes trustFlow {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.ecosystem-network {
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+  animation: networkPulse 6s ease-in-out infinite;
+}
+
+@keyframes networkPulse {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.ecosystem-node {
+  animation: nodeFloat 4s ease-in-out infinite;
+}
+
+.ecosystem-node:nth-child(odd) {
+  animation-delay: 0.5s;
+}
+
+.ecosystem-node:nth-child(even) {
+  animation-delay: 1s;
+}
+
+@keyframes nodeFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.connection-line {
+  filter: drop-shadow(0 0 3px rgba(59, 130, 246, 0.5));
+}

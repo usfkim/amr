@@ -1,0 +1,420 @@
+<!-- API Technology Page -->
+<div class="bg-white dark:bg-slate-900">
+  <app-header />
+  <main class="pt-16">
+    <!-- Hero Section -->
+    <section class="relative h-[480px] flex items-center overflow-hidden">
+      <!-- Animated Background -->
+      <div class="absolute inset-0">
+        <div class="api-grid opacity-20"></div>
+        <div class="trust-ecosystem-bg"></div>
+        
+        <!-- Floating API Elements -->
+        <div class="absolute top-20 left-10 trust-badge animate-float">
+          <div class="w-16 h-16 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-xl flex items-center justify-center shadow-lg">
+            <i class="ri-code-line text-white text-xl"></i>
+          </div>
+        </div>
+        <div class="absolute top-40 right-20 trust-badge animate-float" style="animation-delay: 1s;">
+          <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center shadow-lg">
+            <i class="ri-plug-line text-white"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="max-w-4xl mx-auto text-center">
+          <h1 class="text-6xl lg:text-7xl font-black mb-6">
+            <span class="block text-gray-900 dark:text-white">Open</span>
+            <span class="block text-transparent bg-clip-text bg-gradient-to-r from-orange-600 via-yellow-500 to-blue-600 animate-shimmer">
+              APIs
+            </span>
+          </h1>
+          <p class="text-2xl lg:text-3xl text-gray-600 dark:text-gray-300 font-light leading-relaxed mb-8">
+            Enterprise integration. Real-time data. 
+            <span class="font-semibold text-orange-600 dark:text-orange-400">Seamless connectivity.</span>
+          </p>
+
+          <!-- API Stats -->
+          <div class="flex justify-center items-center gap-8 mb-12">
+            <div class="trust-indicator glass rounded-full px-6 py-3">
+              <i class="ri-code-line text-orange-500 mr-2"></i>
+              <span class="text-gray-900 dark:text-white font-bold">REST API v2.1</span>
+            </div>
+            <div class="trust-indicator glass rounded-full px-6 py-3">
+              <i class="ri-speed-line text-blue-500 mr-2"></i>
+              <span class="text-gray-900 dark:text-white font-bold">&lt; 200ms Response</span>
+            </div>
+            <div class="trust-indicator glass rounded-full px-6 py-3">
+              <i class="ri-shield-check-line text-green-500 mr-2"></i>
+              <span class="text-gray-900 dark:text-white font-bold">99.9% Uptime</span>
+            </div>
+          </div>
+
+          <!-- Hero CTAs -->
+          <div class="flex flex-col lg:flex-row justify-center gap-6">
+            <button class="btn-hero bg-gradient-to-r from-orange-600 to-yellow-500 text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-2xl">
+              <i class="ri-file-text-line mr-3"></i>
+              View Documentation
+            </button>
+            <button class="btn-hero glass border-2 border-white/20 text-gray-900 dark:text-white px-8 py-4 rounded-2xl font-bold text-lg">
+              <i class="ri-play-line mr-3"></i>
+              Try API Playground
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- API Endpoints Section -->
+    <section class="py-24 bg-gray-50 dark:bg-slate-800">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-6">API Endpoints</h2>
+            <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              Comprehensive REST API for seamless integration with your existing systems
+            </p>
+          </div>
+
+          <div class="space-y-6">
+            <div *ngFor="let endpoint of apiEndpoints" 
+                 class="api-endpoint-card bg-white dark:bg-slate-900 rounded-2xl border border-gray-200 dark:border-slate-700 p-6 hover:shadow-lg transition-all duration-300">
+              
+              <!-- Endpoint Header -->
+              <div class="flex items-start justify-between mb-4">
+                <div class="flex items-center gap-4">
+                  <span [class]="'px-3 py-1 rounded-lg text-sm font-bold ' + getMethodClass(endpoint.method)">
+                    {{ endpoint.method }}
+                  </span>
+                  <div>
+                    <h3 class="font-mono text-lg font-bold text-gray-900 dark:text-white">{{ endpoint.endpoint }}</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">{{ endpoint.description }}</p>
+                  </div>
+                </div>
+                <button (click)="copyEndpoint(endpoint.endpoint)" 
+                        class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+                  <i class="ri-file-copy-line"></i>
+                </button>
+              </div>
+
+              <!-- Endpoint Details -->
+              <div class="grid lg:grid-cols-4 gap-6">
+                <div>
+                  <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Parameters</h4>
+                  <div class="space-y-1">
+                    <div *ngFor="let param of endpoint.parameters" class="text-sm font-mono bg-gray-100 dark:bg-slate-800 px-2 py-1 rounded">
+                      {{ param }}
+                    </div>
+                  </div>
+                </div>
+                
+                <div>
+                  <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Response</h4>
+                  <p class="text-sm text-gray-600 dark:text-gray-300">{{ endpoint.response }}</p>
+                </div>
+                
+                <div>
+                  <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Rate Limit</h4>
+                  <p class="text-sm text-gray-600 dark:text-gray-300">{{ endpoint.rateLimit }}</p>
+                </div>
+                
+                <div>
+                  <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Authentication</h4>
+                  <p class="text-sm text-gray-600 dark:text-gray-300">{{ endpoint.authentication }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- API Features Section -->
+    <section class="py-24 bg-white dark:bg-slate-900">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-6">Enterprise API Features</h2>
+            <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              Production-ready API infrastructure designed for mission-critical healthcare applications
+            </p>
+          </div>
+
+          <div class="grid lg:grid-cols-4 gap-8">
+            <div class="api-feature card hover-lift text-center group">
+              <div class="w-20 h-20 bg-gradient-to-r from-green-500 to-emerald-500 rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-500">
+                <i class="ri-speed-line text-white text-3xl"></i>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">High Performance</h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-6">Sub-200ms response times with global CDN distribution</p>
+              <div class="space-y-2 text-sm text-gray-500 dark:text-gray-400">
+                <div>• Global edge caching</div>
+                <div>• Load balancing</div>
+                <div>• Auto-scaling</div>
+                <div>• 99.9% SLA guarantee</div>
+              </div>
+            </div>
+
+            <div class="api-feature card hover-lift text-center group">
+              <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-500">
+                <i class="ri-shield-check-line text-white text-3xl"></i>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Enterprise Security</h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-6">Bank-level security with OAuth 2.0 and API key authentication</p>
+              <div class="space-y-2 text-sm text-gray-500 dark:text-gray-400">
+                <div>• OAuth 2.0 authentication</div>
+                <div>• Rate limiting protection</div>
+                <div>• IP whitelisting</div>
+                <div>• Audit logging</div>
+              </div>
+            </div>
+
+            <div class="api-feature card hover-lift text-center group">
+              <div class="w-20 h-20 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-500">
+                <i class="ri-webhook-line text-white text-3xl"></i>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Real-time Webhooks</h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-6">Instant notifications for license status changes and updates</p>
+              <div class="space-y-2 text-sm text-gray-500 dark:text-gray-400">
+                <div>• Event-driven notifications</div>
+                <div>• Retry mechanisms</div>
+                <div>• Payload verification</div>
+                <div>• Custom event filtering</div>
+              </div>
+            </div>
+
+            <div class="api-feature card hover-lift text-center group">
+              <div class="w-20 h-20 bg-gradient-to-r from-orange-500 to-red-500 rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-500">
+                <i class="ri-bar-chart-line text-white text-3xl"></i>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Analytics & Insights</h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-6">Comprehensive analytics and workforce intelligence data</p>
+              <div class="space-y-2 text-sm text-gray-500 dark:text-gray-400">
+                <div>• Usage analytics</div>
+                <div>• Workforce insights</div>
+                <div>• Compliance reporting</div>
+                <div>• Custom dashboards</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- API Key Request Form -->
+    <section class="py-24 bg-gradient-to-br from-slate-900 to-orange-900 text-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold mb-6">Request API Access</h2>
+            <p class="text-xl text-white/80 max-w-3xl mx-auto">
+              Get production API keys for your healthcare verification integration
+            </p>
+          </div>
+
+          <div class="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20">
+            <form (ngSubmit)="submitAPIRequest()" class="space-y-6">
+              <!-- Organization Details -->
+              <div class="grid lg:grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-sm font-medium text-white mb-2">Organization Name *</label>
+                  <input type="text" [(ngModel)]="apiKeyRequest.organizationName" name="organizationName" required
+                         class="w-full px-4 py-3 border border-white/20 rounded-lg bg-white/10 backdrop-blur-sm text-white placeholder-white/60 focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-white mb-2">Contact Name *</label>
+                  <input type="text" [(ngModel)]="apiKeyRequest.contactName" name="contactName" required
+                         class="w-full px-4 py-3 border border-white/20 rounded-lg bg-white/10 backdrop-blur-sm text-white placeholder-white/60 focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                </div>
+              </div>
+
+              <div class="grid lg:grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-sm font-medium text-white mb-2">Email Address *</label>
+                  <input type="email" [(ngModel)]="apiKeyRequest.email" name="email" required
+                         class="w-full px-4 py-3 border border-white/20 rounded-lg bg-white/10 backdrop-blur-sm text-white placeholder-white/60 focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-white mb-2">Phone Number</label>
+                  <input type="tel" [(ngModel)]="apiKeyRequest.phone" name="phone"
+                         class="w-full px-4 py-3 border border-white/20 rounded-lg bg-white/10 backdrop-blur-sm text-white placeholder-white/60 focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                </div>
+              </div>
+
+              <div class="grid lg:grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-sm font-medium text-white mb-2">Organization Type *</label>
+                  <select [(ngModel)]="apiKeyRequest.organizationType" name="organizationType" required
+                          class="w-full px-4 py-3 border border-white/20 rounded-lg bg-white/10 backdrop-blur-sm text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                    <option value="">Select organization type</option>
+                    <option *ngFor="let type of organizationTypes" [value]="type.value">{{ type.label }}</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-white mb-2">Country *</label>
+                  <select [(ngModel)]="apiKeyRequest.country" name="country" required
+                          class="w-full px-4 py-3 border border-white/20 rounded-lg bg-white/10 backdrop-blur-sm text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                    <option value="">Select country</option>
+                    <option *ngFor="let country of countries" [value]="country.value">{{ country.label }}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="grid lg:grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-sm font-medium text-white mb-2">Expected Volume *</label>
+                  <select [(ngModel)]="apiKeyRequest.expectedVolume" name="expectedVolume" required
+                          class="w-full px-4 py-3 border border-white/20 rounded-lg bg-white/10 backdrop-blur-sm text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                    <option value="">Select expected volume</option>
+                    <option *ngFor="let volume of volumeOptions" [value]="volume.value">{{ volume.label }}</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-white mb-2">Integration Timeline *</label>
+                  <select [(ngModel)]="apiKeyRequest.integrationTimeline" name="integrationTimeline" required
+                          class="w-full px-4 py-3 border border-white/20 rounded-lg bg-white/10 backdrop-blur-sm text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                    <option value="">Select timeline</option>
+                    <option *ngFor="let timeline of timelineOptions" [value]="timeline.value">{{ timeline.label }}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-white mb-2">Use Case Description *</label>
+                <textarea [(ngModel)]="apiKeyRequest.useCase" name="useCase" required rows="3"
+                          placeholder="Describe how you plan to use the AMR API..."
+                          class="w-full px-4 py-3 border border-white/20 rounded-lg bg-white/10 backdrop-blur-sm text-white placeholder-white/60 focus:ring-2 focus:ring-orange-500 focus:border-transparent"></textarea>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-white mb-2">Technical Contact Email</label>
+                <input type="email" [(ngModel)]="apiKeyRequest.technicalContact" name="technicalContact"
+                       placeholder="developer@yourorganization.com"
+                       class="w-full px-4 py-3 border border-white/20 rounded-lg bg-white/10 backdrop-blur-sm text-white placeholder-white/60 focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-white mb-2">Additional Information</label>
+                <textarea [(ngModel)]="apiKeyRequest.message" name="message" rows="3"
+                          placeholder="Any additional requirements or questions..."
+                          class="w-full px-4 py-3 border border-white/20 rounded-lg bg-white/10 backdrop-blur-sm text-white placeholder-white/60 focus:ring-2 focus:ring-orange-500 focus:border-transparent"></textarea>
+              </div>
+
+              <div class="text-center pt-6">
+                <button type="submit" 
+                        class="bg-gradient-to-r from-orange-500 to-yellow-500 text-white px-12 py-4 rounded-2xl font-bold text-lg shadow-2xl hover:from-orange-600 hover:to-yellow-600 transition-all duration-300">
+                  <i class="ri-send-plane-line mr-3"></i>
+                  Request API Access
+                </button>
+                <p class="text-white/60 text-sm mt-4">
+                  We'll review your request and contact you within 24 hours
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Integration Examples -->
+    <section class="py-24 bg-gray-50 dark:bg-slate-800" ngNonBindable>
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-6">Integration Examples</h2>
+            <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              Real-world examples of how organizations integrate with AMR APIs
+            </p>
+          </div>
+
+          <div class="grid lg:grid-cols-3 gap-8">
+            <!-- Hospital Integration -->
+            <div class="integration-example card hover-lift group">
+              <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-blue-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                <i class="ri-hospital-line text-white text-2xl"></i>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Hospital HR Systems</h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-6">Automated staff verification during onboarding and continuous monitoring</p>
+              
+              <div class="code-example bg-gray-900 rounded-lg p-4 text-left" ngNonBindable>
+                <div class="text-green-400 text-xs font-mono mb-2">// Hospital HR Integration</div>
+                <div class="text-white text-xs font-mono space-y-1">
+                  <div><span class="text-blue-400">const</span> verification = <span class="text-yellow-400">await</span></div>
+                  <div>&nbsp;&nbsp;amr.<span class="text-green-400">verify</span>(licenseNumber);</div>
+                  <div><span class="text-purple-400">if</span> (verification.status === <span class="text-orange-400">'active'</span>) &#123;</div>
+                  <div>&nbsp;&nbsp;approveStaffMember();</div>
+                  <div>&#125;</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Insurance Integration -->
+            <div class="integration-example card hover-lift group">
+              <div class="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                <i class="ri-shield-line text-white text-2xl"></i>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Insurance Claims</h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-6">Verify practitioners before processing claims to prevent fraud</p>
+              
+              <div class="code-example bg-gray-900 rounded-lg p-4 text-left" ngNonBindable>
+                <div class="text-green-400 text-xs font-mono mb-2">// Claims Verification</div>
+                <div class="text-white text-xs font-mono space-y-1">
+                  <div><span class="text-blue-400">const</span> claim = <span class="text-yellow-400">await</span></div>
+                  <div>&nbsp;&nbsp;amr.<span class="text-green-400">verifyBeforePay</span>(claim);</div>
+                  <div><span class="text-purple-400">if</span> (claim.verified) &#123;</div>
+                  <div>&nbsp;&nbsp;processClaim();</div>
+                  <div>&#125;</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Government Integration -->
+            <div class="integration-example card hover-lift group">
+              <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                <i class="ri-government-line text-white text-2xl"></i>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Government Analytics</h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-6">Real-time healthcare workforce analytics for policy decisions</p>
+              
+              <div class="code-example bg-gray-900 rounded-lg p-4 text-left" ngNonBindable>
+                <div class="text-green-400 text-xs font-mono mb-2">// Workforce Analytics</div>
+                <div class="text-white text-xs font-mono space-y-1">
+                  <div><span class="text-blue-400">const</span> insights = <span class="text-yellow-400">await</span></div>
+                  <div>&nbsp;&nbsp;amr.<span class="text-green-400">getInsights</span>(country);</div>
+                  <div>generatePolicyReport(insights);</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 bg-white dark:bg-slate-900">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-8">
+            Ready to Integrate with AMR APIs?
+          </h2>
+          <p class="text-xl text-gray-600 dark:text-gray-300 mb-12">
+            Join 500+ organizations using AMR APIs for healthcare verification
+          </p>
+          
+          <div class="flex flex-col lg:flex-row justify-center gap-6">
+            <button class="btn-hero bg-gradient-to-r from-orange-600 to-yellow-500 text-white px-12 py-6 rounded-2xl font-bold text-xl shadow-2xl">
+              <i class="ri-code-line mr-3"></i>
+              Get API Keys
+            </button>
+            <button class="btn-hero glass border-2 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white px-12 py-6 rounded-2xl font-bold text-xl">
+              <i class="ri-book-line mr-3"></i>
+              View Documentation
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <app-footer />
+</div>

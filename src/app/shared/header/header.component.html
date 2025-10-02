@@ -1,83 +1,601 @@
-<header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
-    <nav class="px-6 h-16 flex items-center justify-between w-dvw">
-        <div class="flex items-center lg:gap-12 justify-between lg:justify-start w-full">
-            <div class="w-[100px] h-[40px] mr-10 relative overflow-hidden cursor-pointer" routerLink="/">
-                <img src="logo.png" class="absolute -top-[25px]"/>
-            </div>
-            <div class="items-center gap-6 hidden lg:flex">
-                <a routerLink="/" class="text-gray-900 font-medium">Home</a>
+<header
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out"
+  [ngClass]="{
+    'translate-y-0': isHeaderVisible,
+    '-translate-y-full': !isHeaderVisible,
+    'bg-white/80': isScrolled && !isDarkMode,
+    'bg-slate-900/80': isScrolled && isDarkMode,
+    'backdrop-blur-xl': isScrolled,
+    'border-b': isScrolled,
+    'border-gray-200/20': isScrolled && !isDarkMode,
+    'border-gray-700/20': isScrolled && isDarkMode,
+    'shadow-lg': isScrolled
+  }">
+  
+  <nav class="px-4 h-16 flex items-center justify-between w-full max-w-7xl mx-auto">
+    <!-- Revolutionary Logo -->
+    <div class="flex items-center gap-4 cursor-pointer group" routerLink="/">
+      <div class="relative">
+        <div class="w-10 h-10 bg-gradient-to-r from-blue-600 via-green-500 to-purple-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-all duration-300 shadow-md">
+          <span class="relative text-white font-black text-lg">A</span>
+        </div>
+        <!-- Trust Indicator -->
+        <div class="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full flex items-center justify-center border-2 border-white dark:border-slate-900">
+          <i class="ri-shield-check-line text-white text-xs"></i>
+        </div>
+      </div>
+      <div class="hidden lg:block">
+        <h1 class="text-xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-green-500 leading-tight">AMR</h1>
+        <p class="text-[11px] text-gray-500 dark:text-gray-400 -mt-0.5 font-medium">African Medical Registry</p>
+        <div class="hidden xl:flex items-center gap-1 mt-0.5">
+          <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+          <span class="text-[11px] text-green-600 dark:text-green-400 font-semibold">RegTech Leader</span>
+        </div>
+      </div>
+    </div>
 
-                <a routerLink="/about" class="text-gray-500 hover:text-gray-900">About</a>
-                <a routerLink="/country-platform" class="text-gray-500 hover:text-gray-900">Countries</a>
-
-                <button class="text-gray-500 hover:text-gray-900 flex items-center gap-1" DropDown [menu]="menuElement"
-                    position="bottom">
-                    Services
-                    <i class="ri-arrow-down-s-line"></i>
-                </button>
-                <div #menuElement DropDownItem class="bg-white shadow-lg rounded-md py-2 hidden">
-                    <a routerLink="/verify-practitioner"
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Verify a
-                        Practitioner</a>
-                    <a routerLink="/register"
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Register</a>
-                    <a routerLink="/regulatory-platform"
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Regulatory Portal</a>
+    <!-- Desktop Navigation -->
+  <div class="items-center gap-6 hidden lg:flex">
+      <!-- Solutions Dropdown -->
+      <div class="relative group">
+        <button class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 flex items-center gap-2 transition-all duration-300 font-medium">
+          Solutions
+          <i class="ri-arrow-down-s-line group-hover:rotate-180 transition-transform duration-300"></i>
+        </button>
+        <div class="absolute top-full left-0 mt-2 w-80 bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl rounded-2xl shadow-xl border border-gray-200/50 dark:border-gray-700/50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-3 group-hover:translate-y-0">
+          <div class="p-4">
+            <div class="mb-4 p-4 bg-gradient-to-r from-blue-500/10 to-green-500/10 rounded-2xl border border-blue-200/50 dark:border-blue-800/50">
+              <div class="flex items-center gap-3 mb-2">
+                <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-green-500 rounded-lg flex items-center justify-center">
+                  <i class="ri-shield-star-line text-white"></i>
                 </div>
-                <a routerLink="/news" class="text-gray-500 hover:text-gray-900" data-readdy="false">News & Updates</a>
-                <a routerLink="/contact" class="text-gray-500 hover:text-gray-900" data-readdy="false">Contact</a>
+                <span class="font-bold text-gray-900 dark:text-white">Verification Solutions</span>
+              </div>
+              <p class="text-gray-600 dark:text-gray-300 text-sm">Comprehensive verification for all stakeholders</p>
             </div>
-            <div class="flex items-center space-x-4">
-                <a (click)="toggle()" class="lg:hidden w-10 h-10 flex items-center justify-center text-gray-700">
-                    <i class="ri-menu-line ri-lg"></i>
-                </a>
+            
+            <div class="grid grid-cols-2 gap-2">
+              <a routerLink="/verify-practitioner" class="flex items-center gap-3 px-3 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 rounded-xl transition-all duration-300 group">
+                <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <i class="ri-stethoscope-line text-blue-600 dark:text-blue-400 text-sm"></i>
+                </div>
+                <div>
+                  <div class="font-semibold text-sm">Practitioners</div>
+                  <div class="text-xs text-gray-500">Doctors, Nurses, Pharmacists</div>
+                </div>
+              </a>
+              
+              <a routerLink="/regulatory-platform" class="flex items-center gap-3 px-3 py-3 text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-green-900/20 hover:text-green-600 dark:hover:text-green-400 rounded-xl transition-all duration-300 group">
+                <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <i class="ri-government-line text-green-600 dark:text-green-400 text-sm"></i>
+                </div>
+                <div>
+                  <div class="font-semibold text-sm">Regulators</div>
+                  <div class="text-xs text-gray-500">Medical Councils</div>
+                </div>
+              </a>
+              
+              <a href="#" class="flex items-center gap-3 px-3 py-3 text-gray-700 dark:text-gray-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:text-purple-600 dark:hover:text-purple-400 rounded-xl transition-all duration-300 group">
+                <div class="w-8 h-8 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <i class="ri-hospital-line text-purple-600 dark:text-purple-400 text-sm"></i>
+                </div>
+                <div>
+                  <div class="font-semibold text-sm">Hospitals</div>
+                  <div class="text-xs text-gray-500">Staff Verification</div>
+                </div>
+              </a>
+              
+              <a href="#" class="flex items-center gap-3 px-3 py-3 text-gray-700 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-orange-900/20 hover:text-orange-600 dark:hover:text-orange-400 rounded-xl transition-all duration-300 group">
+                <div class="w-8 h-8 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <i class="ri-shield-line text-orange-600 dark:text-orange-400 text-sm"></i>
+                </div>
+                <div>
+                  <div class="font-semibold text-sm">Insurers</div>
+                  <div class="text-xs text-gray-500">Claims Verification</div>
+                </div>
+              </a>
+              
+              <a href="#" class="flex items-center gap-3 px-3 py-3 text-gray-700 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-xl transition-all duration-300 group">
+                <div class="w-8 h-8 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <i class="ri-school-line text-indigo-600 dark:text-indigo-400 text-sm"></i>
+                </div>
+                <div>
+                  <div class="font-semibold text-sm">Universities</div>
+                  <div class="text-xs text-gray-500">Graduate Validation</div>
+                </div>
+              </a>
+              
+              <a href="#" class="flex items-center gap-3 px-3 py-3 text-gray-700 dark:text-gray-300 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 rounded-xl transition-all duration-300 group">
+                <div class="w-8 h-8 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <i class="ri-building-line text-red-600 dark:text-red-400 text-sm"></i>
+                </div>
+                <div>
+                  <div class="font-semibold text-sm">Embassies</div>
+                  <div class="text-xs text-gray-500">Visa Verification</div>
+                </div>
+              </a>
+              
+              <a routerLink="/verify-practitioner" class="flex items-center gap-3 px-3 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-100 rounded-xl transition-all duration-300 group">
+                <div class="w-8 h-8 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <i class="ri-user-line text-gray-600 dark:text-gray-400 text-sm"></i>
+                </div>
+                <div>
+                  <div class="font-semibold text-sm">Public</div>
+                  <div class="text-xs text-gray-500">Instant Verification</div>
+                </div>
+              </a>
             </div>
+          </div>
         </div>
-        <div class="lg:flex hidden items-center gap-4">
-            <a routerLink="/partnership" class="text-gray-500 hover:text-gray-900 whitespace-nowrap">Partners & Investors</a>
-            <div class="relative">
-                <button class="flex items-center gap-1 px-4 py-2 bg-gray-100 text-gray-500 rounded-full text-sm whitespace-nowrap">
-                    AMR-X
-                    <span class="text-xs px-1.5 py-0.5 bg-blue-500/10 text-blue-500 rounded">Coming Soon</span>
-                </button>
+      </div>
+
+      <!-- Technology Dropdown -->
+      <div class="relative group">
+        <button class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 flex items-center gap-2 transition-all duration-300 font-medium">
+          Technology
+          <i class="ri-arrow-down-s-line group-hover:rotate-180 transition-transform duration-300"></i>
+        </button>
+        <div class="absolute top-full left-0 mt-2 w-72 bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl rounded-2xl shadow-xl border border-gray-200/50 dark:border-gray-700/50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-3 group-hover:translate-y-0">
+          <div class="p-4">
+            <div class="mb-4 p-4 bg-gradient-to-r from-purple-500/10 to-blue-500/10 rounded-2xl border border-purple-200/50 dark:border-purple-800/50">
+              <div class="flex items-center gap-3 mb-2">
+                <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg flex items-center justify-center">
+                  <i class="ri-cpu-line text-white"></i>
+                </div>
+                <span class="font-bold text-gray-900 dark:text-white">Advanced Technology Stack</span>
+              </div>
+              <p class="text-gray-600 dark:text-gray-300 text-sm">Revolutionary RegTech infrastructure</p>
             </div>
+            
+            <div class="space-y-2">
+              <a href="#" class="flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 rounded-2xl transition-all duration-300 group">
+                <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <i class="ri-links-line text-blue-600 dark:text-blue-400"></i>
+                </div>
+                <div>
+                  <div class="font-bold">Blockchain Trust Layer</div>
+                  <div class="text-xs text-gray-500">Tamper-proof verification</div>
+                </div>
+              </a>
+              
+              <a routerLink="/technology/blockchain" class="flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 rounded-2xl transition-all duration-300 group">
+                <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <i class="ri-links-line text-blue-600 dark:text-blue-400"></i>
+                </div>
+                <div>
+                  <div class="font-bold">Blockchain Trust Layer</div>
+                  <div class="text-xs text-gray-500">Tamper-proof verification</div>
+                </div>
+              </a>
+              
+              <a routerLink="/technology/ai" class="flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:text-purple-600 dark:hover:text-purple-400 rounded-2xl transition-all duration-300 group">
+                <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <i class="ri-brain-line text-purple-600 dark:text-purple-400"></i>
+                </div>
+                <div>
+                  <div class="font-bold">AI/Analytics</div>
+                  <div class="text-xs text-gray-500">Fraud detection & insights</div>
+                </div>
+              </a>
+              
+              <a routerLink="/technology/qr-ussd" class="flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-green-900/20 hover:text-green-600 dark:hover:text-green-400 rounded-2xl transition-all duration-300 group">
+                <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <i class="ri-qr-code-line text-green-600 dark:text-green-400"></i>
+                </div>
+                <div>
+                  <div class="font-bold">QR/USSD</div>
+                  <div class="text-xs text-gray-500">Instant verification access</div>
+                </div>
+              </a>
+              
+              <a routerLink="/technology/api" class="flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-orange-900/20 hover:text-orange-600 dark:hover:text-orange-400 rounded-2xl transition-all duration-300 group">
+                <div class="w-10 h-10 bg-orange-100 dark:bg-orange-900/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <i class="ri-code-line text-orange-600 dark:text-orange-400"></i>
+                </div>
+                <div>
+                  <div class="font-bold">APIs</div>
+                  <div class="text-xs text-gray-500">Enterprise integration</div>
+                </div>
+              </a>
+            </div>
+          </div>
         </div>
-    </nav>
+      </div>
+
+      <!-- Countries -->
+      <a routerLink="/countries" 
+         class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 transition-all duration-300 relative group font-medium">
+        Countries
+        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-green-500 group-hover:w-full transition-all duration-300"></span>
+      </a>
+
+      <!-- Resources Dropdown -->
+      <div class="relative group">
+        <button class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 flex items-center gap-2 transition-all duration-300 font-medium">
+          Resources
+          <i class="ri-arrow-down-s-line group-hover:rotate-180 transition-transform duration-300"></i>
+        </button>
+        <div class="absolute top-full left-0 mt-2 w-64 bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl rounded-2xl shadow-xl border border-gray-200/50 dark:border-gray-700/50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-3 group-hover:translate-y-0">
+          <div class="p-4">
+            <div class="mb-4 p-4 bg-gradient-to-r from-green-500/10 to-blue-500/10 rounded-2xl border border-green-200/50 dark:border-green-800/50">
+              <div class="flex items-center gap-3 mb-2">
+                <div class="w-8 h-8 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg flex items-center justify-center">
+                  <i class="ri-book-line text-white"></i>
+                </div>
+                <span class="font-bold text-gray-900 dark:text-white">Knowledge Hub</span>
+              </div>
+              <p class="text-gray-600 dark:text-gray-300 text-sm">Latest insights and documentation</p>
+            </div>
+            
+            <div class="space-y-2">
+              <a routerLink="/news" class="flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 rounded-2xl transition-all duration-300 group">
+                <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <i class="ri-newspaper-line text-blue-600 dark:text-blue-400"></i>
+                </div>
+                <div>
+                  <div class="font-bold">Press/Updates</div>
+                  <div class="text-xs text-gray-500">Latest news & announcements</div>
+                </div>
+              </a>
+              
+              <a href="#" class="flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-green-900/20 hover:text-green-600 dark:hover:text-green-400 rounded-2xl transition-all duration-300 group">
+                <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <i class="ri-file-text-line text-green-600 dark:text-green-400"></i>
+                </div>
+                <div>
+                  <div class="font-bold">Case Studies</div>
+                  <div class="text-xs text-gray-500">Success stories & impact</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- About -->
+      <a routerLink="/about" 
+         class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 transition-all duration-300 relative group font-medium">
+        About
+        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-green-500 group-hover:w-full transition-all duration-300"></span>
+      </a>
+
+      <!-- Contact -->
+      <a routerLink="/contact" 
+         class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 transition-all duration-300 relative group font-medium">
+        Contact
+        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-green-500 group-hover:w-full transition-all duration-300"></span>
+      </a>
+
+      <!-- Sign In Dropdown -->
+      <div class="relative group">
+        <button class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 flex items-center gap-2 transition-all duration-300 font-medium">
+          Sign In
+          <i class="ri-arrow-down-s-line group-hover:rotate-180 transition-transform duration-300"></i>
+        </button>
+        <div class="absolute top-full right-0 mt-2 w-64 bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl rounded-2xl shadow-xl border border-gray-200/50 dark:border-gray-700/50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-3 group-hover:translate-y-0">
+          <div class="p-4">
+            <div class="mb-4 p-4 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl border border-blue-200/50 dark:border-blue-800/50">
+              <div class="flex items-center gap-3 mb-2">
+                <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
+                  <i class="ri-login-circle-line text-white"></i>
+                </div>
+                <span class="font-bold text-gray-900 dark:text-white">Access Portals</span>
+              </div>
+              <p class="text-gray-600 dark:text-gray-300 text-sm">Secure access to your dashboard</p>
+            </div>
+            
+            <div class="space-y-2">
+              <a routerLink="/practitioner/dashboard" class="flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 rounded-2xl transition-all duration-300 group">
+                <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <i class="ri-stethoscope-line text-blue-600 dark:text-blue-400"></i>
+                </div>
+                <div>
+                  <div class="font-bold">Practitioner Portal</div>
+                  <div class="text-xs text-gray-500">Manage your profile</div>
+                </div>
+              </a>
+              
+              <a routerLink="/regulatory-platform" class="flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-green-900/20 hover:text-green-600 dark:hover:text-green-400 rounded-2xl transition-all duration-300 group">
+                <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <i class="ri-government-line text-green-600 dark:text-green-400"></i>
+                </div>
+                <div>
+                  <div class="font-bold">Regulator Portal</div>
+                  <div class="text-xs text-gray-500">Administrative access</div>
+                </div>
+              </a>
+              
+              <a routerLink="/hospital-portal" class="flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:text-purple-600 dark:hover:text-purple-400 rounded-2xl transition-all duration-300 group">
+                <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <i class="ri-hospital-line text-purple-600 dark:text-purple-400"></i>
+                </div>
+                <div>
+                  <div class="font-bold">Hospital Portal</div>
+                  <div class="text-xs text-gray-500">Staff management</div>
+                </div>
+              </a>
+              
+              <a routerLink="/insurer-portal" class="flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-orange-900/20 hover:text-orange-600 dark:hover:text-orange-400 rounded-2xl transition-all duration-300 group">
+                <div class="w-10 h-10 bg-orange-100 dark:bg-orange-900/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <i class="ri-shield-line text-orange-600 dark:text-orange-400"></i>
+                </div>
+                <div>
+                  <div class="font-bold">Insurer Portal</div>
+                  <div class="text-xs text-gray-500">Claims verification</div>
+                </div>
+              </a>
+              
+              <a routerLink="/embassy-portal" class="flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 rounded-2xl transition-all duration-300 group">
+                <div class="w-10 h-10 bg-red-100 dark:bg-red-900/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <i class="ri-building-line text-red-600 dark:text-red-400"></i>
+                </div>
+                <div>
+                  <div class="font-bold">Embassy Portal</div>
+                  <div class="text-xs text-gray-500">Diplomatic services</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button (click)="toggle()" 
+              class="lg:hidden w-12 h-12 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-all duration-300 hover:scale-110">
+        <i class="ri-menu-line text-xl" *ngIf="!showMenu"></i>
+        <i class="ri-close-line text-xl" *ngIf="showMenu"></i>
+      </button>
+    </div>
+
+    <!-- Right Side Actions -->
+  <div class="hidden lg:flex items-center gap-4">
+      <!-- Trust Indicator -->
+      <div class="hidden xl:flex items-center gap-2 bg-green-500/10 px-3 py-1 rounded-full border border-green-200/50 dark:border-green-800/50">
+        <div class="w-2.5 h-2.5 bg-green-500 rounded-full"></div>
+        <span class="text-green-600 dark:text-green-400 font-semibold text-xs">Verified</span>
+      </div>
+
+      <!-- Theme Toggle -->
+      <button (click)="toggleTheme()" 
+              class="w-12 h-12 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-all duration-300 group hover:scale-110">
+        <i class="ri-sun-line text-xl group-hover:rotate-180 transition-transform duration-500" *ngIf="isDarkMode"></i>
+        <i class="ri-moon-line text-xl group-hover:-rotate-180 transition-transform duration-500" *ngIf="!isDarkMode"></i>
+      </button>
+
+      <!-- AMR-X Revolutionary Badge -->
+      <div class="relative group hidden xl:block">
+        <button class="flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 text-yellow-600 dark:text-yellow-400 rounded-xl font-black text-sm border border-yellow-200/50 dark:border-yellow-800/50 hover:from-yellow-500/30 hover:to-orange-500/30 transition-all duration-300 group-hover:scale-105">
+          <div class="relative">
+            <i class="ri-rocket-line text-lg"></i>
+            <div class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+          </div>
+          AMR-X
+          <span class="text-xs px-3 py-1 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-full animate-pulse font-black">
+            COMING SOON
+          </span>
+        </button>
+        
+        <!-- Tooltip -->
+        <div class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-64 bg-gray-900 text-white text-xs rounded-xl p-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+          <div class="font-bold mb-1">AMR-X: Medication Registry</div>
+          <div>Revolutionary drug traceability with QR seals</div>
+        </div>
+      </div>
+    </div>
+  </nav>
 </header>
 
-<div class="fixed inset-0 z-[99999999]" *ngIf="showMenu">
-    <div class="w-dvw max-h-max flex flex-col overflow-auto p-4 border-b shadow-lg bg-white">
-        <div class="flex justify-end">
-            <i class="ri-close-large-fill text-lg" (click)="toggle()"></i>
+<!-- Revolutionary Mobile Menu Overlay -->
+<div class="fixed inset-0 z-[60] lg:hidden transition-all duration-500 ease-in-out"
+     [class.opacity-100]="showMenu"
+     [class.opacity-0]="!showMenu"
+     [class.pointer-events-auto]="showMenu"
+     [class.pointer-events-none]="!showMenu">
+  
+  <!-- Backdrop with Blur -->
+  <div class="absolute inset-0 bg-black/60 backdrop-blur-md" 
+       (click)="toggle()"></div>
+  
+  <!-- Menu Panel -->
+  <div class="absolute top-0 right-0 h-full w-80 max-w-[90vw] bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl shadow-2xl transform transition-transform duration-500 ease-in-out border-l border-gray-200/50 dark:border-slate-700/50"
+       [class.translate-x-0]="showMenu"
+       [class.translate-x-full]="!showMenu">
+    
+    <div class="p-6 h-full overflow-y-auto">
+      <!-- Header -->
+      <div class="flex items-center justify-between mb-8">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-green-500 rounded-xl flex items-center justify-center">
+            <span class="text-white font-black text-lg">A</span>
+          </div>
+          <div>
+            <h2 class="font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-green-500">AMR</h2>
+            <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">RegTech Revolution</p>
+          </div>
         </div>
-        <nav class="flex flex-col space-y-6">
-            <a [routerLink]="['/']" [routerLinkActiveOptions]="{ exact: true }"
-                routerLinkActive="text-primary font-medium border-b-2 border-primary"
-                class="text-gray-800 font-medium hover:text-primary transition">Home</a>
-            <a [routerLink]="['/about']" routerLinkActive="text-primary font-medium border-b-2 border-primary"
-                data-readdy="true" class="text-gray-600 hover:text-primary transition">About AMR</a>
-            <a [routerLink]="['/verify-practitioner']"
-                routerLinkActive="text-primary font-medium border-b-2 border-primary" data-readdy="true"
-                class="text-gray-600 hover:text-primary transition">Verify a Practitioner</a>
-            <a [routerLink]="['/register']" routerLinkActive="text-primary font-medium border-b-2 border-primary"
-                data-readdy="true" class="text-gray-600 hover:text-primary transition">Register</a>
-            <a [routerLink]="['/country-platform']" routerLinkActive="text-primary font-medium border-b-2 border-primary"
-                data-readdy="true" class="text-gray-600 hover:text-primary transition">Country Platforms</a>
-            <a [routerLink]="['/regulatory-platform']" routerLinkActive="text-primary font-medium border-b-2 border-primary"
-                data-readdy="true" class="text-gray-600 hover:text-primary transition">Regulatory Portal</a>
-            <a [routerLink]="['/news']" routerLinkActive="text-primary font-medium border-b-2 border-primary"
-                data-readdy="true" class="text-gray-600 hover:text-primary transition">News</a>   
-            <a [routerLink]="['/contact']" routerLinkActive="text-primary font-medium border-b-2 border-primary"
-                data-readdy="true" class="text-gray-600 hover:text-primary transition">Contact</a>        
-        </nav>
-        <div class=" flex flex-col space-y-6 mt-6">
-            <a routerLink="/partnership" class="text-gray-500 hover:text-gray-900">Partners & Investors</a>
-            <div class="relative">
-                <button class="flex items-center gap-1 px-4 py-2 bg-gray-100 text-gray-500 rounded-full text-sm">
-                    AMR-X
-                    <span class="text-xs px-1.5 py-0.5 bg-blue-500/10 text-blue-500 rounded">Coming Soon</span>
-                </button>
+        <button (click)="toggle()" 
+                class="w-10 h-10 flex items-center justify-center text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-all duration-300 hover:scale-110">
+          <i class="ri-close-line text-xl"></i>
+        </button>
+      </div>
+
+      <!-- Trust Status -->
+      <div class="bg-gradient-to-r from-green-500/10 to-blue-500/10 rounded-2xl p-4 mb-8 border border-green-200/50 dark:border-green-800/50">
+        <div class="flex items-center gap-3 mb-2">
+          <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+            <i class="ri-shield-check-line text-white text-sm"></i>
+          </div>
+          <span class="font-bold text-green-600 dark:text-green-400">Platform Status: SECURE</span>
+        </div>
+        <div class="text-xs text-gray-600 dark:text-gray-300 space-y-1">
+          <div>• 99.9% Uptime</div>
+          <div>• Blockchain Verified</div>
+          <div>• Real-time Monitoring</div>
+        </div>
+      </div>
+
+      <!-- Solutions Section -->
+      <div class="mb-6">
+        <h3 class="text-sm font-bold text-gray-900 dark:text-white mb-3 uppercase tracking-wider">Solutions</h3>
+        <div class="space-y-2">
+          <a routerLink="/practitioners" (click)="toggle()" class="flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 rounded-2xl transition-all duration-300 group">
+            <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <i class="ri-stethoscope-line text-blue-600 dark:text-blue-400"></i>
             </div>
+            <span>Practitioners</span>
+          </a>
+          
+          <a routerLink="/regulators" (click)="toggle()" class="flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-green-900/20 hover:text-green-600 dark:hover:text-green-400 rounded-2xl transition-all duration-300 group">
+            <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <i class="ri-government-line text-green-600 dark:text-green-400"></i>
+            </div>
+            <span>Regulators</span>
+          </a>
+          
+          <a routerLink="/hospitals" (click)="toggle()" class="flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:text-purple-600 dark:hover:text-purple-400 rounded-2xl transition-all duration-300 group">
+            <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <i class="ri-hospital-line text-purple-600 dark:text-purple-400"></i>
+            </div>
+            <span>Hospitals</span>
+          </a>
+          
+          <a routerLink="/insurers" (click)="toggle()" class="flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-orange-900/20 hover:text-orange-600 dark:hover:text-orange-400 rounded-2xl transition-all duration-300 group">
+            <div class="w-10 h-10 bg-orange-100 dark:bg-orange-900/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <i class="ri-shield-line text-orange-600 dark:text-orange-400"></i>
+            </div>
+            <span>Insurers</span>
+          </a>
         </div>
+      </div>
+
+      <!-- Technology Section -->
+      <div class="mb-6">
+        <h3 class="text-sm font-bold text-gray-900 dark:text-white mb-3 uppercase tracking-wider">Technology</h3>
+        <div class="space-y-2">
+          <a href="#" (click)="toggle()" class="flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 rounded-2xl transition-all duration-300 group">
+            <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <i class="ri-links-line text-blue-600 dark:text-blue-400"></i>
+            </div>
+            <span>Blockchain Trust Layer</span>
+          </a>
+          
+          <a href="#" (click)="toggle()" class="flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:text-purple-600 dark:hover:text-purple-400 rounded-2xl transition-all duration-300 group">
+            <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <i class="ri-brain-line text-purple-600 dark:text-purple-400"></i>
+            </div>
+            <span>AI/Analytics</span>
+          </a>
+          
+          <a href="#" (click)="toggle()" class="flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-green-900/20 hover:text-green-600 dark:hover:text-green-400 rounded-2xl transition-all duration-300 group">
+            <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <i class="ri-qr-code-line text-green-600 dark:text-green-400"></i>
+            </div>
+            <span>QR/USSD</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Navigation Section -->
+      <div class="mb-6">
+        <h3 class="text-sm font-bold text-gray-900 dark:text-white mb-3 uppercase tracking-wider">Navigation</h3>
+        <div class="space-y-2">
+          <a routerLink="/country-platform" (click)="toggle()" class="flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-100 rounded-2xl transition-all duration-300 group">
+            <div class="w-10 h-10 bg-gray-100 dark:bg-gray-800 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <i class="ri-global-line text-gray-600 dark:text-gray-400"></i>
+            </div>
+            <span>Countries</span>
+          </a>
+          
+          <a routerLink="/news" (click)="toggle()" class="flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-100 rounded-2xl transition-all duration-300 group">
+            <div class="w-10 h-10 bg-gray-100 dark:bg-gray-800 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <i class="ri-newspaper-line text-gray-600 dark:text-gray-400"></i>
+            </div>
+            <span>Press & Media</span>
+          </a>
+          
+          <a routerLink="/case-studies" (click)="toggle()" class="flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-100 rounded-2xl transition-all duration-300 group">
+            <div class="w-10 h-10 bg-gray-100 dark:bg-gray-800 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <i class="ri-file-chart-line text-gray-600 dark:text-gray-400"></i>
+            </div>
+            <span>Case Studies</span>
+          </a>
+          
+          <a routerLink="/security-privacy" (click)="toggle()" class="flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-100 rounded-2xl transition-all duration-300 group">
+            <div class="w-10 h-10 bg-gray-100 dark:bg-gray-800 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <i class="ri-shield-star-line text-gray-600 dark:text-gray-400"></i>
+            </div>
+            <span>Security & Privacy</span>
+          </a>
+          
+          <a routerLink="/about" (click)="toggle()" class="flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-100 rounded-2xl transition-all duration-300 group">
+            <div class="w-10 h-10 bg-gray-100 dark:bg-gray-800 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <i class="ri-information-line text-gray-600 dark:text-gray-400"></i>
+            </div>
+            <span>About</span>
+          </a>
+          
+          <a routerLink="/contact" (click)="toggle()" class="flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-100 rounded-2xl transition-all duration-300 group">
+            <div class="w-10 h-10 bg-gray-100 dark:bg-gray-800 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <i class="ri-phone-line text-gray-600 dark:text-gray-400"></i>
+            </div>
+            <span>Contact</span>
+          </a>
+        </div>
+      </div>
+      <!-- Admin Access -->
+      <div class="mb-6">
+        <h3 class="text-sm font-bold text-gray-900 dark:text-white mb-3 uppercase tracking-wider">Admin Access</h3>
+        <div class="space-y-2">
+          <a routerLink="/admin/dashboard" (click)="toggle()" class="flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 rounded-2xl transition-all duration-300 group">
+            <div class="w-10 h-10 bg-red-100 dark:bg-red-900/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <i class="ri-dashboard-line text-red-600 dark:text-red-400"></i>
+            </div>
+            <span>Global Dashboard</span>
+          </a>
+          
+          <a routerLink="/auth/sign-in" (click)="toggle()" class="flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 rounded-2xl transition-all duration-300 group">
+            <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <i class="ri-login-circle-line text-blue-600 dark:text-blue-400"></i>
+            </div>
+            <span>Portal Sign In</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Portal Access -->
+      <div class="space-y-4 pt-6 border-t border-gray-200 dark:border-gray-700">
+        <a routerLink="/practitioner/dashboard" (click)="toggle()" class="flex items-center gap-4 px-4 py-4 bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-900/20 dark:to-green-900/20 text-blue-600 dark:text-blue-400 rounded-2xl font-bold border border-blue-200/50 dark:border-blue-800/50">
+          <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-green-500 rounded-xl flex items-center justify-center">
+            <i class="ri-user-line text-white"></i>
+          </div>
+          <span>Practitioner Portal</span>
+          <i class="ri-arrow-right-line ml-auto"></i>
+        </a>
+        
+        <!-- Theme Toggle -->
+        <button (click)="toggleTheme()" 
+                class="flex items-center gap-4 px-4 py-4 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-2xl w-full text-left transition-all duration-300">
+          <div class="w-10 h-10 bg-gray-100 dark:bg-gray-800 rounded-xl flex items-center justify-center">
+            <i class="ri-sun-line text-gray-600 dark:text-gray-400" *ngIf="isDarkMode"></i>
+            <i class="ri-moon-line text-gray-600 dark:text-gray-400" *ngIf="!isDarkMode"></i>
+          </div>
+          <span>{{ isDarkMode ? 'Light Mode' : 'Dark Mode' }}</span>
+        </button>
+        
+        <!-- AMR-X Mobile -->
+        <div class="flex items-center gap-4 px-4 py-4 bg-gradient-to-r from-yellow-500/10 to-orange-500/10 text-yellow-600 dark:text-yellow-400 rounded-2xl border border-yellow-200/50 dark:border-yellow-800/50">
+          <div class="w-10 h-10 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-xl flex items-center justify-center">
+            <i class="ri-rocket-line text-white"></i>
+          </div>
+          <div>
+            <div class="font-bold">AMR-X</div>
+            <div class="text-xs">Medication Registry</div>
+          </div>
+          <span class="ml-auto text-xs px-2 py-1 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-full animate-pulse font-bold">
+            SOON
+          </span>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

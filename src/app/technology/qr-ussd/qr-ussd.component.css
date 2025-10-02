@@ -1,0 +1,155 @@
+.qr-pattern-grid {
+  background-image: 
+    radial-gradient(circle at 10% 10%, rgba(16, 185, 129, 0.1) 2px, transparent 2px),
+    radial-gradient(circle at 30% 30%, rgba(59, 130, 246, 0.1) 2px, transparent 2px),
+    radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.1) 2px, transparent 2px),
+    radial-gradient(circle at 70% 70%, rgba(16, 185, 129, 0.1) 2px, transparent 2px),
+    radial-gradient(circle at 90% 90%, rgba(59, 130, 246, 0.1) 2px, transparent 2px);
+  background-size: 40px 40px, 60px 60px, 80px 80px, 100px 100px, 120px 120px;
+  animation: qrPatternMove 20s linear infinite;
+}
+
+@keyframes qrPatternMove {
+  0% {
+    background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+  }
+  100% {
+    background-position: 40px 40px, -60px 60px, 80px -80px, -100px -100px, 120px 120px;
+  }
+}
+
+.method-card {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.method-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.1), transparent);
+  transition: left 0.8s;
+}
+
+.method-card:hover::before {
+  left: 100%;
+}
+
+.scenario-card {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.scenario-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.8s;
+}
+
+.scenario-card:hover::before {
+  left: 100%;
+}
+
+.scenario-card:hover {
+  transform: translateY(-8px) scale(1.05);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.qr-code-large {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+}
+
+.qr-pattern {
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 20%, currentColor 2px, transparent 2px),
+    radial-gradient(circle at 40% 20%, currentColor 2px, transparent 2px),
+    radial-gradient(circle at 60% 20%, currentColor 2px, transparent 2px),
+    radial-gradient(circle at 80% 20%, currentColor 2px, transparent 2px),
+    radial-gradient(circle at 20% 40%, currentColor 2px, transparent 2px),
+    radial-gradient(circle at 60% 40%, currentColor 2px, transparent 2px),
+    radial-gradient(circle at 80% 40%, currentColor 2px, transparent 2px),
+    radial-gradient(circle at 20% 60%, currentColor 2px, transparent 2px),
+    radial-gradient(circle at 40% 60%, currentColor 2px, transparent 2px),
+    radial-gradient(circle at 80% 60%, currentColor 2px, transparent 2px),
+    radial-gradient(circle at 20% 80%, currentColor 2px, transparent 2px),
+    radial-gradient(circle at 40% 80%, currentColor 2px, transparent 2px),
+    radial-gradient(circle at 60% 80%, currentColor 2px, transparent 2px),
+    radial-gradient(circle at 80% 80%, currentColor 2px, transparent 2px);
+  background-size: 20px 20px;
+  animation: qrPatternShift 4s ease-in-out infinite;
+}
+
+@keyframes qrPatternShift {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.qr-scanner-beam {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #10B981, transparent);
+  animation: qrBeamScan 3s linear infinite;
+}
+
+@keyframes qrBeamScan {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(117px);
+    opacity: 0.3;
+  }
+}
+
+.phone-screen {
+  animation: phoneGlow 3s ease-in-out infinite;
+}
+
+@keyframes phoneGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(16, 185, 129, 0.6);
+  }
+}
+
+.stat-card {
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.access-method {
+  transition: all 0.3s ease;
+}
+
+.access-method:hover {
+  transform: scale(1.05);
+}

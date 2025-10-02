@@ -67,7 +67,44 @@
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                         <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-200">
                             <h2 class="text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
-                            <form class="space-y-6">
+                            
+                            <!-- Success Alert -->
+                            <div *ngIf="showSuccess" class="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                                            <i class="ri-check-line text-white"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold text-green-900">Message Sent Successfully!</h4>
+                                            <p class="text-green-800 text-sm">We'll respond within 2-3 working days.</p>
+                                        </div>
+                                    </div>
+                                    <button (click)="closeAlert()" class="text-green-600 hover:text-green-800">
+                                        <i class="ri-close-line"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Error Alert -->
+                            <div *ngIf="showError" class="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
+                                            <i class="ri-close-line text-white"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold text-red-900">Error Sending Message</h4>
+                                            <p class="text-red-800 text-sm">{{ errorMessage }}</p>
+                                        </div>
+                                    </div>
+                                    <button (click)="closeAlert()" class="text-red-600 hover:text-red-800">
+                                        <i class="ri-close-line"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <form (ngSubmit)="submitForm()" class="space-y-6">
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 mb-2">
@@ -76,6 +113,9 @@
                                             Full Name
                                         </label>
                                         <input type="text"
+                                            [(ngModel)]="contactForm.name"
+                                            name="name"
+                                            required
                                             class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                                             placeholder="Enter your full name" required>
                                     </div>
@@ -86,6 +126,9 @@
                                             Email Address
                                         </label>
                                         <input type="email"
+                                            [(ngModel)]="contactForm.email"
+                                            name="email"
+                                            required
                                             class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                                             placeholder="your.email@domain.com" required>
                                     </div>
@@ -97,6 +140,8 @@
                                         Organization / Institution (Optional)
                                     </label>
                                     <input type="text"
+                                        [(ngModel)]="contactForm.organization"
+                                        name="organization"
                                         class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                                         placeholder="Your organization or institution">
                                 </div>
@@ -109,26 +154,13 @@
                                         </label>
                                         <div class="relative">
                                             <select
+                                                [(ngModel)]="contactForm.country"
+                                                name="country"
+                                                required
                                                 class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm appearance-none bg-white pr-8"
                                                 required>
                                                 <option value="">Select your country</option>
-                                                <option value="ghana">Ghana</option>
-                                                <option value="nigeria">Nigeria</option>
-                                                <option value="south-africa">South Africa</option>
-                                                <option value="kenya">Kenya</option>
-                                                <option value="egypt">Egypt</option>
-                                                <option value="morocco">Morocco</option>
-                                                <option value="ethiopia">Ethiopia</option>
-                                                <option value="uganda">Uganda</option>
-                                                <option value="tanzania">Tanzania</option>
-                                                <option value="rwanda">Rwanda</option>
-                                                <option value="senegal">Senegal</option>
-                                                <option value="botswana">Botswana</option>
-                                                <option value="namibia">Namibia</option>
-                                                <option value="zambia">Zambia</option>
-                                                <option value="zimbabwe">Zimbabwe</option>
-                                                <option value="other">Other African Country</option>
-                                                <option value="diaspora">African Diaspora</option>
+                                                <option *ngFor="let country of countries" [value]="country.value">{{ country.label }}</option>
                                             </select>
                                             <i
                                                 class="ri-arrow-down-s-line absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 flex items-center justify-center"></i>
@@ -142,16 +174,13 @@
                                         </label>
                                         <div class="relative">
                                             <select
+                                                [(ngModel)]="contactForm.inquiryType"
+                                                name="inquiryType"
+                                                required
                                                 class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm appearance-none bg-white pr-8"
                                                 required>
                                                 <option value="">Select inquiry type</option>
-                                                <option value="practitioner-support">Practitioner Support</option>
-                                                <option value="regulatory-integration">Regulatory Integration</option>
-                                                <option value="country-partnership">Country Partnership</option>
-                                                <option value="media-press">Media or Press</option>
-                                                <option value="investment-inquiry">Investment Inquiry</option>
-                                                <option value="technical-support">Technical Support</option>
-                                                <option value="other">Other</option>
+                                                <option *ngFor="let type of inquiryTypes" [value]="type.value">{{ type.label }}</option>
                                             </select>
                                             <i
                                                 class="ri-arrow-down-s-line absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 flex items-center justify-center"></i>
@@ -165,21 +194,20 @@
                                         Message
                                     </label>
                                     <textarea
+                                        [(ngModel)]="contactForm.message"
+                                        name="message"
+                                        required
                                         class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                                         rows="5" placeholder="Please provide details about your inquiry..."
                                         required></textarea>
                                 </div>
                                 <button type="submit"
+                                    [disabled]="isSubmitting"
                                     class="rounded-lg w-full bg-blue-500 text-white font-medium py-4 hover:bg-blue-500/90 whitespace-nowrap">
-                                    <i class="ri-send-plane-line mr-2"></i>
-                                    Submit Message
+                                    <i class="ri-send-plane-line mr-2" *ngIf="!isSubmitting"></i>
+                                    <i class="ri-loader-4-line mr-2 animate-spin" *ngIf="isSubmitting"></i>
+                                    {{ isSubmitting ? 'Sending...' : 'Submit Message' }}
                                 </button>
-                                <div
-                                    class="success-message hidden bg-green-50 border border-green-200 rounded-lg p-4 text-green-800 text-sm">
-                                    <i class="ri-check-line mr-2"></i>
-                                    Thank you for contacting the African Medical Registry. We'll respond within 2–3
-                                    working days.
-                                </div>
                             </form>
                         </div>
                         <div class="space-y-8">

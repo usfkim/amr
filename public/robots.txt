@@ -1,0 +1,48 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://africanmedicalregistry.com/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Specific rules for search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Block access to admin areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /auth/
+
+# Allow important pages
+Allow: /verify-practitioner
+Allow: /register
+Allow: /countries
+Allow: /about
+Allow: /contact
+Allow: /press
+Allow: /case-studies
+Allow: /security-privacy
+
+# Block temporary or development pages
+Disallow: /temp/
+Disallow: /dev/
+Disallow: /*.json$
+Disallow: /*?*
+
+# Allow social media crawlers
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /

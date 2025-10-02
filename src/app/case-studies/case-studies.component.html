@@ -1,0 +1,154 @@
+<div class="bg-white">
+  <app-header />
+  <main class="pt-16">
+    <!-- Hero Section -->
+    <section class="relative h-[400px] flex items-center"
+             style="background-image: url('https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=1920&h=400&fit=crop'); background-size: cover; background-position: center;">
+      <div class="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-transparent"></div>
+      <div class="container mx-auto px-6 relative">
+        <div class="max-w-3xl">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-16 h-16 flex items-center justify-center bg-green-500/10 rounded-full">
+              <i class="ri-file-chart-line text-green-500 text-2xl"></i>
+            </div>
+            <div>
+              <h1 class="text-5xl font-bold text-gray-900">Case Studies & Impact</h1>
+              <p class="text-xl text-gray-600 mt-2">Real-world transformations across Africa's healthcare systems</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Impact Overview -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">Continental Impact at a Glance</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">AMR's deployment across Africa has delivered measurable improvements in healthcare verification, fraud prevention, and professional mobility</p>
+          </div>
+          
+          <div class="grid lg:grid-cols-4 gap-8">
+            <div class="bg-white rounded-xl p-8 text-center shadow-sm hover:shadow-lg transition-all duration-300">
+              <div class="text-4xl font-black text-blue-600 mb-2">98%</div>
+              <div class="text-lg font-semibold text-gray-900 mb-2">Fraud Reduction</div>
+              <div class="text-gray-600 text-sm">Average across all deployed countries</div>
+            </div>
+            <div class="bg-white rounded-xl p-8 text-center shadow-sm hover:shadow-lg transition-all duration-300">
+              <div class="text-4xl font-black text-green-600 mb-2">25K+</div>
+              <div class="text-lg font-semibold text-gray-900 mb-2">Verified Practitioners</div>
+              <div class="text-gray-600 text-sm">Healthcare professionals registered</div>
+            </div>
+            <div class="bg-white rounded-xl p-8 text-center shadow-sm hover:shadow-lg transition-all duration-300">
+              <div class="text-4xl font-black text-purple-600 mb-2">5M+</div>
+              <div class="text-lg font-semibold text-gray-900 mb-2">Verifications</div>
+              <div class="text-gray-600 text-sm">Monthly verification requests</div>
+            </div>
+            <div class="bg-white rounded-xl p-8 text-center shadow-sm hover:shadow-lg transition-all duration-300">
+              <div class="text-4xl font-black text-orange-600 mb-2">12</div>
+              <div class="text-lg font-semibold text-gray-900 mb-2">Countries Active</div>
+              <div class="text-gray-600 text-sm">Live or pilot deployments</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Case Studies -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="space-y-16">
+            <div *ngFor="let study of caseStudies; let i = index" 
+                 class="grid lg:grid-cols-2 gap-12 items-center"
+                 [class.lg:grid-cols-2]="i % 2 === 0"
+                 [class.lg:grid-cols-2]="i % 2 === 1">
+              
+              <!-- Content -->
+              <div [class.lg:order-2]="i % 2 === 1">
+                <div class="flex items-center gap-3 mb-6">
+                  <div class="text-4xl">{{ study.flag }}</div>
+                  <div>
+                    <h2 class="text-3xl font-bold text-gray-900">{{ study.title }}</h2>
+                    <div class="flex items-center gap-3 mt-2">
+                      <span [class]="'px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 ' + getStatusClass(study.status)">
+                        <i [class]="getStatusIcon(study.status)"></i>
+                        {{ study.status | titlecase }}
+                      </span>
+                      <span class="text-gray-500">{{ study.timeline }}</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="space-y-6">
+                  <div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-3">Challenge</h3>
+                    <p class="text-gray-600">{{ study.challenge }}</p>
+                  </div>
+                  
+                  <div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-3">AMR Solution</h3>
+                    <p class="text-gray-600">{{ study.solution }}</p>
+                  </div>
+                  
+                  <div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-3">Key Stakeholders</h3>
+                    <div class="flex flex-wrap gap-2">
+                      <span *ngFor="let stakeholder of study.stakeholders" 
+                            class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium">
+                        {{ stakeholder }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Image and Impact Metrics -->
+              <div [class.lg:order-1]="i % 2 === 1">
+                <div class="bg-gradient-to-br from-gray-50 to-blue-50 rounded-2xl p-8">
+                  <img [src]="study.image" [alt]="study.title" 
+                       class="w-full h-64 object-cover rounded-xl mb-6 shadow-lg">
+                  
+                  <h3 class="text-lg font-semibold text-gray-900 mb-4">Measurable Impact</h3>
+                  <div class="grid grid-cols-2 gap-4">
+                    <div *ngFor="let metric of study.impact" 
+                         class="bg-white rounded-lg p-4 text-center shadow-sm hover:shadow-md transition-all duration-300">
+                      <div class="text-2xl font-black text-blue-600 mb-1">{{ metric.value }}</div>
+                      <div class="font-semibold text-gray-900 text-sm mb-1">{{ metric.metric }}</div>
+                      <div class="text-gray-600 text-xs">{{ metric.description }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-16 bg-gradient-to-br from-blue-900 to-green-900 text-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-3xl font-bold mb-6">Ready to Transform Your Healthcare System?</h2>
+          <p class="text-xl text-white/80 mb-8">Join the countries already benefiting from AMR's revolutionary verification platform</p>
+          
+          <div class="flex flex-col lg:flex-row justify-center gap-6">
+            <button routerLink="/contact" 
+                    class="bg-white text-blue-900 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-blue-50 transition-colors shadow-lg">
+              <i class="ri-rocket-line mr-3"></i>
+              Start Your Transformation
+            </button>
+            <button routerLink="/partnership" 
+                    class="border-2 border-white text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-white/10 transition-colors">
+              <i class="ri-handshake-line mr-3"></i>
+              Explore Partnership
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <app-footer />
+</div>

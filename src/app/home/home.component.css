@@ -1,0 +1,879 @@
+/* Revolutionary Hero Animations */
+.hero-gradient {
+  background: linear-gradient(135deg, #1e40af 0%, #059669 100%);
+  position: relative;
+}
+
+/* Impact Pillars */
+.impact-pillar {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.impact-pillar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+  transition: left 0.8s;
+}
+
+.impact-pillar:hover::before {
+  left: 100%;
+}
+
+.impact-pillar:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+/* Solution Pillars */
+.solution-pillar {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.solution-pillar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #3B82F6, #10B981, #8B5CF6);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.solution-pillar:hover::after {
+  transform: translateX(0);
+}
+
+/* Technology Cards */
+.technology-card {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.technology-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.8s;
+}
+
+.technology-card:hover::before {
+  left: 100%;
+}
+
+/* Ecosystem Cards */
+.ecosystem-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.ecosystem-card:hover {
+  transform: translateY(-8px) scale(1.05);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Logo Placeholders */
+.logo-placeholder {
+  transition: all 0.3s ease;
+}
+
+.logo-placeholder:hover {
+  opacity: 1;
+  transform: translateY(-4px) scale(1.05);
+}
+
+/* Blockchain Network Animation */
+.blockchain-network {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.blockchain-node {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: linear-gradient(135deg, #3B82F6, #10B981);
+  border-radius: 50%;
+  animation: blockchainPulse 3s ease-in-out infinite;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+}
+
+@keyframes blockchainPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+}
+
+.blockchain-connection {
+  stroke-dasharray: 10, 5;
+  animation: connectionFlow 4s linear infinite;
+}
+
+@keyframes connectionFlow {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 60;
+  }
+}
+
+/* Trust Badges Animation */
+.trust-badge {
+  position: absolute;
+  text-align: center;
+  animation: trustFloat 6s ease-in-out infinite;
+}
+
+@keyframes trustFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+  66% {
+    transform: translateY(5px) rotate(-1deg);
+  }
+}
+
+/* QR Scanner Animation */
+.qr-scanner-animation {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.qr-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  width: 100%;
+  height: 100%;
+}
+
+.qr-dot {
+  background: #374151;
+  border-radius: 2px;
+  animation: qrDotPulse 2s ease-in-out infinite;
+}
+
+.qr-dot:nth-child(odd) {
+  animation-delay: 0.2s;
+}
+
+.qr-dot:nth-child(even) {
+  animation-delay: 0.4s;
+}
+
+@keyframes qrDotPulse {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.qr-scanner-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #3B82F6, transparent);
+  animation: qrScan 2s linear infinite;
+}
+
+@keyframes qrScan {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(38px);
+  }
+}
+
+/* AI Brain Animation */
+.ai-brain-animation {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.ai-neuron {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #8B5CF6;
+  border-radius: 50%;
+  animation: aiNeuronPulse 2s ease-in-out infinite;
+}
+
+.ai-neuron:nth-child(1) {
+  top: 5px;
+  left: 5px;
+}
+
+.ai-neuron:nth-child(2) {
+  top: 5px;
+  right: 5px;
+}
+
+.ai-neuron:nth-child(3) {
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@keyframes aiNeuronPulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.3);
+  }
+}
+
+.ai-connection {
+  position: absolute;
+  width: 2px;
+  height: 15px;
+  background: linear-gradient(180deg, #8B5CF6, transparent);
+  animation: aiConnectionFlow 2s ease-in-out infinite;
+}
+
+.ai-connection:nth-child(4) {
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.ai-connection:nth-child(5) {
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-45deg);
+}
+
+@keyframes aiConnectionFlow {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Blockchain Animation */
+.blockchain-animation {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.blockchain-block {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #10B981;
+  border-radius: 2px;
+  animation: blockchainMove 3s ease-in-out infinite;
+}
+
+.blockchain-block:nth-child(1) {
+  top: 5px;
+  left: 5px;
+}
+
+.blockchain-block:nth-child(2) {
+  top: 5px;
+  left: 16px;
+}
+
+.blockchain-block:nth-child(3) {
+  top: 5px;
+  left: 27px;
+}
+
+@keyframes blockchainMove {
+  0%, 100% {
+    opacity: 0.5;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(3px);
+  }
+}
+
+.blockchain-chain {
+  position: absolute;
+  top: 9px;
+  left: 13px;
+  width: 16px;
+  height: 2px;
+  background: linear-gradient(90deg, #10B981, #3B82F6);
+  animation: chainGlow 2s ease-in-out infinite;
+}
+
+@keyframes chainGlow {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 10px #10B981;
+  }
+}
+
+/* Phone Mockup Animations */
+.phone-mockup {
+  animation: phoneFloat 6s ease-in-out infinite;
+}
+
+@keyframes phoneFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+}
+
+/* QR Viewfinder Animation */
+.qr-viewfinder {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: auto;
+}
+
+.qr-corner {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border: 3px solid #10B981;
+}
+
+.qr-corner.top-left {
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+
+.qr-corner.top-right {
+  top: 0;
+  right: 0;
+  border-left: none;
+  border-bottom: none;
+}
+
+.qr-corner.bottom-left {
+  bottom: 0;
+  left: 0;
+  border-right: none;
+  border-top: none;
+}
+
+.qr-corner.bottom-right {
+  bottom: 0;
+  right: 0;
+  border-left: none;
+  border-top: none;
+}
+
+.qr-scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #10B981, transparent);
+  animation: qrScanLine 2s linear infinite;
+}
+
+@keyframes qrScanLine {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(194px);
+  }
+}
+
+/* Large QR Code Animation */
+.qr-code-large {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.qr-pattern {
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 20%, #374151 2px, transparent 2px),
+    radial-gradient(circle at 40% 20%, #374151 2px, transparent 2px),
+    radial-gradient(circle at 60% 20%, #374151 2px, transparent 2px),
+    radial-gradient(circle at 80% 20%, #374151 2px, transparent 2px),
+    radial-gradient(circle at 20% 40%, #374151 2px, transparent 2px),
+    radial-gradient(circle at 60% 40%, #374151 2px, transparent 2px),
+    radial-gradient(circle at 80% 40%, #374151 2px, transparent 2px),
+    radial-gradient(circle at 20% 60%, #374151 2px, transparent 2px),
+    radial-gradient(circle at 40% 60%, #374151 2px, transparent 2px),
+    radial-gradient(circle at 80% 60%, #374151 2px, transparent 2px),
+    radial-gradient(circle at 20% 80%, #374151 2px, transparent 2px),
+    radial-gradient(circle at 40% 80%, #374151 2px, transparent 2px),
+    radial-gradient(circle at 60% 80%, #374151 2px, transparent 2px),
+    radial-gradient(circle at 80% 80%, #374151 2px, transparent 2px);
+  background-size: 20px 20px;
+  animation: qrPatternShift 4s ease-in-out infinite;
+}
+
+@keyframes qrPatternShift {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.qr-scanner-beam {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #10B981, transparent);
+  animation: qrBeamScan 3s linear infinite;
+}
+
+@keyframes qrBeamScan {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(117px);
+    opacity: 0.3;
+  }
+}
+
+/* Country Node Animations */
+.country-node {
+  position: absolute;
+  animation: countryPulse 4s ease-in-out infinite;
+}
+
+.country-node.active {
+  animation: countryActive 2s ease-in-out infinite;
+}
+
+.country-node.pending {
+  animation: countryPending 3s ease-in-out infinite;
+}
+
+@keyframes countryActive {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+}
+
+@keyframes countryPending {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+.connection-line {
+  stroke-dasharray: 10, 5;
+  animation: connectionPulse 3s linear infinite;
+}
+
+@keyframes connectionPulse {
+  0% {
+    stroke-dashoffset: 0;
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    stroke-dashoffset: 60;
+    opacity: 0.3;
+  }
+}
+
+/* Trust Pillar Animations */
+.trust-pillar {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 32px;
+  text-align: center;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.trust-pillar:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Trust Ecosystem Background */
+.trust-ecosystem-bg {
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 60%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+  animation: ecosystemShift 20s ease-in-out infinite;
+}
+
+@keyframes ecosystemShift {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* CTA Particles Animation */
+.cta-particles {
+  background-image: 
+    radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    radial-gradient(circle at 90% 90%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 100px 100px, 150px 150px, 200px 200px, 250px 250px, 300px 300px;
+  animation: particleFloat 30s linear infinite;
+}
+
+@keyframes particleFloat {
+  0% {
+    background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%, -100% 100%, 100% -100%, -100% -100%, 100% 100%;
+  }
+}
+
+/* Floating Animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Text Shimmer Effect */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, #10b981 25%, #3b82f6 50%, #8b5cf6 75%);
+  background-size: 200% 100%;
+  animation: shimmer 4s ease-in-out infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass Effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Hover Lift Effect */
+.hover-lift {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Stats Counter Animation */
+.stats-counter {
+  font-variant-numeric: tabular-nums;
+  animation: countUp 2s ease-out;
+}
+
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Section Animations */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fade-in-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Button Animations */
+.btn-hero {
+  position: relative;
+  overflow: hidden;
+  transform: perspective(1px) translateZ(0);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-hero:hover::before {
+  left: 100%;
+}
+
+.btn-hero:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Revolutionary Card Styles */
+.card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 32px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+  transition: left 0.8s;
+}
+
+.card:hover::before {
+  left: 100%;
+}
+
+.card:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+  border-color: var(--primary-300);
+}
+
+/* Why AMR Matters Section */
+.trust-ecosystem-bg {
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 60%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+  animation: ecosystemShift 20s ease-in-out infinite;
+}
+
+@keyframes ecosystemShift {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* Integration Cards */
+.integration-card {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.integration-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+  transition: left 0.8s;
+}
+
+.integration-card:hover::before {
+  left: 100%;
+}
+
+.integration-card:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+/* API Feature Cards */
+.api-feature {
+  transition: all 0.3s ease;
+}
+
+.api-feature:hover {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Blockchain Grid Background */
+.blockchain-grid {
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: gridMove 30s linear infinite;
+}
+
+@keyframes gridMove {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(40px, 40px);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 4rem;
+    line-height: 1.1;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.25rem;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-4px);
+  }
+  
+  .phone-mockup {
+    max-width: 280px;
+  }
+  
+  .trust-pillar {
+    padding: 24px;
+  }
+  
+  .integration-card:hover {
+    transform: translateY(-6px);
+  }
+}
+
+/* Dark Mode Adjustments */
+[data-theme="dark"] .glass {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .card::before {
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.2), transparent);
+}
+
+/* Performance Optimizations */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-shimmer,
+  .animate-bounce,
+  .blockchain-node,
+  .trust-badge,
+  .phone-mockup {
+    animation: none;
+  }
+  
+  .hover-lift:hover,
+  .btn-hero:hover {
+    transform: none;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .hero-gradient {
+    background: #1e40af !important;
+    color: white !important;
+  }
+}

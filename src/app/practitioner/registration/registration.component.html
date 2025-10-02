@@ -1,0 +1,343 @@
+<div class="bg-gray-50 min-h-screen">
+  <app-header />
+  <main class="pt-16">
+    <!-- Header Section -->
+    <section class="bg-white border-b border-gray-200 py-8">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <div class="flex items-center gap-4 mb-6">
+            <button routerLink="/practitioner/dashboard" class="flex items-center gap-2 text-gray-600 hover:text-gray-900">
+              <i class="ri-arrow-left-line"></i>
+              Back to Dashboard
+            </button>
+          </div>
+          <h1 class="text-3xl font-bold text-gray-900 mb-2">Professional Registration</h1>
+          <p class="text-gray-600">Complete your registration to join the African Medical Registry</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Progress Steps -->
+    <section class="bg-white py-6 border-b border-gray-200">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <div class="flex items-center justify-between">
+            <div *ngFor="let step of steps; let i = index" class="flex items-center" [class.flex-1]="i < steps.length - 1">
+              <div class="flex items-center">
+                <div [class]="'w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold ' + getStepClass(step)"
+                     (click)="goToStep(step.id)"
+                     [class.cursor-pointer]="step.id <= currentStep || step.completed">
+                  <span *ngIf="!step.completed">{{ step.id }}</span>
+                  <i *ngIf="step.completed" class="ri-check-line"></i>
+                </div>
+                <div class="ml-3 hidden md:block">
+                  <p class="text-sm font-medium text-gray-900">{{ step.title }}</p>
+                  <p class="text-xs text-gray-500">{{ step.description }}</p>
+                </div>
+              </div>
+              <div *ngIf="i < steps.length - 1" class="flex-1 h-0.5 bg-gray-200 mx-4">
+                <div class="h-full bg-blue-500 transition-all duration-300" 
+                     [style.width.%]="step.completed ? 100 : 0"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Form Content -->
+    <section class="py-12">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <form class="bg-white rounded-xl border border-gray-200 p-8">
+            
+            <!-- Step 1: Personal Information -->
+            <div *ngIf="currentStep === 1" class="space-y-6">
+              <h2 class="text-2xl font-bold text-gray-900 mb-6">Personal Information</h2>
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">First Name *</label>
+                  <input type="text" [(ngModel)]="registrationForm.firstName" name="firstName" required
+                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Last Name *</label>
+                  <input type="text" [(ngModel)]="registrationForm.lastName" name="lastName" required
+                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Date of Birth *</label>
+                  <input type="date" [(ngModel)]="registrationForm.dateOfBirth" name="dateOfBirth" required
+                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Gender *</label>
+                  <select [(ngModel)]="registrationForm.gender" name="gender" required
+                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Nationality *</label>
+                  <select [(ngModel)]="registrationForm.nationality" name="nationality" required
+                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <option value="">Select Nationality</option>
+                    <option *ngFor="let country of countries" [value]="country.value">{{ country.label }}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">National ID Number *</label>
+                <input type="text" [(ngModel)]="registrationForm.nationalId" name="nationalId" required
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+              </div>
+            </div>
+
+            <!-- Step 2: Contact Information -->
+            <div *ngIf="currentStep === 2" class="space-y-6">
+              <h2 class="text-2xl font-bold text-gray-900 mb-6">Contact Information</h2>
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                  <input type="email" [(ngModel)]="registrationForm.email" name="email" required
+                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
+                  <input type="tel" [(ngModel)]="registrationForm.phone" name="phone" required
+                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Address *</label>
+                <textarea [(ngModel)]="registrationForm.address" name="address" required rows="3"
+                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"></textarea>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">City *</label>
+                  <input type="text" [(ngModel)]="registrationForm.city" name="city" required
+                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Country *</label>
+                  <select [(ngModel)]="registrationForm.country" name="country" required
+                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <option value="">Select Country</option>
+                    <option *ngFor="let country of countries" [value]="country.value">{{ country.label }}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 3: Professional Information -->
+            <div *ngIf="currentStep === 3" class="space-y-6">
+              <h2 class="text-2xl font-bold text-gray-900 mb-6">Professional Information</h2>
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Profession *</label>
+                  <select [(ngModel)]="registrationForm.profession" name="profession" required
+                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <option value="">Select Profession</option>
+                    <option *ngFor="let profession of professions" [value]="profession.value">{{ profession.label }}</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Specialization</label>
+                  <input type="text" [(ngModel)]="registrationForm.specialization" name="specialization"
+                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Qualifications *</label>
+                <textarea [(ngModel)]="registrationForm.qualifications" name="qualifications" required rows="3"
+                          placeholder="List your degrees, certifications, and qualifications"
+                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"></textarea>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Institution *</label>
+                  <input type="text" [(ngModel)]="registrationForm.institution" name="institution" required
+                         placeholder="University or training institution"
+                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Graduation Year *</label>
+                  <input type="number" [(ngModel)]="registrationForm.graduationYear" name="graduationYear" required
+                         min="1950" max="2025"
+                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Previous License Number</label>
+                  <input type="text" [(ngModel)]="registrationForm.previousLicense" name="previousLicense"
+                         placeholder="If applicable"
+                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Regulatory Body</label>
+                  <input type="text" [(ngModel)]="registrationForm.regulatoryBody" name="regulatoryBody"
+                         placeholder="Previous regulatory authority"
+                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 4: Documents -->
+            <div *ngIf="currentStep === 4" class="space-y-6">
+              <h2 class="text-2xl font-bold text-gray-900 mb-6">Required Documents</h2>
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-500 transition-colors">
+                  <div class="w-12 h-12 flex items-center justify-center bg-gray-100 rounded-full mx-auto mb-4">
+                    <i class="ri-camera-line text-xl text-gray-400"></i>
+                  </div>
+                  <h3 class="font-medium text-gray-900 mb-2">Passport Photo *</h3>
+                  <p class="text-sm text-gray-500 mb-4">Upload a recent passport-style photo</p>
+                  <input type="file" accept="image/*" (change)="onFileSelect($event, 'photo')" class="hidden" #photoInput>
+                  <button type="button" (click)="photoInput.click()" 
+                          class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                    Choose File
+                  </button>
+                  <p *ngIf="registrationForm.documents.photo" class="text-green-600 text-sm mt-2">
+                    ✓ {{ registrationForm.documents.photo.name }}
+                  </p>
+                </div>
+
+                <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-500 transition-colors">
+                  <div class="w-12 h-12 flex items-center justify-center bg-gray-100 rounded-full mx-auto mb-4">
+                    <i class="ri-file-text-line text-xl text-gray-400"></i>
+                  </div>
+                  <h3 class="font-medium text-gray-900 mb-2">Professional Certificate *</h3>
+                  <p class="text-sm text-gray-500 mb-4">Upload your degree/diploma certificate</p>
+                  <input type="file" accept=".pdf,.jpg,.jpeg,.png" (change)="onFileSelect($event, 'certificate')" class="hidden" #certificateInput>
+                  <button type="button" (click)="certificateInput.click()" 
+                          class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                    Choose File
+                  </button>
+                  <p *ngIf="registrationForm.documents.certificate" class="text-green-600 text-sm mt-2">
+                    ✓ {{ registrationForm.documents.certificate.name }}
+                  </p>
+                </div>
+
+                <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-500 transition-colors">
+                  <div class="w-12 h-12 flex items-center justify-center bg-gray-100 rounded-full mx-auto mb-4">
+                    <i class="ri-file-list-line text-xl text-gray-400"></i>
+                  </div>
+                  <h3 class="font-medium text-gray-900 mb-2">Academic Transcript</h3>
+                  <p class="text-sm text-gray-500 mb-4">Upload your official transcript</p>
+                  <input type="file" accept=".pdf,.jpg,.jpeg,.png" (change)="onFileSelect($event, 'transcript')" class="hidden" #transcriptInput>
+                  <button type="button" (click)="transcriptInput.click()" 
+                          class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                    Choose File
+                  </button>
+                  <p *ngIf="registrationForm.documents.transcript" class="text-green-600 text-sm mt-2">
+                    ✓ {{ registrationForm.documents.transcript.name }}
+                  </p>
+                </div>
+
+                <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-500 transition-colors">
+                  <div class="w-12 h-12 flex items-center justify-center bg-gray-100 rounded-full mx-auto mb-4">
+                    <i class="ri-id-card-line text-xl text-gray-400"></i>
+                  </div>
+                  <h3 class="font-medium text-gray-900 mb-2">National ID</h3>
+                  <p class="text-sm text-gray-500 mb-4">Upload copy of national ID</p>
+                  <input type="file" accept=".pdf,.jpg,.jpeg,.png" (change)="onFileSelect($event, 'nationalId')" class="hidden" #nationalIdInput>
+                  <button type="button" (click)="nationalIdInput.click()" 
+                          class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                    Choose File
+                  </button>
+                  <p *ngIf="registrationForm.documents.nationalId" class="text-green-600 text-sm mt-2">
+                    ✓ {{ registrationForm.documents.nationalId.name }}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 5: Review & Submit -->
+            <div *ngIf="currentStep === 5" class="space-y-6">
+              <h2 class="text-2xl font-bold text-gray-900 mb-6">Review Your Application</h2>
+              
+              <div class="bg-gray-50 rounded-lg p-6 space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <h4 class="font-medium text-gray-900">Full Name</h4>
+                    <p class="text-gray-600">{{ registrationForm.firstName }} {{ registrationForm.lastName }}</p>
+                  </div>
+                  <div>
+                    <h4 class="font-medium text-gray-900">Email</h4>
+                    <p class="text-gray-600">{{ registrationForm.email }}</p>
+                  </div>
+                  <div>
+                    <h4 class="font-medium text-gray-900">Profession</h4>
+                    <p class="text-gray-600">{{ registrationForm.profession | titlecase }}</p>
+                  </div>
+                  <div>
+                    <h4 class="font-medium text-gray-900">Institution</h4>
+                    <p class="text-gray-600">{{ registrationForm.institution }}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                <h4 class="font-medium text-blue-900 mb-2">Important Notice</h4>
+                <p class="text-blue-800 text-sm">
+                  By submitting this application, you confirm that all information provided is accurate and complete. 
+                  False information may result in rejection or revocation of your license.
+                </p>
+              </div>
+
+              <div class="flex items-center gap-3">
+                <input type="checkbox" id="terms" class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                <label for="terms" class="text-sm text-gray-700">
+                  I agree to the <a href="/terms" class="text-blue-600 hover:underline">Terms and Conditions</a> 
+                  and <a href="/legal" class="text-blue-600 hover:underline">Privacy Policy</a>
+                </label>
+              </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="flex items-center justify-between pt-8 border-t border-gray-200">
+              <button *ngIf="currentStep > 1" type="button" (click)="previousStep()"
+                      class="flex items-center gap-2 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                <i class="ri-arrow-left-line"></i>
+                Previous
+              </button>
+              <div class="flex-1"></div>
+              
+              <button *ngIf="currentStep < totalSteps" type="button" (click)="nextStep()"
+                      [disabled]="!validateCurrentStep()"
+                      class="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+                Next
+                <i class="ri-arrow-right-line"></i>
+              </button>
+              
+              <button *ngIf="currentStep === totalSteps" type="button" (click)="submitRegistration()"
+                      class="flex items-center gap-2 px-8 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+                <i class="ri-send-plane-line"></i>
+                Submit Application
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+  <app-footer />
+</div>

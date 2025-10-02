@@ -1,0 +1,270 @@
+<div class="bg-gray-50 min-h-screen">
+  <app-header />
+  <main class="pt-16">
+    <!-- Hospital Header -->
+    <section class="bg-gradient-to-r from-green-600 to-blue-600 text-white py-12">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="flex flex-col lg:flex-row items-start justify-between gap-8">
+            <div>
+              <h1 class="text-3xl font-bold mb-2">{{ hospitalName }}</h1>
+              <p class="text-green-100 mb-4">Hospital Staff Verification Portal</p>
+              <div class="flex items-center gap-6">
+                <div class="flex items-center gap-2">
+                  <i class="ri-shield-check-line"></i>
+                  <span class="font-medium">{{ getVerificationRate() }}% Staff Verified</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i class="ri-team-line"></i>
+                  <span class="font-medium">{{ totalStaff }} Total Staff</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Quick Stats -->
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 min-w-[300px]">
+              <h3 class="text-lg font-semibold mb-4">Verification Status</h3>
+              <div class="space-y-3">
+                <div class="flex justify-between">
+                  <span class="text-green-100">Verified Staff:</span>
+                  <span class="font-bold">{{ verifiedStaff }}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-green-100">Pending Verifications:</span>
+                  <span class="font-bold">{{ pendingVerifications }}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-green-100">Compliance Rate:</span>
+                  <span class="font-bold">{{ getVerificationRate() }}%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Tabs -->
+    <section class="bg-white border-b border-gray-200">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <nav class="flex space-x-8">
+            <button (click)="setActiveTab('dashboard')" 
+                    [class]="'py-4 px-1 border-b-2 font-medium text-sm transition-colors ' + (activeTab === 'dashboard' ? 'border-green-500 text-green-600' : 'border-transparent text-gray-500 hover:text-gray-700')">
+              Dashboard
+            </button>
+            <button (click)="setActiveTab('staff')" 
+                    [class]="'py-4 px-1 border-b-2 font-medium text-sm transition-colors ' + (activeTab === 'staff' ? 'border-green-500 text-green-600' : 'border-transparent text-gray-500 hover:text-gray-700')">
+              Staff Roster
+            </button>
+            <button (click)="setActiveTab('requests')" 
+                    [class]="'py-4 px-1 border-b-2 font-medium text-sm transition-colors ' + (activeTab === 'requests' ? 'border-green-500 text-green-600' : 'border-transparent text-gray-500 hover:text-gray-700')">
+              Verification Requests
+            </button>
+            <button (click)="setActiveTab('analytics')" 
+                    [class]="'py-4 px-1 border-b-2 font-medium text-sm transition-colors ' + (activeTab === 'analytics' ? 'border-green-500 text-green-600' : 'border-transparent text-gray-500 hover:text-gray-700')">
+              Analytics
+            </button>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dashboard Tab -->
+    <section *ngIf="activeTab === 'dashboard'" class="py-12">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="grid lg:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-xl border border-gray-200 p-6 text-center">
+              <div class="text-3xl font-bold text-green-600 mb-2">{{ verifiedStaff }}</div>
+              <div class="text-gray-600">Verified Staff</div>
+            </div>
+            <div class="bg-white rounded-xl border border-gray-200 p-6 text-center">
+              <div class="text-3xl font-bold text-yellow-600 mb-2">{{ pendingVerifications }}</div>
+              <div class="text-gray-600">Pending</div>
+            </div>
+            <div class="bg-white rounded-xl border border-gray-200 p-6 text-center">
+              <div class="text-3xl font-bold text-blue-600 mb-2">{{ getVerificationRate() }}%</div>
+              <div class="text-gray-600">Compliance</div>
+            </div>
+            <div class="bg-white rounded-xl border border-gray-200 p-6 text-center">
+              <div class="text-3xl font-bold text-purple-600 mb-2">24/7</div>
+              <div class="text-gray-600">Monitoring</div>
+            </div>
+          </div>
+
+          <!-- Recent Activity -->
+          <div class="bg-white rounded-xl border border-gray-200 p-8">
+            <h3 class="text-xl font-bold text-gray-900 mb-6">Recent Verification Activity</h3>
+            <div class="space-y-4">
+              <div class="flex items-center gap-4 p-4 bg-green-50 rounded-lg">
+                <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
+                  <i class="ri-check-line text-white"></i>
+                </div>
+                <div class="flex-1">
+                  <h4 class="font-medium text-gray-900">Dr. Sarah Mensah verified</h4>
+                  <p class="text-gray-600 text-sm">Cardiology Department - 2 hours ago</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-4 p-4 bg-blue-50 rounded-lg">
+                <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                  <i class="ri-user-add-line text-white"></i>
+                </div>
+                <div class="flex-1">
+                  <h4 class="font-medium text-gray-900">New verification request</h4>
+                  <p class="text-gray-600 text-sm">Dr. Emmanuel Kwame - Emergency Department</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Staff Roster Tab -->
+    <section *ngIf="activeTab === 'staff'" class="py-12">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+              <h3 class="text-lg font-semibold text-gray-900">Staff Verification Status</h3>
+              <button class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                <i class="ri-add-line mr-2"></i>
+                Add Staff Member
+              </button>
+            </div>
+            
+            <div class="divide-y divide-gray-200">
+              <div *ngFor="let staff of staffMembers" class="p-6 hover:bg-gray-50 transition-colors">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-4">
+                    <img [src]="staff.photo" [alt]="staff.name" class="w-12 h-12 rounded-full object-cover">
+                    <div>
+                      <h4 class="font-semibold text-gray-900">{{ staff.name }}</h4>
+                      <p class="text-gray-600 text-sm">{{ staff.profession }} • {{ staff.department }}</p>
+                      <p class="text-gray-500 text-xs">License: {{ staff.licenseNumber }}</p>
+                    </div>
+                  </div>
+                  
+                  <div class="flex items-center gap-4">
+                    <div class="text-right">
+                      <span [class]="'px-3 py-1 rounded-full text-xs font-medium ' + getStatusClass(staff.status)">
+                        {{ staff.status | titlecase }}
+                      </span>
+                      <p class="text-gray-500 text-xs mt-1">Last verified: {{ staff.lastVerified }}</p>
+                    </div>
+                    
+                    <button (click)="verifyStaff(staff.id)"
+                            class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                      <i class="ri-refresh-line mr-2"></i>
+                      Re-verify
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Verification Requests Tab -->
+    <section *ngIf="activeTab === 'requests'" class="py-12">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-200">
+              <h3 class="text-lg font-semibold text-gray-900">Pending Verification Requests</h3>
+            </div>
+            
+            <div class="divide-y divide-gray-200">
+              <div *ngFor="let request of verificationRequests" class="p-6">
+                <div class="flex items-center justify-between">
+                  <div class="flex-1">
+                    <div class="flex items-center gap-3 mb-2">
+                      <h4 class="font-semibold text-gray-900">{{ request.candidateName }}</h4>
+                      <span [class]="'px-2 py-1 rounded-full text-xs font-medium ' + getPriorityClass(request.priority)">
+                        {{ request.priority | titlecase }} Priority
+                      </span>
+                    </div>
+                    <p class="text-gray-600 mb-1">{{ request.position }}</p>
+                    <div class="flex items-center gap-4 text-sm text-gray-500">
+                      <span>License: {{ request.licenseNumber }}</span>
+                      <span>•</span>
+                      <span>Submitted by: {{ request.submittedBy }}</span>
+                      <span>•</span>
+                      <span>{{ request.submittedDate }}</span>
+                    </div>
+                  </div>
+                  
+                  <div class="flex gap-3">
+                    <button (click)="rejectRequest(request.id)"
+                            class="bg-red-100 text-red-700 px-4 py-2 rounded-lg hover:bg-red-200 transition-colors">
+                      <i class="ri-close-line mr-2"></i>
+                      Reject
+                    </button>
+                    <button (click)="approveRequest(request.id)"
+                            class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                      <i class="ri-check-line mr-2"></i>
+                      Approve
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Analytics Tab -->
+    <section *ngIf="activeTab === 'analytics'" class="py-12">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="grid lg:grid-cols-2 gap-8">
+            <div class="bg-white rounded-xl border border-gray-200 p-8">
+              <h3 class="text-xl font-bold text-gray-900 mb-6">Verification Trends</h3>
+              <div class="space-y-4">
+                <div class="flex justify-between items-center">
+                  <span class="text-gray-600">This Month</span>
+                  <span class="font-bold text-green-600">+45 Verifications</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-gray-600">Average Processing Time</span>
+                  <span class="font-bold text-blue-600">2.3 hours</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-gray-600">Compliance Score</span>
+                  <span class="font-bold text-purple-600">98.7%</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-gray-200 p-8">
+              <h3 class="text-xl font-bold text-gray-900 mb-6">Department Breakdown</h3>
+              <div class="space-y-3">
+                <div class="flex justify-between items-center">
+                  <span class="text-gray-600">Emergency</span>
+                  <span class="font-bold">156 staff</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-gray-600">Surgery</span>
+                  <span class="font-bold">89 staff</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-gray-600">Cardiology</span>
+                  <span class="font-bold">67 staff</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-gray-600">Pediatrics</span>
+                  <span class="font-bold">54 staff</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <app-footer />
+</div>

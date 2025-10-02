@@ -1,0 +1,33 @@
+.digital-id-card {
+  transition: all 0.3s ease;
+}
+
+.digital-id-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.qr-code-container {
+  transition: all 0.3s ease;
+}
+
+.qr-code-container:hover {
+  transform: scale(1.05);
+}
+
+.feature-card {
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.share-button {
+  transition: all 0.2s ease;
+}
+
+.share-button:hover {
+  transform: scale(1.05);
+}

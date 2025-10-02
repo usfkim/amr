@@ -1,0 +1,421 @@
+<!-- Blockchain Technology Page -->
+<div class="bg-white dark:bg-slate-900">
+  <app-header />
+  <main class="pt-16">
+    <!-- Hero Section -->
+    <section class="relative h-[480px] flex items-center overflow-hidden">
+      <!-- Animated Background -->
+      <div class="absolute inset-0">
+        <div class="blockchain-grid opacity-20"></div>
+        <div class="trust-ecosystem-bg"></div>
+        
+        <!-- Floating Blockchain Elements -->
+        <div class="absolute top-20 left-10 trust-badge animate-float">
+          <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center shadow-lg">
+            <i class="ri-links-line text-white text-xl"></i>
+          </div>
+        </div>
+        <div class="absolute top-40 right-20 trust-badge animate-float" style="animation-delay: 1s;">
+          <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-500 rounded-xl flex items-center justify-center shadow-lg">
+            <i class="ri-shield-check-line text-white"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="max-w-4xl mx-auto text-center">
+          <h1 class="text-6xl lg:text-7xl font-black mb-6">
+            <span class="block text-gray-900 dark:text-white">Blockchain</span>
+            <span class="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-cyan-500 to-green-600 animate-shimmer">
+              Trust Layer
+            </span>
+          </h1>
+          <p class="text-2xl lg:text-3xl text-gray-600 dark:text-gray-300 font-light leading-relaxed mb-8">
+            Immutable proofs. Tamper-resistant records. 
+            <span class="font-semibold text-blue-600 dark:text-blue-400">Unbreakable trust infrastructure.</span>
+          </p>
+
+          <!-- Blockchain Stats -->
+          <div class="flex justify-center items-center gap-8 mb-12">
+            <div class="trust-indicator glass rounded-full px-6 py-3">
+              <i class="ri-database-line text-blue-500 mr-2"></i>
+              <span class="text-gray-900 dark:text-white font-bold">{{ blockchainStats.totalBlocks | number }} Blocks</span>
+            </div>
+            <div class="trust-indicator glass rounded-full px-6 py-3">
+              <i class="ri-shield-check-line text-green-500 mr-2"></i>
+              <span class="text-gray-900 dark:text-white font-bold">{{ blockchainStats.dataIntegrity }}</span>
+            </div>
+            <div class="trust-indicator glass rounded-full px-6 py-3">
+              <i class="ri-time-line text-purple-500 mr-2"></i>
+              <span class="text-gray-900 dark:text-white font-bold">{{ blockchainStats.averageBlockTime }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blockchain Architecture Section -->
+    <section class="py-24 bg-gray-50 dark:bg-slate-800">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-6">Append-Only Proof Architecture</h2>
+            <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              Every credential verification creates an immutable blockchain record that cannot be altered or deleted
+            </p>
+          </div>
+
+          <!-- Blockchain Visualization -->
+          <div class="bg-gradient-to-br from-slate-900 to-blue-900 rounded-3xl p-8 text-white mb-12">
+            <h3 class="text-2xl font-bold mb-8 text-center">Live Blockchain Network</h3>
+            
+            <!-- Network Nodes -->
+            <div class="grid lg:grid-cols-3 gap-6 mb-8">
+              <div *ngFor="let node of blockchainNodes" 
+                   class="blockchain-node-card glass rounded-2xl p-6 hover:scale-105 transition-all duration-300">
+                <div class="flex items-center justify-between mb-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+                      <i [class]="getNodeTypeIcon(node.type) + ' text-white'"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-bold text-white">{{ node.name }}</h4>
+                      <p class="text-white/70 text-sm">{{ node.country }}</p>
+                    </div>
+                  </div>
+                  <div [class]="'w-3 h-3 rounded-full ' + getNodeStatusClass(node.status)"></div>
+                </div>
+                
+                <div class="space-y-2 text-sm">
+                  <div class="flex justify-between text-white/80">
+                    <span>Last Block:</span>
+                    <span class="font-mono">{{ node.lastBlock | number }}</span>
+                  </div>
+                  <div class="flex justify-between text-white/80">
+                    <span>Transactions:</span>
+                    <span class="font-mono">{{ node.transactions | number }}</span>
+                  </div>
+                  <div class="flex justify-between text-white/80">
+                    <span>Status:</span>
+                    <span class="font-medium">{{ node.status | titlecase }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Network Stats -->
+            <div class="grid lg:grid-cols-6 gap-4">
+              <div class="text-center p-4 bg-white/10 rounded-xl">
+                <div class="text-2xl font-bold text-cyan-400">{{ blockchainStats.totalBlocks | number }}</div>
+                <div class="text-white/80 text-xs">Total Blocks</div>
+              </div>
+              <div class="text-center p-4 bg-white/10 rounded-xl">
+                <div class="text-2xl font-bold text-green-400">{{ blockchainStats.totalTransactions | number }}</div>
+                <div class="text-white/80 text-xs">Transactions</div>
+              </div>
+              <div class="text-center p-4 bg-white/10 rounded-xl">
+                <div class="text-2xl font-bold text-blue-400">{{ blockchainStats.networkHashRate }}</div>
+                <div class="text-white/80 text-xs">Hash Rate</div>
+              </div>
+              <div class="text-center p-4 bg-white/10 rounded-xl">
+                <div class="text-2xl font-bold text-purple-400">{{ blockchainStats.averageBlockTime }}</div>
+                <div class="text-white/80 text-xs">Block Time</div>
+              </div>
+              <div class="text-center p-4 bg-white/10 rounded-xl">
+                <div class="text-2xl font-bold text-orange-400">{{ blockchainStats.consensusAlgorithm }}</div>
+                <div class="text-white/80 text-xs">Consensus</div>
+              </div>
+              <div class="text-center p-4 bg-white/10 rounded-xl">
+                <div class="text-2xl font-bold text-pink-400">{{ blockchainStats.dataIntegrity }}</div>
+                <div class="text-white/80 text-xs">Integrity</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Technical Features -->
+          <div class="grid lg:grid-cols-3 gap-8">
+            <div class="feature-card card hover-lift group">
+              <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                <i class="ri-file-shield-line text-white text-2xl"></i>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Append-Only Proofs</h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-6">Every verification creates an immutable record that cannot be altered, ensuring complete audit transparency.</p>
+              <div class="space-y-2 text-sm text-gray-500 dark:text-gray-400">
+                <div>• Cryptographic hash verification</div>
+                <div>• Tamper-evident data structures</div>
+                <div>• Chronological integrity</div>
+                <div>• Distributed consensus validation</div>
+              </div>
+            </div>
+
+            <div class="feature-card card hover-lift group">
+              <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                <i class="ri-government-line text-white text-2xl"></i>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Council Nodes</h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-6">Medical councils operate sovereign blockchain nodes, maintaining complete control over their national data.</p>
+              <div class="space-y-2 text-sm text-gray-500 dark:text-gray-400">
+                <div>• Sovereign data control</div>
+                <div>• National blockchain nodes</div>
+                <div>• Cross-border synchronization</div>
+                <div>• Regulatory compliance</div>
+              </div>
+            </div>
+
+            <div class="feature-card card hover-lift group">
+              <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                <i class="ri-file-search-line text-white text-2xl"></i>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Complete Audit Trail</h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-6">Every action is logged with cryptographic proof, creating an unbreakable chain of accountability.</p>
+              <div class="space-y-2 text-sm text-gray-500 dark:text-gray-400">
+                <div>• Comprehensive activity logging</div>
+                <div>• Cryptographic signatures</div>
+                <div>• Time-stamped records</div>
+                <div>• Regulatory audit support</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Audit Trail Section -->
+    <section class="py-24 bg-white dark:bg-slate-900">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-6">Live Audit Trail</h2>
+            <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              Real-time blockchain transactions showing practitioner verifications across Africa
+            </p>
+          </div>
+
+          <div class="bg-gradient-to-br from-gray-900 to-slate-800 rounded-3xl p-8 text-white">
+            <div class="flex items-center justify-between mb-6">
+              <h3 class="text-xl font-bold">Recent Blockchain Transactions</h3>
+              <div class="flex items-center gap-2">
+                <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                <span class="text-green-400 font-medium text-sm">Live Updates</span>
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              <div *ngFor="let audit of recentAudits" 
+                   class="audit-entry bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:bg-white/10 transition-all duration-300">
+                <div class="flex items-center justify-between">
+                  <div class="flex-1">
+                    <div class="flex items-center gap-3 mb-2">
+                      <div class="w-8 h-8 bg-green-500/20 rounded-lg flex items-center justify-center">
+                        <i class="ri-check-line text-green-400"></i>
+                      </div>
+                      <div>
+                        <h4 class="font-semibold text-white">{{ audit.action }}</h4>
+                        <p class="text-white/70 text-sm">{{ audit.practitioner }} • {{ audit.council }}</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="text-right">
+                    <div class="text-white/80 text-sm">{{ formatTimestamp(audit.timestamp) }}</div>
+                    <div class="font-mono text-xs text-cyan-400">{{ audit.hash }}</div>
+                    <div class="flex items-center gap-1 mt-1">
+                      <i class="ri-shield-check-line text-green-400 text-xs"></i>
+                      <span class="text-green-400 text-xs">Verified</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Specifications -->
+    <section class="py-24 bg-gray-50 dark:bg-slate-800">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-6">Technical Architecture</h2>
+            <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              Enterprise-grade blockchain infrastructure designed for healthcare regulatory compliance
+            </p>
+          </div>
+
+          <div class="grid lg:grid-cols-2 gap-12">
+            <!-- Consensus Mechanism -->
+            <div class="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-gray-200 dark:border-slate-700">
+              <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Proof of Authority Consensus</h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-6">
+                Medical councils serve as trusted validators, ensuring only authorized institutions can add blocks to the chain.
+              </p>
+              
+              <div class="space-y-4">
+                <div class="flex items-start gap-3">
+                  <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mt-1">
+                    <i class="ri-government-line text-blue-600 dark:text-blue-400"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-gray-900 dark:text-white">Authorized Validators</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Only licensed medical councils can validate transactions</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-start gap-3">
+                  <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mt-1">
+                    <i class="ri-shield-check-line text-green-600 dark:text-green-400"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-gray-900 dark:text-white">Regulatory Compliance</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Built-in compliance with healthcare regulations</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-start gap-3">
+                  <div class="w-8 h-8 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mt-1">
+                    <i class="ri-speed-line text-purple-600 dark:text-purple-400"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-gray-900 dark:text-white">High Performance</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">15-second block times with instant finality</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Data Structure -->
+            <div class="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-gray-200 dark:border-slate-700">
+              <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Immutable Data Structure</h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-6">
+                Each block contains cryptographically linked practitioner records with tamper-evident hashing.
+              </p>
+              
+              <!-- Block Structure Visualization -->
+              <div class="space-y-3">
+                <div class="block-structure bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-lg p-4 border border-blue-200/50 dark:border-blue-800/50">
+                  <div class="flex items-center gap-3 mb-3">
+                    <div class="w-6 h-6 bg-blue-500 rounded-lg flex items-center justify-center">
+                      <span class="text-white text-xs font-bold">1</span>
+                    </div>
+                    <span class="font-mono text-sm text-gray-900 dark:text-white">Block Header</span>
+                  </div>
+                  <div class="text-xs text-gray-600 dark:text-gray-300 space-y-1">
+                    <div>• Previous Block Hash</div>
+                    <div>• Merkle Root</div>
+                    <div>• Timestamp</div>
+                    <div>• Validator Signature</div>
+                  </div>
+                </div>
+                
+                <div class="block-structure bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg p-4 border border-green-200/50 dark:border-green-800/50">
+                  <div class="flex items-center gap-3 mb-3">
+                    <div class="w-6 h-6 bg-green-500 rounded-lg flex items-center justify-center">
+                      <span class="text-white text-xs font-bold">2</span>
+                    </div>
+                    <span class="font-mono text-sm text-gray-900 dark:text-white">Transaction Data</span>
+                  </div>
+                  <div class="text-xs text-gray-600 dark:text-gray-300 space-y-1">
+                    <div>• Practitioner ID Hash</div>
+                    <div>• License Status</div>
+                    <div>• Verification Timestamp</div>
+                    <div>• Council Signature</div>
+                  </div>
+                </div>
+                
+                <div class="block-structure bg-gradient-to-r from-purple-500/10 to-indigo-500/10 rounded-lg p-4 border border-purple-200/50 dark:border-purple-800/50">
+                  <div class="flex items-center gap-3 mb-3">
+                    <div class="w-6 h-6 bg-purple-500 rounded-lg flex items-center justify-center">
+                      <span class="text-white text-xs font-bold">3</span>
+                    </div>
+                    <span class="font-mono text-sm text-gray-900 dark:text-white">Cryptographic Proof</span>
+                  </div>
+                  <div class="text-xs text-gray-600 dark:text-gray-300 space-y-1">
+                    <div>• SHA-256 Hash</div>
+                    <div>• Digital Signature</div>
+                    <div>• Merkle Tree Proof</div>
+                    <div>• Consensus Validation</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Security Guarantees -->
+    <section class="py-24 bg-gradient-to-br from-slate-900 to-blue-900 text-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold mb-6">Unbreakable Security Guarantees</h2>
+            <p class="text-xl text-white/80 max-w-3xl mx-auto">
+              Military-grade security protecting Africa's healthcare data
+            </p>
+          </div>
+
+          <div class="grid lg:grid-cols-4 gap-8">
+            <div class="security-card glass rounded-2xl p-8 text-center hover-trust group">
+              <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-500">
+                <i class="ri-lock-line text-white text-2xl"></i>
+              </div>
+              <h3 class="font-bold mb-2">256-bit Encryption</h3>
+              <p class="text-white/70 text-sm">Military-grade encryption for all data</p>
+            </div>
+
+            <div class="security-card glass rounded-2xl p-8 text-center hover-trust group">
+              <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-500">
+                <i class="ri-shield-star-line text-white text-2xl"></i>
+              </div>
+              <h3 class="font-bold mb-2">Tamper Resistance</h3>
+              <p class="text-white/70 text-sm">Cryptographic proof of data integrity</p>
+            </div>
+
+            <div class="security-card glass rounded-2xl p-8 text-center hover-trust group">
+              <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-500">
+                <i class="ri-time-line text-white text-2xl"></i>
+              </div>
+              <h3 class="font-bold mb-2">Immutable History</h3>
+              <p class="text-white/70 text-sm">Permanent record of all transactions</p>
+            </div>
+
+            <div class="security-card glass rounded-2xl p-8 text-center hover-trust group">
+              <div class="w-16 h-16 bg-gradient-to-r from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-500">
+                <i class="ri-global-line text-white text-2xl"></i>
+              </div>
+              <h3 class="font-bold mb-2">Distributed Trust</h3>
+              <p class="text-white/70 text-sm">No single point of failure</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 bg-white dark:bg-slate-900">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-8">
+            Ready to Deploy Blockchain Trust?
+          </h2>
+          <p class="text-xl text-gray-600 dark:text-gray-300 mb-12">
+            Implement unbreakable trust infrastructure for your healthcare system
+          </p>
+          
+          <div class="flex flex-col lg:flex-row justify-center gap-6">
+            <button routerLink="/contact" class="btn-hero bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-12 py-6 rounded-2xl font-bold text-xl shadow-2xl">
+              <i class="ri-rocket-line mr-3"></i>
+              Deploy Blockchain
+            </button>
+            <button class="btn-hero glass border-2 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white px-12 py-6 rounded-2xl font-bold text-xl">
+              <i class="ri-file-text-line mr-3"></i>
+              Technical Specs
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <app-footer />
+</div>

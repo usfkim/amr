@@ -1,0 +1,129 @@
+.qr-demo-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.blockchain-grid {
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(20px, 20px);
+  }
+}
+
+.phone-frame {
+  transform: perspective(1000px) rotateY(-5deg);
+  transition: transform 0.5s ease;
+}
+
+.phone-frame:hover {
+  transform: perspective(1000px) rotateY(0deg) scale(1.05);
+}
+
+.qr-viewfinder {
+  width: 120px;
+  height: 120px;
+}
+
+.qr-pattern {
+  animation: qrGlow 2s ease-in-out infinite;
+}
+
+@keyframes qrGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(16, 185, 129, 0.6);
+  }
+}
+
+.qr-dot {
+  animation: dotPulse 3s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.scan-line {
+  animation: scanMove 2s linear infinite;
+}
+
+@keyframes scanMove {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(500%);
+  }
+}
+
+.qr-corners .corner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid #10B981;
+}
+
+.corner.top-left {
+  top: -3px;
+  left: -3px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.corner.top-right {
+  top: -3px;
+  right: -3px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.corner.bottom-left {
+  bottom: -3px;
+  left: -3px;
+  border-right: none;
+  border-top: none;
+}
+
+.corner.bottom-right {
+  bottom: -3px;
+  right: -3px;
+  border-left: none;
+  border-top: none;
+}
+
+.verification-step {
+  transition: all 0.5s ease;
+}
+
+.verification-step:hover {
+  transform: translateX(8px);
+}
+
+.step-icon {
+  transition: all 0.3s ease;
+}
+
+.metric {
+  transition: all 0.3s ease;
+}
+
+.metric:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.15);
+}

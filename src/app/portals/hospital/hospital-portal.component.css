@@ -1,0 +1,24 @@
+.hospital-card {
+  transition: all 0.3s ease;
+}
+
+.hospital-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.staff-row {
+  transition: all 0.2s ease;
+}
+
+.staff-row:hover {
+  background-color: #f8fafc;
+}
+
+.verification-badge {
+  transition: all 0.2s ease;
+}
+
+.verification-badge:hover {
+  transform: scale(1.05);
+}

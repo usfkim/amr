@@ -1,0 +1,165 @@
+<div class="bg-gray-50">
+  <app-header />
+  <main class="pt-16">
+    <!-- Hero Section -->
+    <section class="relative h-[400px] flex items-center"
+             style="background-image: url('https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1920&h=400&fit=crop'); background-size: cover; background-position: center;">
+      <div class="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-transparent"></div>
+      <div class="container mx-auto px-6 relative">
+        <div class="max-w-3xl">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-16 h-16 flex items-center justify-center bg-blue-500/10 rounded-full">
+              <i class="ri-newspaper-line text-blue-500 text-2xl"></i>
+            </div>
+            <div>
+              <h1 class="text-5xl font-bold text-gray-900">Press & Media Center</h1>
+              <p class="text-xl text-gray-600 mt-2">Latest news, announcements, and media coverage</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured News -->
+    <section class="py-16 bg-white" *ngIf="getFeaturedPosts().length > 0">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Featured Stories</h2>
+          
+          <div class="grid lg:grid-cols-2 gap-8">
+            <div *ngFor="let post of getFeaturedPosts()" 
+                 class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer"
+                 (click)="readPost(post.id)">
+              <img [src]="post.image" [alt]="post.title" class="w-full h-64 object-cover">
+              
+              <div class="p-8">
+                <div class="flex items-center gap-3 mb-4">
+                  <span [class]="'px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1 ' + getCategoryClass(post.category)">
+                    <i [class]="getCategoryIcon(post.category)"></i>
+                    {{ post.category | titlecase }}
+                  </span>
+                  <span class="text-red-500 bg-red-100 px-2 py-1 rounded-full text-xs font-bold">Featured</span>
+                </div>
+                
+                <h3 class="text-2xl font-bold text-gray-900 mb-4 hover:text-blue-600 transition-colors">{{ post.title }}</h3>
+                <p class="text-gray-600 mb-6">{{ post.excerpt }}</p>
+                
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-4 text-sm text-gray-500">
+                    <span>{{ post.publishDate | date:'MMM d, yyyy' }}</span>
+                    <span>•</span>
+                    <span>{{ post.readTime }} min read</span>
+                    <span>•</span>
+                    <span>{{ post.author }}</span>
+                  </div>
+                  
+                  <div class="flex items-center text-blue-600 font-medium">
+                    <span>Read More</span>
+                    <i class="ri-arrow-right-line ml-2"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filters and Search -->
+    <section class="py-8 bg-gray-50">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="bg-white rounded-xl border border-gray-200 p-6">
+            <div class="flex flex-col lg:flex-row gap-6 items-center">
+              <!-- Search -->
+              <div class="flex-1">
+                <div class="relative">
+                  <i class="ri-search-line absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                  <input 
+                    type="text" 
+                    [(ngModel)]="searchQuery"
+                    placeholder="Search news and announcements..."
+                    class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+              </div>
+
+              <!-- Category Filter -->
+              <div class="flex flex-wrap gap-3">
+                <button *ngFor="let category of categories"
+                        (click)="selectedCategory = category.value"
+                        [class]="'px-4 py-2 rounded-full text-sm font-medium transition-colors ' + (selectedCategory === category.value ? 'bg-blue-500 text-white' : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50')">
+                  {{ category.label }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- News Grid -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="grid lg:grid-cols-3 gap-8">
+            <div *ngFor="let post of getRegularPosts()" 
+                 class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer"
+                 (click)="readPost(post.id)">
+              <img [src]="post.image" [alt]="post.title" class="w-full h-48 object-cover">
+              
+              <div class="p-6">
+                <div class="flex items-center gap-2 mb-3">
+                  <span [class]="'px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1 ' + getCategoryClass(post.category)">
+                    <i [class]="getCategoryIcon(post.category)"></i>
+                    {{ post.category | titlecase }}
+                  </span>
+                  <span class="text-sm text-gray-500">{{ post.publishDate | date:'MMM d' }}</span>
+                </div>
+                
+                <h3 class="text-lg font-bold text-gray-900 mb-3 hover:text-blue-600 transition-colors">{{ post.title }}</h3>
+                <p class="text-gray-600 text-sm mb-4">{{ post.excerpt }}</p>
+                
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2 text-xs text-gray-500">
+                    <span>{{ post.readTime }} min read</span>
+                    <span>•</span>
+                    <span>{{ post.author }}</span>
+                  </div>
+                  
+                  <div class="flex items-center text-blue-600 font-medium text-sm">
+                    <span>Read</span>
+                    <i class="ri-arrow-right-line ml-1"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter Subscription -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <div class="bg-gradient-to-br from-blue-50 to-green-50 rounded-2xl p-8 text-center">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Stay Updated with AMR News</h2>
+            <p class="text-lg text-gray-600 mb-8">Get the latest updates on platform launches, partnerships, and healthcare innovation across Africa</p>
+            
+            <form class="max-w-md mx-auto">
+              <div class="flex gap-4">
+                <input type="email" placeholder="Enter your email" 
+                       class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <button type="submit" 
+                        class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium">
+                  Subscribe
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <app-footer />
+</div>

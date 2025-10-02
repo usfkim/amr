@@ -1,0 +1,122 @@
+.ai-neural-network {
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 60%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+  animation: neuralPulse 8s ease-in-out infinite;
+}
+
+@keyframes neuralPulse {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.anomaly-entry {
+  transition: all 0.3s ease;
+}
+
+.anomaly-entry:hover {
+  transform: translateX(8px);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.ai-capability {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.ai-capability::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.1), transparent);
+  transition: left 0.8s;
+}
+
+.ai-capability:hover::before {
+  left: 100%;
+}
+
+.risk-card {
+  transition: all 0.3s ease;
+}
+
+.risk-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.risk-factor {
+  transition: all 0.3s ease;
+}
+
+.risk-factor:hover {
+  transform: scale(1.02);
+}
+
+.insight-card {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.insight-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.8s;
+}
+
+.insight-card:hover::before {
+  left: 100%;
+}
+
+.insight-card:hover {
+  transform: translateY(-8px) scale(1.05);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.ai-model-card {
+  transition: all 0.3s ease;
+}
+
+.ai-model-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.performance-metric {
+  transition: all 0.3s ease;
+}
+
+.performance-metric:hover {
+  transform: scale(1.02);
+}
+
+.metric {
+  transition: all 0.3s ease;
+}
+
+.metric:hover {
+  transform: scale(1.02);
+}
+
+.trends {
+  transition: all 0.3s ease;
+}
+
+.trends:hover {
+  background: rgba(255, 255, 255, 0.15);
+}

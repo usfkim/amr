@@ -1,0 +1,300 @@
+<div class="bg-gray-50 min-h-screen">
+  <app-header />
+  <main class="pt-16">
+    <!-- Header Section -->
+    <section class="bg-white border-b border-gray-200 py-8">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="flex items-center gap-4 mb-6">
+            <button routerLink="/practitioner/dashboard" class="flex items-center gap-2 text-gray-600 hover:text-gray-900">
+              <i class="ri-arrow-left-line"></i>
+              Back to Dashboard
+            </button>
+          </div>
+          <div class="flex flex-col lg:flex-row items-start justify-between gap-8">
+            <div>
+              <h1 class="text-3xl font-bold text-gray-900 mb-2">License Renewal</h1>
+              <p class="text-gray-600">Renew your professional license and maintain your credentials</p>
+            </div>
+            
+            <!-- Renewal Status Card -->
+            <div class="bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-xl p-6 min-w-[300px]">
+              <h3 class="text-lg font-semibold mb-4">Current License Status</h3>
+              <div class="space-y-2">
+                <div class="flex justify-between">
+                  <span class="text-orange-100">License Number:</span>
+                  <span class="font-bold">{{ renewalForm.currentLicense }}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-orange-100">Expires:</span>
+                  <span class="font-bold">{{ renewalForm.expiryDate }}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-orange-100">CPD Credits:</span>
+                  <span class="font-bold">{{ renewalForm.cpdCredits }}/{{ requiredCredits }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Progress Steps -->
+    <section class="bg-white py-6 border-b border-gray-200">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="flex items-center justify-between">
+            <div *ngFor="let step of renewalSteps; let i = index" class="flex items-center" [class.flex-1]="i < renewalSteps.length - 1">
+              <div class="flex items-center">
+                <div [class]="'w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold ' + getStepClass(step)">
+                  <span *ngIf="!step.completed">{{ step.id }}</span>
+                  <i *ngIf="step.completed" class="ri-check-line"></i>
+                </div>
+                <div class="ml-3 hidden md:block">
+                  <p class="text-sm font-medium text-gray-900">{{ step.title }}</p>
+                  <p class="text-xs text-gray-500">{{ step.description }}</p>
+                </div>
+              </div>
+              <div *ngIf="i < renewalSteps.length - 1" class="flex-1 h-0.5 bg-gray-200 mx-4">
+                <div class="h-full bg-blue-500 transition-all duration-300" 
+                     [style.width.%]="step.completed ? 100 : 0"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Renewal Content -->
+    <section class="py-12">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="grid lg:grid-cols-3 gap-8">
+            <!-- Main Renewal Form -->
+            <div class="lg:col-span-2">
+              <div class="bg-white rounded-xl border border-gray-200 p-8">
+                
+                <!-- Step 1: Eligibility Check -->
+                <div *ngIf="currentStep === 1" class="space-y-6">
+                  <h2 class="text-2xl font-bold text-gray-900 mb-6">Renewal Eligibility</h2>
+                  
+                  <div class="bg-green-50 border border-green-200 rounded-lg p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                      <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                        <i class="ri-check-line text-white"></i>
+                      </div>
+                      <h3 class="font-semibold text-green-900">Eligible for Renewal</h3>
+                    </div>
+                    <div class="space-y-3 text-green-800">
+                      <div class="flex items-center gap-2">
+                        <i class="ri-check-line text-green-600"></i>
+                        <span>License is in good standing</span>
+                      </div>
+                      <div class="flex items-center gap-2">
+                        <i class="ri-check-line text-green-600"></i>
+                        <span>No outstanding disciplinary actions</span>
+                      </div>
+                      <div class="flex items-center gap-2">
+                        <i class="ri-check-line text-green-600"></i>
+                        <span>Renewal window is open</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">Renewal Period</label>
+                      <select [(ngModel)]="renewalForm.renewalPeriod" name="renewalPeriod"
+                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <option value="1-year">1 Year - $250</option>
+                        <option value="2-year">2 Years - $450</option>
+                        <option value="3-year">3 Years - $600</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">Processing Priority</label>
+                      <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <option value="standard">Standard (5-7 days) - Free</option>
+                        <option value="expedited">Expedited (2-3 days) - $50</option>
+                        <option value="urgent">Urgent (24 hours) - $100</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Step 2: CPD Verification -->
+                <div *ngIf="currentStep === 2" class="space-y-6">
+                  <h2 class="text-2xl font-bold text-gray-900 mb-6">CPD Credit Verification</h2>
+                  
+                  <!-- CPD Progress -->
+                  <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                    <div class="flex items-center justify-between mb-4">
+                      <h3 class="font-semibold text-blue-900">CPD Progress</h3>
+                      <span class="text-blue-600 font-bold">{{ renewalForm.cpdCredits }}/{{ requiredCredits }} Credits</span>
+                    </div>
+                    <div class="w-full bg-blue-200 rounded-full h-3 mb-4">
+                      <div class="bg-blue-600 h-3 rounded-full transition-all duration-500" [style.width.%]="getCreditProgress()"></div>
+                    </div>
+                    <p class="text-blue-800 text-sm">
+                      {{ requiredCredits - renewalForm.cpdCredits > 0 ? 'You need ' + (requiredCredits - renewalForm.cpdCredits) + ' more credits to complete renewal' : 'CPD requirements met!' }}
+                    </p>
+                  </div>
+
+                  <!-- Upload CPD Documents -->
+                  <div class="space-y-4">
+                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-500 transition-colors">
+                      <div class="w-12 h-12 flex items-center justify-center bg-gray-100 rounded-full mx-auto mb-4">
+                        <i class="ri-file-text-line text-xl text-gray-400"></i>
+                      </div>
+                      <h3 class="font-medium text-gray-900 mb-2">CPD Certificates</h3>
+                      <p class="text-sm text-gray-500 mb-4">Upload your continuing education certificates</p>
+                      <input type="file" multiple accept=".pdf,.jpg,.jpeg,.png" (change)="onFileSelect($event, 'cpdCertificates')" class="hidden" #cpdInput>
+                      <button type="button" (click)="cpdInput.click()" 
+                              class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                        Choose Files
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Step 3: Payment -->
+                <div *ngIf="currentStep === 3" class="space-y-6">
+                  <h2 class="text-2xl font-bold text-gray-900 mb-6">Payment Processing</h2>
+                  
+                  <!-- Payment Summary -->
+                  <div class="bg-gray-50 rounded-lg p-6">
+                    <h3 class="font-semibold text-gray-900 mb-4">Renewal Summary</h3>
+                    <div class="space-y-2">
+                      <div class="flex justify-between">
+                        <span class="text-gray-600">License Renewal ({{ renewalForm.renewalPeriod }})</span>
+                        <span class="font-medium">${{ renewalFee }}</span>
+                      </div>
+                      <div class="flex justify-between">
+                        <span class="text-gray-600">Processing Fee</span>
+                        <span class="font-medium">$0</span>
+                      </div>
+                      <div class="border-t border-gray-200 pt-2 flex justify-between">
+                        <span class="font-semibold text-gray-900">Total</span>
+                        <span class="font-bold text-lg">${{ renewalFee }}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Payment Method -->
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-3">Payment Method</label>
+                    <div class="space-y-3">
+                      <label class="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50">
+                        <input type="radio" value="card" [(ngModel)]="renewalForm.paymentMethod" name="paymentMethod" class="mr-3">
+                        <i class="ri-bank-card-line text-gray-400 mr-3"></i>
+                        <span>Credit/Debit Card</span>
+                      </label>
+                      <label class="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50">
+                        <input type="radio" value="mobile" [(ngModel)]="renewalForm.paymentMethod" name="paymentMethod" class="mr-3">
+                        <i class="ri-smartphone-line text-gray-400 mr-3"></i>
+                        <span>Mobile Money</span>
+                      </label>
+                      <label class="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50">
+                        <input type="radio" value="bank" [(ngModel)]="renewalForm.paymentMethod" name="paymentMethod" class="mr-3">
+                        <i class="ri-bank-line text-gray-400 mr-3"></i>
+                        <span>Bank Transfer</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Step 4: Confirmation -->
+                <div *ngIf="currentStep === 4" class="space-y-6">
+                  <h2 class="text-2xl font-bold text-gray-900 mb-6">Renewal Complete</h2>
+                  
+                  <div class="text-center py-12">
+                    <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                      <i class="ri-check-line text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">License Renewed Successfully!</h3>
+                    <p class="text-gray-600 mb-6">Your license has been renewed and is now valid until {{ renewalForm.expiryDate }}</p>
+                    
+                    <div class="flex justify-center gap-4">
+                      <button class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="ri-download-line mr-2"></i>
+                        Download New License
+                      </button>
+                      <button routerLink="/practitioner/dashboard" class="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-50 transition-colors">
+                        Return to Dashboard
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="flex items-center justify-between pt-8 border-t border-gray-200" *ngIf="currentStep < 4">
+                  <button *ngIf="currentStep > 1" type="button" (click)="previousStep()"
+                          class="flex items-center gap-2 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                    <i class="ri-arrow-left-line"></i>
+                    Previous
+                  </button>
+                  <div class="flex-1"></div>
+                  
+                  <button *ngIf="currentStep < 3" type="button" (click)="nextStep()"
+                          class="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                    Next
+                    <i class="ri-arrow-right-line"></i>
+                  </button>
+                  
+                  <button *ngIf="currentStep === 3" type="button" (click)="submitRenewal()"
+                          class="flex items-center gap-2 px-8 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+                    <i class="ri-bank-card-line"></i>
+                    Process Payment
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="space-y-6">
+              <!-- Renewal Info -->
+              <div class="bg-white rounded-xl border border-gray-200 p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Renewal Information</h3>
+                <div class="space-y-3 text-sm">
+                  <div class="flex justify-between">
+                    <span class="text-gray-500">Processing Time:</span>
+                    <span class="font-medium">{{ processingTime }}</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-gray-500">Renewal Fee:</span>
+                    <span class="font-medium">${{ renewalFee }}</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-gray-500">Required CPD:</span>
+                    <span class="font-medium">{{ requiredCredits }} credits</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Help & Support -->
+              <div class="bg-blue-50 rounded-xl border border-blue-200 p-6">
+                <h3 class="text-lg font-semibold text-blue-900 mb-4">Need Help?</h3>
+                <div class="space-y-3">
+                  <a href="#" class="flex items-center gap-2 text-blue-600 hover:text-blue-700 text-sm">
+                    <i class="ri-question-line"></i>
+                    Renewal FAQ
+                  </a>
+                  <a href="#" class="flex items-center gap-2 text-blue-600 hover:text-blue-700 text-sm">
+                    <i class="ri-customer-service-line"></i>
+                    Contact Support
+                  </a>
+                  <a href="#" class="flex items-center gap-2 text-blue-600 hover:text-blue-700 text-sm">
+                    <i class="ri-book-line"></i>
+                    CPD Guidelines
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <app-footer />
+</div>

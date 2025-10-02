@@ -1,0 +1,132 @@
+<div class="bg-gray-50 min-h-screen">
+  <app-header />
+  <main class="pt-16">
+    <!-- Welcome Section -->
+    <section class="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-12">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <div class="flex flex-col lg:flex-row items-start justify-between gap-8">
+            <div>
+              <h1 class="text-3xl font-bold mb-2">Welcome back, {{ practitionerName }}</h1>
+              <p class="text-blue-100 mb-4">License: {{ licenseNumber }}</p>
+              <div class="flex items-center gap-4">
+                <span class="inline-flex items-center gap-2 px-3 py-1 bg-green-500 text-white rounded-full text-sm font-medium">
+                  <i class="ri-check-line"></i>
+                  {{ licenseStatus }}
+                </span>
+                <span class="text-blue-100">Expires: {{ expiryDate }}</span>
+              </div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center">
+              <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                <i class="ri-qr-code-line text-2xl"></i>
+              </div>
+              <p class="text-sm text-blue-100 mb-3">Your Digital ID</p>
+              <button class="bg-white text-blue-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-50 transition-colors">
+                View QR Code
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dashboard Cards -->
+    <section class="py-12">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="text-2xl font-bold text-gray-900 mb-8">Your Dashboard</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            <div *ngFor="let card of dashboardCards" 
+                 class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-all duration-300 cursor-pointer"
+                 [routerLink]="card.route">
+              <div class="flex items-start justify-between mb-4">
+                <div [class]="'w-12 h-12 flex items-center justify-center rounded-lg ' + (card.status === 'complete' ? 'bg-green-100 text-green-600' : card.status === 'action-required' ? 'bg-red-100 text-red-600' : card.status === 'pending' ? 'bg-yellow-100 text-yellow-600' : 'bg-gray-100 text-gray-600')">
+                  <i [class]="card.icon + ' text-xl'"></i>
+                </div>
+                <span [class]="'px-3 py-1 rounded-full text-xs font-medium ' + getStatusClass(card.status)">
+                  {{ card.status | titlecase }}
+                </span>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">{{ card.title }}</h3>
+              <p class="text-gray-600 mb-4">{{ card.description }}</p>
+              
+              <!-- Progress Bar -->
+              <div *ngIf="card.progress !== undefined" class="mb-4">
+                <div class="flex justify-between text-sm text-gray-600 mb-1">
+                  <span>Progress</span>
+                  <span>{{ card.progress }}%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div [class]="'h-2 rounded-full transition-all duration-300 ' + (card.progress === 100 ? 'bg-green-500' : card.progress > 50 ? 'bg-yellow-500' : 'bg-blue-500')" 
+                       [style.width.%]="card.progress"></div>
+                </div>
+              </div>
+              
+              <div class="flex items-center text-blue-600 font-medium">
+                <span>Manage</span>
+                <i class="ri-arrow-right-line ml-2"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Activities -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="bg-white rounded-xl border border-gray-200 p-6">
+              <h3 class="text-lg font-semibold text-gray-900 mb-6">Recent Activities</h3>
+              <div class="space-y-4">
+                <div *ngFor="let activity of recentActivities" class="flex items-start gap-4 p-4 bg-gray-50 rounded-lg">
+                  <div [class]="'w-10 h-10 flex items-center justify-center rounded-full ' + getActivityTypeClass(activity.type)">
+                    <i [class]="activity.icon"></i>
+                  </div>
+                  <div class="flex-1">
+                    <h4 class="font-medium text-gray-900">{{ activity.title }}</h4>
+                    <p class="text-gray-600 text-sm">{{ activity.description }}</p>
+                    <p class="text-gray-500 text-xs mt-1">{{ activity.date }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="bg-white rounded-xl border border-gray-200 p-6">
+              <h3 class="text-lg font-semibold text-gray-900 mb-6">Quick Actions</h3>
+              <div class="space-y-3">
+                <button class="w-full flex items-center gap-3 p-4 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors text-left">
+                  <div class="w-10 h-10 flex items-center justify-center bg-blue-100 rounded-full">
+                    <i class="ri-refresh-line text-blue-600"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-medium text-gray-900">Renew License</h4>
+                    <p class="text-gray-600 text-sm">Start renewal process</p>
+                  </div>
+                </button>
+                
+                <button class="w-full flex items-center gap-3 p-4 bg-green-50 hover:bg-green-100 rounded-lg transition-colors text-left">
+                  <div class="w-10 h-10 flex items-center justify-center bg-green-100 rounded-full">
+                    <i class="ri-book-line text-green-600"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-medium text-gray-900">Browse CPD Courses</h4>
+                    <p class="text-gray-600 text-sm">Find continuing education</p>
+                  </div>
+                </button>
+                
+                <button class="w-full flex items-center gap-3 p-4 bg-purple-50 hover:bg-purple-100 rounded-lg transition-colors text-left">
+                  <div class="w-10 h-10 flex items-center justify-center bg-purple-100 rounded-full">
+                    <i class="ri-download-line text-purple-600"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-medium text-gray-900">Download Certificate</h4>
+                    <p class="text-gray-600 text-sm">Get your digital certificate</p>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <app-footer />
+</div>

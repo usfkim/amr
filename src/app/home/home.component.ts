@@ -1,21 +1,42 @@
 import { Component } from '@angular/core';
-import { CarouselComponent } from '../shared/carousel/carousel.component';// Adjust path as needed
 import { HeaderComponent } from '../shared/header/header.component'; // If not already imported
 import { FooterComponent } from '../shared/footer/footer.component'; // If not already imported
+import { EcosystemWidgetComponent } from '../shared/components/ecosystem-widget/ecosystem-widget.component';
+import { TrustBadgeComponent } from '../shared/components/trust-badge/trust-badge.component';
+import { QrVerificationDemoComponent } from '../shared/components/qr-verification-demo/qr-verification-demo.component';
+import { IntegrationShowcaseComponent } from '../shared/components/integration-showcase/integration-showcase.component';
+import { OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
-    CarouselComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    EcosystemWidgetComponent,
+    TrustBadgeComponent,
+    QrVerificationDemoComponent,
+    IntegrationShowcaseComponent
     // Add other components as needed
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit, OnDestroy {
+  
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+
+  ngOnInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.setupIntersectionObserver();
+      this.setupSmoothScrolling();
+    }
+  }
+
+  ngOnDestroy() {
+    // Cleanup if needed
+  }
   
   // Method for QR verification functionality
   handleQrVerification(): void {
@@ -56,5 +77,48 @@ export class HomeComponent {
       .toLowerCase()
       .replace(/[^\w ]+/g, '')
       .replace(/ +/g, '-');
+  }
+
+  private setupIntersectionObserver() {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all sections with fade-in-section class
+    setTimeout(() => {
+      const sections = document.querySelectorAll('.fade-in-section');
+      sections.forEach(section => observer.observe(section));
+    }, 100);
+  }
+
+  private setupSmoothScrolling() {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    // Add smooth scrolling to anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const href = anchor.getAttribute('href');
+        if (!href) { return; }
+        const target = document.querySelector(href);
+        if (target instanceof Element) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
   }
 }

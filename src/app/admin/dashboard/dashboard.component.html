@@ -1,0 +1,592 @@
+<!-- AMR Global Dashboard -->
+<div class="bg-gray-50 dark:bg-slate-900 min-h-screen">
+  <app-header />
+  <main class="pt-16">
+    <!-- Dashboard Header -->
+    <section class="bg-gradient-to-r from-slate-900 to-blue-900 text-white py-12">
+      <div class="container mx-auto px-6">
+        <div class="max-w-7xl mx-auto">
+          <div class="flex flex-col lg:flex-row items-start justify-between gap-8">
+            <div>
+              <div class="flex items-center gap-4 mb-4">
+                <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-green-500 rounded-2xl flex items-center justify-center shadow-xl">
+                  <i class="ri-dashboard-line text-white text-2xl"></i>
+                </div>
+                <div>
+                  <h1 class="text-4xl font-bold">AMR Global Command Center</h1>
+                  <p class="text-blue-100">Continental Healthcare Verification Dashboard</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-6">
+                <div class="flex items-center gap-2">
+                  <i class="ri-shield-check-line text-green-400"></i>
+                  <span class="font-medium">{{ systemUptime }}% System Uptime</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i class="ri-global-line text-blue-400"></i>
+                  <span class="font-medium">{{ countryData.length }} Countries Active</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i class="ri-user-line text-purple-400"></i>
+                  <span class="font-medium">{{ totalPractitioners | number }}+ Practitioners</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- User Info -->
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 min-w-[300px]">
+              <div class="flex items-center gap-3 mb-4">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=60&h=60&fit=crop&crop=face" 
+                     alt="User Avatar" class="w-12 h-12 rounded-full object-cover border-2 border-white/20">
+                <div>
+                  <h3 class="font-bold text-white">{{ currentUser }}</h3>
+                  <p class="text-white/80 text-sm">{{ userRole }}</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                <span class="text-green-400 font-medium text-sm">All Systems Operational</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Tabs -->
+    <section class="bg-white dark:bg-slate-800 border-b border-gray-200 dark:border-slate-700">
+      <div class="container mx-auto px-6">
+        <div class="max-w-7xl mx-auto">
+          <nav class="flex space-x-8 overflow-x-auto">
+            <button (click)="setActiveTab('overview')" 
+                    [class]="'py-4 px-1 border-b-2 font-medium text-sm transition-colors whitespace-nowrap ' + (activeTab === 'overview' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700')">
+              <i class="ri-dashboard-line mr-2"></i>
+              Overview
+            </button>
+            <button (click)="setActiveTab('countries')" 
+                    [class]="'py-4 px-1 border-b-2 font-medium text-sm transition-colors whitespace-nowrap ' + (activeTab === 'countries' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700')">
+              <i class="ri-global-line mr-2"></i>
+              Countries
+            </button>
+            <button (click)="setActiveTab('network')" 
+                    [class]="'py-4 px-1 border-b-2 font-medium text-sm transition-colors whitespace-nowrap ' + (activeTab === 'network' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700')">
+              <i class="ri-links-line mr-2"></i>
+              Network
+            </button>
+            <button (click)="setActiveTab('revenue')" 
+                    [class]="'py-4 px-1 border-b-2 font-medium text-sm transition-colors whitespace-nowrap ' + (activeTab === 'revenue' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700')">
+              <i class="ri-money-dollar-circle-line mr-2"></i>
+              Revenue
+            </button>
+            <button (click)="setActiveTab('access')" 
+                    [class]="'py-4 px-1 border-b-2 font-medium text-sm transition-colors whitespace-nowrap ' + (activeTab === 'access' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700')">
+              <i class="ri-user-settings-line mr-2"></i>
+              Access
+            </button>
+            <button (click)="setActiveTab('audit')" 
+                    [class]="'py-4 px-1 border-b-2 font-medium text-sm transition-colors whitespace-nowrap ' + (activeTab === 'audit' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700')">
+              <i class="ri-file-list-line mr-2"></i>
+              Audit Logs
+            </button>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <!-- Overview Tab -->
+    <section *ngIf="activeTab === 'overview'" class="py-12">
+      <div class="container mx-auto px-6">
+        <div class="max-w-7xl mx-auto">
+          <!-- Key Metrics -->
+          <div class="grid lg:grid-cols-5 gap-6 mb-12">
+            <div class="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-6 text-center hover:shadow-lg transition-all duration-300">
+              <div class="text-4xl font-black text-blue-600 dark:text-blue-400 mb-2">{{ totalPractitioners | number }}</div>
+              <div class="text-gray-600 dark:text-gray-300 font-medium">Total Practitioners</div>
+              <div class="text-green-600 dark:text-green-400 text-sm mt-1">+2.3% this month</div>
+            </div>
+            <div class="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-6 text-center hover:shadow-lg transition-all duration-300">
+              <div class="text-4xl font-black text-green-600 dark:text-green-400 mb-2">{{ activePractitioners | number }}</div>
+              <div class="text-gray-600 dark:text-gray-300 font-medium">Active Licenses</div>
+              <div class="text-green-600 dark:text-green-400 text-sm mt-1">98.9% active rate</div>
+            </div>
+            <div class="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-6 text-center hover:shadow-lg transition-all duration-300">
+              <div class="text-4xl font-black text-orange-600 dark:text-orange-400 mb-2">{{ expiredLicenses | number }}</div>
+              <div class="text-gray-600 dark:text-gray-300 font-medium">Expired Licenses</div>
+              <div class="text-orange-600 dark:text-orange-400 text-sm mt-1">Renewal required</div>
+            </div>
+            <div class="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-6 text-center hover:shadow-lg transition-all duration-300">
+              <div class="text-4xl font-black text-purple-600 dark:text-purple-400 mb-2">{{ last24hVerifications | number }}</div>
+              <div class="text-gray-600 dark:text-gray-300 font-medium">24h Verifications</div>
+              <div class="text-purple-600 dark:text-purple-400 text-sm mt-1">Real-time activity</div>
+            </div>
+            <div class="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-6 text-center hover:shadow-lg transition-all duration-300">
+              <div class="text-4xl font-black text-red-600 dark:text-red-400 mb-2">{{ fraudAlertsToday }}</div>
+              <div class="text-gray-600 dark:text-gray-300 font-medium">Fraud Alerts</div>
+              <div class="text-red-600 dark:text-red-400 text-sm mt-1">Today</div>
+            </div>
+          </div>
+
+          <!-- Charts and Fraud Alerts -->
+          <div class="grid lg:grid-cols-2 gap-8">
+            <!-- Mock Chart Area -->
+            <div class="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-8">
+              <div class="flex items-center justify-between mb-6">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white">Verification Activity (24h)</h3>
+                <button (click)="refreshData()" class="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300">
+                  <i class="ri-refresh-line"></i>
+                </button>
+              </div>
+              
+              <!-- Mock Chart Visualization -->
+              <div class="h-64 bg-gradient-to-br from-blue-50 to-green-50 dark:from-blue-900/20 dark:to-green-900/20 rounded-xl flex items-center justify-center border border-blue-200/50 dark:border-blue-800/50">
+                <div class="text-center">
+                  <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-green-500 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+                    <i class="ri-bar-chart-line text-white text-2xl"></i>
+                  </div>
+                  <h4 class="font-bold text-gray-900 dark:text-white mb-2">Live Analytics Dashboard</h4>
+                  <p class="text-gray-600 dark:text-gray-300 text-sm">Real-time verification charts and trends</p>
+                  <div class="mt-4 text-xs text-gray-500 dark:text-gray-400">Chart.js integration ready</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Fraud Alerts -->
+            <div class="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-8">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6">Recent Fraud Alerts</h3>
+              
+              <div class="space-y-4">
+                <div *ngFor="let alert of fraudAlerts" 
+                     class="bg-gray-50 dark:bg-slate-700 rounded-xl p-4 border border-gray-200 dark:border-slate-600 hover:shadow-md transition-all duration-300">
+                  <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center gap-3">
+                      <span [class]="'px-2 py-1 rounded-full text-xs font-bold ' + getSeverityClass(alert.severity)">
+                        {{ alert.severity | uppercase }}
+                      </span>
+                      <span class="text-2xl">{{ getFlagByCountryName(alert.country) }}</span>
+                      <span class="font-medium text-gray-900 dark:text-white">{{ alert.country }}</span>
+                    </div>
+                    <span [class]="'px-3 py-1 rounded-full text-xs font-medium ' + getAlertStatusClass(alert.status)">
+                      {{ getAlertStatusLabel(alert.status) | titlecase }}
+                    </span>
+                  </div>
+                  
+                  <div class="space-y-2">
+                    <div class="flex justify-between">
+                      <span class="text-gray-600 dark:text-gray-300">Practitioner:</span>
+                      <span class="font-medium text-gray-900 dark:text-white">{{ alert.practitioner }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                      <span class="text-gray-600 dark:text-gray-300">Type:</span>
+                      <span class="font-medium text-gray-900 dark:text-white">{{ getAlertTypeLabel(alert.type) | titlecase }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                      <span class="text-gray-600 dark:text-gray-300">Confidence:</span>
+                      <span class="font-bold text-red-600 dark:text-red-400">{{ alert.confidence }}%</span>
+                    </div>
+                    <div class="flex justify-between">
+                      <span class="text-gray-600 dark:text-gray-300">Time:</span>
+                      <span class="text-gray-500 dark:text-gray-400 text-sm">{{ formatTimestamp(alert.timestamp) }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Countries Tab -->
+    <section *ngIf="activeTab === 'countries'" class="py-12">
+      <div class="container mx-auto px-6">
+        <div class="max-w-7xl mx-auto">
+          <div class="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-200 dark:border-slate-700 flex items-center justify-between">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white">Country Performance Dashboard</h3>
+              <button (click)="exportData('countries')" 
+                      class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                <i class="ri-download-line mr-2"></i>
+                Export Data
+              </button>
+            </div>
+            
+            <!-- Countries Table -->
+            <div class="overflow-x-auto">
+              <table class="w-full">
+                <thead class="bg-gray-50 dark:bg-slate-700">
+                  <tr>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Country</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Status</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Adoption %</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Practitioners</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Facilities</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">API Uptime</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Growth</th>
+                  </tr>
+                </thead>
+                <tbody class="bg-white dark:bg-slate-800 divide-y divide-gray-200 dark:divide-slate-700">
+                  <tr *ngFor="let country of countryData" class="hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors">
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <div class="flex items-center gap-3">
+                        <div class="text-2xl">{{ country.flag }}</div>
+                        <div>
+                          <div class="font-medium text-gray-900 dark:text-white">{{ country.name }}</div>
+                          <div class="text-gray-500 dark:text-gray-400 text-sm">{{ country.code.toUpperCase() }}</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <span [class]="'px-3 py-1 rounded-full text-xs font-medium ' + getStatusClass(country.status)">
+                        {{ country.status | titlecase }}
+                      </span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <div class="flex items-center gap-2">
+                        <div class="w-16 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                          <div class="bg-green-500 h-2 rounded-full transition-all duration-500" [style.width.%]="country.adoptionRate"></div>
+                        </div>
+                        <span class="font-medium text-gray-900 dark:text-white">{{ country.adoptionRate }}%</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <div class="text-gray-900 dark:text-white font-medium">{{ country.verifiedPractitioners | number }}</div>
+                      <div class="text-gray-500 dark:text-gray-400 text-sm">of {{ country.totalPractitioners | number }}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <div class="text-gray-900 dark:text-white font-medium">{{ country.facilitiesOnboard | number }}</div>
+                      <div class="text-gray-500 dark:text-gray-400 text-sm">facilities</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <div class="flex items-center gap-2">
+                        <div [class]="'w-3 h-3 rounded-full ' + (country.apiUptime >= 99 ? 'bg-green-500 animate-pulse' : country.apiUptime >= 95 ? 'bg-yellow-500' : 'bg-red-500')"></div>
+                        <span class="font-medium text-gray-900 dark:text-white">{{ country.apiUptime }}%</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <div class="text-green-600 dark:text-green-400 font-bold">+{{ country.monthlyGrowth }}%</div>
+                      <div class="text-gray-500 dark:text-gray-400 text-sm">monthly</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Network Tab -->
+    <section *ngIf="activeTab === 'network'" class="py-12">
+      <div class="container mx-auto px-6">
+        <div class="max-w-7xl mx-auto">
+          <div class="grid lg:grid-cols-2 gap-8">
+            <!-- Network Status -->
+            <div class="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-8">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6">Network Node Status</h3>
+              
+              <div class="space-y-4">
+                <div *ngFor="let node of networkNodes" 
+                     class="bg-gray-50 dark:bg-slate-700 rounded-xl p-4 border border-gray-200 dark:border-slate-600">
+                  <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center gap-3">
+                      <div [class]="'w-4 h-4 rounded-full ' + getNodeStatusClass(node.status)"></div>
+                      <div>
+                        <h4 class="font-semibold text-gray-900 dark:text-white">{{ node.name }}</h4>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">{{ node.region }}</p>
+                      </div>
+                    </div>
+                    <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full text-xs font-medium">
+                      {{ node.type | titlecase }}
+                    </span>
+                  </div>
+                  
+                  <div class="grid grid-cols-3 gap-4 text-sm">
+                    <div>
+                      <div class="text-gray-500 dark:text-gray-400">Uptime</div>
+                      <div class="font-bold text-gray-900 dark:text-white">{{ node.uptime }}%</div>
+                    </div>
+                    <div>
+                      <div class="text-gray-500 dark:text-gray-400">Connections</div>
+                      <div class="font-bold text-gray-900 dark:text-white">{{ node.connections | number }}</div>
+                    </div>
+                    <div>
+                      <div class="text-gray-500 dark:text-gray-400">Throughput</div>
+                      <div class="font-bold text-gray-900 dark:text-white">{{ node.throughput }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Network Map Placeholder -->
+            <div class="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-8">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6">Continental Network Map</h3>
+              
+              <div class="h-80 bg-gradient-to-br from-slate-900 to-blue-900 rounded-xl flex items-center justify-center relative overflow-hidden">
+                <!-- Network Visualization Placeholder -->
+                <div class="absolute inset-0 opacity-20">
+                  <div class="blockchain-grid"></div>
+                </div>
+                
+                <div class="relative z-10 text-center text-white">
+                  <div class="w-20 h-20 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+                    <i class="ri-global-line text-3xl"></i>
+                  </div>
+                  <h4 class="text-xl font-bold mb-2">Interactive Network Map</h4>
+                  <p class="text-white/80">Real-time node connections across Africa</p>
+                  <div class="mt-4 text-sm text-white/60">D3.js visualization ready</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Revenue Tab -->
+    <section *ngIf="activeTab === 'revenue'" class="py-12">
+      <div class="container mx-auto px-6">
+        <div class="max-w-7xl mx-auto">
+          <!-- Revenue Overview -->
+          <div class="grid lg:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-6 text-center">
+              <div class="text-3xl font-black text-green-600 dark:text-green-400 mb-2">${{ getTotalRevenue() | number }}</div>
+              <div class="text-gray-600 dark:text-gray-300">Monthly Revenue</div>
+            </div>
+            <div class="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-6 text-center">
+              <div class="text-3xl font-black text-blue-600 dark:text-blue-400 mb-2">${{ getAnnualProjection() | number }}</div>
+              <div class="text-gray-600 dark:text-gray-300">Annual Projection</div>
+            </div>
+            <div class="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-6 text-center">
+              <div class="text-3xl font-black text-purple-600 dark:text-purple-400 mb-2">{{ getAverageGrowth() }}%</div>
+              <div class="text-gray-600 dark:text-gray-300">Average Growth</div>
+            </div>
+            <div class="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-6 text-center">
+              <div class="text-3xl font-black text-orange-600 dark:text-orange-400 mb-2">{{ revenueStreams.length }}</div>
+              <div class="text-gray-600 dark:text-gray-300">Revenue Streams</div>
+            </div>
+          </div>
+
+          <!-- Revenue Streams -->
+          <div class="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-8">
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6">Revenue Stream Analysis</h3>
+            
+            <div class="space-y-6">
+              <div *ngFor="let stream of revenueStreams" 
+                   class="bg-gray-50 dark:bg-slate-700 rounded-xl p-6 border border-gray-200 dark:border-slate-600">
+                <div class="flex items-center justify-between mb-4">
+                  <div>
+                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">{{ stream.name }}</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">{{ stream.type | titlecase }} Model</p>
+                  </div>
+                  <div class="text-right">
+                    <div class="text-2xl font-black text-green-600 dark:text-green-400">${{ stream.monthlyRevenue | number }}</div>
+                    <div class="text-gray-500 dark:text-gray-400 text-sm">Monthly</div>
+                  </div>
+                </div>
+                
+                <div class="grid grid-cols-3 gap-4 mb-4">
+                  <div>
+                    <div class="text-gray-500 dark:text-gray-400 text-sm">Annual Projection</div>
+                    <div class="font-bold text-gray-900 dark:text-white">${{ stream.annualProjection | number }}</div>
+                  </div>
+                  <div>
+                    <div class="text-gray-500 dark:text-gray-400 text-sm">Growth Rate</div>
+                    <div class="font-bold text-green-600 dark:text-green-400">+{{ stream.growth }}%</div>
+                  </div>
+                  <div>
+                    <div class="text-gray-500 dark:text-gray-400 text-sm">Active Countries</div>
+                    <div class="font-bold text-gray-900 dark:text-white">{{ stream.countries.length }}</div>
+                  </div>
+                </div>
+                
+                <div class="flex flex-wrap gap-2">
+                  <span *ngFor="let country of stream.countries" 
+                        class="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full text-xs font-medium">
+                    {{ country }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Access Tab -->
+    <section *ngIf="activeTab === 'access'" class="py-12">
+      <div class="container mx-auto px-6">
+        <div class="max-w-7xl mx-auto">
+          <div class="grid lg:grid-cols-2 gap-8">
+            <!-- User Roles -->
+            <div class="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-8">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6">Access Control Matrix</h3>
+              
+              <div class="space-y-4">
+                <div class="bg-red-50 dark:bg-red-900/20 rounded-xl p-4 border border-red-200 dark:border-red-800">
+                  <div class="flex items-center gap-3 mb-2">
+                    <div class="w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center">
+                      <i class="ri-admin-line text-white"></i>
+                    </div>
+                    <h4 class="font-bold text-red-900 dark:text-red-100">Global Administrator</h4>
+                  </div>
+                  <p class="text-red-800 dark:text-red-200 text-sm mb-3">Full system access across all countries and functions</p>
+                  <div class="flex flex-wrap gap-1">
+                    <span class="px-2 py-1 bg-red-100 dark:bg-red-800/30 text-red-800 dark:text-red-200 rounded-full text-xs">All Countries</span>
+                    <span class="px-2 py-1 bg-red-100 dark:bg-red-800/30 text-red-800 dark:text-red-200 rounded-full text-xs">Revenue Access</span>
+                    <span class="px-2 py-1 bg-red-100 dark:bg-red-800/30 text-red-800 dark:text-red-200 rounded-full text-xs">User Management</span>
+                  </div>
+                </div>
+
+                <div class="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4 border border-blue-200 dark:border-blue-800">
+                  <div class="flex items-center gap-3 mb-2">
+                    <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
+                      <i class="ri-government-line text-white"></i>
+                    </div>
+                    <h4 class="font-bold text-blue-900 dark:text-blue-100">Country Administrator</h4>
+                  </div>
+                  <p class="text-blue-800 dark:text-blue-200 text-sm mb-3">Full access within assigned country jurisdiction</p>
+                  <div class="flex flex-wrap gap-1">
+                    <span class="px-2 py-1 bg-blue-100 dark:bg-blue-800/30 text-blue-800 dark:text-blue-200 rounded-full text-xs">Country Scope</span>
+                    <span class="px-2 py-1 bg-blue-100 dark:bg-blue-800/30 text-blue-800 dark:text-blue-200 rounded-full text-xs">Practitioner Management</span>
+                    <span class="px-2 py-1 bg-blue-100 dark:bg-blue-800/30 text-blue-800 dark:text-blue-200 rounded-full text-xs">Audit Access</span>
+                  </div>
+                </div>
+
+                <div class="bg-green-50 dark:bg-green-900/20 rounded-xl p-4 border border-green-200 dark:border-green-800">
+                  <div class="flex items-center gap-3 mb-2">
+                    <div class="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center">
+                      <i class="ri-eye-line text-white"></i>
+                    </div>
+                    <h4 class="font-bold text-green-900 dark:text-green-100">Read-Only Observer</h4>
+                  </div>
+                  <p class="text-green-800 dark:text-green-200 text-sm mb-3">View-only access for WHO, CDC, and partner organizations</p>
+                  <div class="flex flex-wrap gap-1">
+                    <span class="px-2 py-1 bg-green-100 dark:bg-green-800/30 text-green-800 dark:text-green-200 rounded-full text-xs">Dashboard View</span>
+                    <span class="px-2 py-1 bg-green-100 dark:bg-green-800/30 text-green-800 dark:text-green-200 rounded-full text-xs">Analytics Access</span>
+                    <span class="px-2 py-1 bg-green-100 dark:bg-green-800/30 text-green-800 dark:text-green-200 rounded-full text-xs">Export Reports</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Test Accounts -->
+            <div class="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-8">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6">Demo Test Accounts</h3>
+              
+              <div class="space-y-4">
+                <div class="bg-gray-50 dark:bg-slate-700 rounded-xl p-4 border border-gray-200 dark:border-slate-600">
+                  <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Global Admin Access</h4>
+                  <div class="space-y-1 text-sm">
+                    <div class="flex justify-between">
+                      <span class="text-gray-600 dark:text-gray-300">Email:</span>
+                      <span class="font-mono text-gray-900 dark:text-white">admin&#64;amr.demo</span>
+                    </div>
+                    <div class="flex justify-between">
+                      <span class="text-gray-600 dark:text-gray-300">Password:</span>
+                      <span class="font-mono text-gray-900 dark:text-white">AMRDemo2025!</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="bg-gray-50 dark:bg-slate-700 rounded-xl p-4 border border-gray-200 dark:border-slate-600">
+                  <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Ghana Country Admin</h4>
+                  <div class="space-y-1 text-sm">
+                    <div class="flex justify-between">
+                      <span class="text-gray-600 dark:text-gray-300">Email:</span>
+                      <span class="font-mono text-gray-900 dark:text-white">ghana.admin&#64;amr.demo</span>
+                    </div>
+                    <div class="flex justify-between">
+                      <span class="text-gray-600 dark:text-gray-300">Password:</span>
+                      <span class="font-mono text-gray-900 dark:text-white">GhanaAMR2025!</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="bg-gray-50 dark:bg-slate-700 rounded-xl p-4 border border-gray-200 dark:border-slate-600">
+                  <h4 class="font-semibold text-gray-900 dark:text-white mb-2">WHO Observer</h4>
+                  <div class="space-y-1 text-sm">
+                    <div class="flex justify-between">
+                      <span class="text-gray-600 dark:text-gray-300">Email:</span>
+                      <span class="font-mono text-gray-900 dark:text-white">who.observer&#64;amr.demo</span>
+                    </div>
+                    <div class="flex justify-between">
+                      <span class="text-gray-600 dark:text-gray-300">Password:</span>
+                      <span class="font-mono text-gray-900 dark:text-white">WHODemo2025!</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Audit Logs Tab -->
+    <section *ngIf="activeTab === 'audit'" class="py-12">
+      <div class="container mx-auto px-6">
+        <div class="max-w-7xl mx-auto">
+          <div class="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-200 dark:border-slate-700 flex items-center justify-between">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white">System Audit Trail</h3>
+              <div class="flex gap-3">
+                <button (click)="exportData('audit')" 
+                        class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                  <i class="ri-download-line mr-2"></i>
+                  Export Logs
+                </button>
+                <button (click)="refreshData()" 
+                        class="border border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors">
+                  <i class="ri-refresh-line mr-2"></i>
+                  Refresh
+                </button>
+              </div>
+            </div>
+            
+            <div class="overflow-x-auto">
+              <table class="w-full">
+                <thead class="bg-gray-50 dark:bg-slate-700">
+                  <tr>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Timestamp</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">User</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Action</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Resource</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Country</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Result</th>
+                  </tr>
+                </thead>
+                <tbody class="bg-white dark:bg-slate-800 divide-y divide-gray-200 dark:divide-slate-700">
+                  <tr *ngFor="let log of auditLogs" class="hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+                      {{ formatTimestamp(log.timestamp) }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <div class="text-sm font-medium text-gray-900 dark:text-white">{{ log.user }}</div>
+                      <div class="text-sm text-gray-500 dark:text-gray-400">{{ log.ipAddress }}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+                      {{ log.action }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+                      {{ log.resource }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+                      {{ log.country }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <span [class]="'px-2 py-1 rounded-full text-xs font-medium ' + getResultClass(log.result)">
+                        {{ log.result | titlecase }}
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <app-footer />
+</div>

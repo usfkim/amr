@@ -1,1 +1,198 @@
-<p>sign-in works!</p>
+<div class="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 flex items-center justify-center py-12 px-4">
+  <div class="max-w-md w-full">
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <div class="w-20 h-20 bg-gradient-to-r from-blue-600 to-green-500 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl">
+        <span class="text-white font-black text-3xl">A</span>
+      </div>
+      <h1 class="text-3xl font-bold text-gray-900 mb-2">Welcome to AMR</h1>
+      <p class="text-gray-600">Sign in to your secure portal</p>
+    </div>
+
+    <!-- Sign In Form -->
+    <div class="bg-white rounded-2xl shadow-xl border border-gray-200 p-8">
+      <!-- Success Alert -->
+      <div *ngIf="showSuccess" class="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+            <i class="ri-check-line text-white"></i>
+          </div>
+          <div>
+            <h4 class="font-semibold text-green-900">Sign In Successful!</h4>
+            <p class="text-green-800 text-sm">Redirecting to your portal...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Error Alert -->
+      <div *ngIf="showError" class="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
+              <i class="ri-close-line text-white"></i>
+            </div>
+            <div>
+              <h4 class="font-semibold text-red-900">Sign In Failed</h4>
+              <p class="text-red-800 text-sm">{{ errorMessage }}</p>
+            </div>
+          </div>
+          <button (click)="closeAlert()" class="text-red-600 hover:text-red-800">
+            <i class="ri-close-line"></i>
+          </button>
+        </div>
+      </div>
+
+      <form (ngSubmit)="onSignIn()" class="space-y-6">
+        <!-- User Type Selection -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-3">Portal Access</label>
+          <div class="grid grid-cols-1 gap-3">
+            <label *ngFor="let type of userTypes" 
+                   class="flex items-center p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all duration-300"
+                   [class.border-blue-500]="signInForm.userType === type.value"
+                   [class.bg-blue-50]="signInForm.userType === type.value">
+              <input type="radio" 
+                     [(ngModel)]="signInForm.userType" 
+                     [value]="type.value" 
+                     name="userType" 
+                     class="sr-only">
+              <div class="flex items-center gap-3 flex-1">
+                <div [class]="'w-10 h-10 rounded-xl flex items-center justify-center ' + (signInForm.userType === type.value ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-600')">
+                  <i [class]="type.icon"></i>
+                </div>
+                <div>
+                  <div class="font-semibold text-gray-900">{{ type.label }}</div>
+                  <div class="text-sm text-gray-500">{{ type.description }}</div>
+                </div>
+              </div>
+              <div *ngIf="signInForm.userType === type.value" class="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
+                <i class="ri-check-line text-white text-sm"></i>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+          <div class="relative">
+            <div class="absolute left-3 top-1/2 transform -translate-y-1/2">
+              <i class="ri-mail-line text-gray-400"></i>
+            </div>
+            <input type="email" 
+                   [(ngModel)]="signInForm.email" 
+                   name="email" 
+                   required
+                   class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                   placeholder="your.email@domain.com">
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+          <div class="relative">
+            <div class="absolute left-3 top-1/2 transform -translate-y-1/2">
+              <i class="ri-lock-line text-gray-400"></i>
+            </div>
+            <input type="password" 
+                   [(ngModel)]="signInForm.password" 
+                   name="password" 
+                   required
+                   class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                   placeholder="Enter your password">
+          </div>
+        </div>
+
+        <!-- Remember Me -->
+        <div class="flex items-center justify-between">
+          <label class="flex items-center gap-2">
+            <input type="checkbox" 
+                   [(ngModel)]="signInForm.rememberMe" 
+                   name="rememberMe"
+                   class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+            <span class="text-sm text-gray-700">Remember me</span>
+          </label>
+          <a href="#" class="text-sm text-blue-600 hover:text-blue-700">Forgot password?</a>
+        </div>
+
+        <!-- Sign In Button -->
+        <button type="submit" 
+                [disabled]="isLoading"
+                class="w-full bg-gradient-to-r from-blue-600 to-green-500 text-white py-4 rounded-xl font-bold text-lg hover:from-blue-700 hover:to-green-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 shadow-lg hover:shadow-xl">
+          <i class="ri-login-circle-line mr-2" *ngIf="!isLoading"></i>
+          <i class="ri-loader-4-line mr-2 animate-spin" *ngIf="isLoading"></i>
+          {{ isLoading ? 'Signing In...' : 'Sign In to Portal' }}
+        </button>
+      </form>
+
+      <!-- Demo Test Accounts -->
+      <div class="mt-6 p-4 bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 rounded-xl border border-yellow-200 dark:border-yellow-800">
+        <h4 class="font-semibold text-yellow-900 dark:text-yellow-100 mb-3 flex items-center gap-2">
+          <i class="ri-key-line"></i>
+          Demo Test Accounts
+        </h4>
+        <div class="space-y-2 text-xs">
+          <div class="grid grid-cols-2 gap-2">
+            <div class="bg-white/70 dark:bg-slate-800/70 rounded-lg p-2">
+              <div class="font-mono text-yellow-900 dark:text-yellow-100">admin&#64;amr.demo</div>
+              <div class="text-yellow-700 dark:text-yellow-300">Global Admin</div>
+            </div>
+            <div class="bg-white/70 dark:bg-slate-800/70 rounded-lg p-2">
+              <div class="font-mono text-yellow-900 dark:text-yellow-100">ghana.admin&#64;amr.demo</div>
+              <div class="text-yellow-700 dark:text-yellow-300">Country Admin</div>
+            </div>
+          </div>
+          <div class="text-yellow-800 dark:text-yellow-200 text-center">Password: AMRDemo2025! (for all accounts)</div>
+        </div>
+      </div>
+
+      <!-- Portal Info -->
+      <div class="mt-6 p-4 bg-gradient-to-r from-blue-50 to-green-50 rounded-xl border border-blue-200">
+        <div class="flex items-center gap-3 mb-2">
+          <i [class]="getUserTypeInfo()?.icon + ' text-blue-600'"></i>
+          <span class="font-semibold text-blue-900">{{ getUserTypeInfo()?.label }}</span>
+        </div>
+        <p class="text-blue-800 text-sm">{{ getUserTypeInfo()?.description }}</p>
+      </div>
+
+      <!-- Registration Links -->
+      <div class="mt-6 text-center">
+        <p class="text-gray-600 text-sm mb-4">Don't have an account?</p>
+        <div class="space-y-2">
+          <a routerLink="/register" class="block text-blue-600 hover:text-blue-700 font-medium">
+            Register as Practitioner
+          </a>
+          <a routerLink="/contact" class="block text-gray-600 hover:text-gray-700 text-sm">
+            Request Institutional Access
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Country API Status -->
+    <div class="mt-6 bg-white/80 backdrop-blur-sm rounded-xl border border-gray-200 p-4">
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="font-semibold text-gray-900">Country API Status</h3>
+        <div class="flex items-center gap-2">
+          <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+          <span class="text-green-600 font-medium text-sm">All Systems Operational</span>
+        </div>
+      </div>
+      <div class="grid grid-cols-3 gap-3 text-center">
+        <div class="p-2 bg-green-50 rounded-lg">
+          <div class="text-lg font-bold text-green-600">🇬🇭</div>
+          <div class="text-xs text-gray-600">Ghana</div>
+        </div>
+        <div class="p-2 bg-green-50 rounded-lg">
+          <div class="text-lg font-bold text-green-600">🇳🇬</div>
+          <div class="text-xs text-gray-600">Nigeria</div>
+        </div>
+        <div class="p-2 bg-blue-50 rounded-lg">
+          <div class="text-lg font-bold text-blue-600">🇺🇬</div>
+          <div class="text-xs text-gray-600">Uganda</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

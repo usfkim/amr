@@ -1,0 +1,393 @@
+<!-- QR/USSD Technology Page -->
+<div class="bg-white dark:bg-slate-900">
+  <app-header />
+  <main class="pt-16">
+    <!-- Hero Section -->
+    <section class="relative h-[480px] flex items-center overflow-hidden">
+      <!-- Animated Background -->
+      <div class="absolute inset-0">
+        <div class="qr-pattern-grid opacity-20"></div>
+        <div class="trust-ecosystem-bg"></div>
+        
+        <!-- Floating QR Elements -->
+        <div class="absolute top-20 left-10 trust-badge animate-float">
+          <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-blue-500 rounded-xl flex items-center justify-center shadow-lg">
+            <i class="ri-qr-code-line text-white text-xl"></i>
+          </div>
+        </div>
+        <div class="absolute top-40 right-20 trust-badge animate-float" style="animation-delay: 1s;">
+          <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center shadow-lg">
+            <i class="ri-phone-line text-white"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="max-w-4xl mx-auto text-center">
+          <h1 class="text-6xl lg:text-7xl font-black mb-6">
+            <span class="block text-gray-900 dark:text-white">QR & USSD</span>
+            <span class="block text-transparent bg-clip-text bg-gradient-to-r from-green-600 via-blue-500 to-purple-600 animate-shimmer">
+              Universal Access
+            </span>
+          </h1>
+          <p class="text-2xl lg:text-3xl text-gray-600 dark:text-gray-300 font-light leading-relaxed mb-8">
+            Offline verification. Low-data access. 
+            <span class="font-semibold text-green-600 dark:text-green-400">Every phone. Every network.</span>
+          </p>
+
+          <!-- Access Stats -->
+          <div class="flex justify-center items-center gap-8 mb-12">
+            <div class="trust-indicator glass rounded-full px-6 py-3">
+              <i class="ri-qr-scan-line text-green-500 mr-2"></i>
+              <span class="text-gray-900 dark:text-white font-bold">{{ usageStats.qrScans | number }}+ Scans</span>
+            </div>
+            <div class="trust-indicator glass rounded-full px-6 py-3">
+              <i class="ri-phone-line text-blue-500 mr-2"></i>
+              <span class="text-gray-900 dark:text-white font-bold">{{ usageStats.ussdQueries | number }}+ USSD</span>
+            </div>
+            <div class="trust-indicator glass rounded-full px-6 py-3">
+              <i class="ri-wifi-off-line text-purple-500 mr-2"></i>
+              <span class="text-gray-900 dark:text-white font-bold">{{ usageStats.offlineVerifications | number }}+ Offline</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Verification Methods Section -->
+    <section class="py-24 bg-gray-50 dark:bg-slate-800">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-6">Universal Verification Methods</h2>
+            <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              Multiple access methods ensuring every citizen can verify healthcare practitioners regardless of device or connectivity
+            </p>
+          </div>
+
+          <div class="grid lg:grid-cols-2 gap-8">
+            <div *ngFor="let method of verificationMethods" 
+                 class="method-card card hover-lift group">
+              
+              <!-- Method Header -->
+              <div class="flex items-center justify-between mb-6">
+                <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-blue-500 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                  <i [class]="method.icon + ' text-white text-2xl'"></i>
+                </div>
+                <div class="text-right">
+                  <span [class]="'px-3 py-1 rounded-full text-xs font-bold ' + getAccessibilityClass(method.accessibility)">
+                    {{ method.accessibility }}
+                  </span>
+                  <div *ngIf="method.offlineCapable" class="mt-2">
+                    <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">
+                      <i class="ri-wifi-off-line mr-1"></i>
+                      Offline Ready
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">{{ method.name }}</h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-6">{{ method.description }}</p>
+              
+              <!-- Method Specs -->
+              <div class="grid grid-cols-3 gap-4 mb-6">
+                <div class="text-center p-3 bg-gray-50 dark:bg-slate-700 rounded-lg">
+                  <div class="font-bold text-green-600 dark:text-green-400">{{ method.speed }}</div>
+                  <div class="text-xs text-gray-500 dark:text-gray-400">Response Time</div>
+                </div>
+                <div class="text-center p-3 bg-gray-50 dark:bg-slate-700 rounded-lg">
+                  <div class="font-bold text-blue-600 dark:text-blue-400">{{ method.dataUsage }}</div>
+                  <div class="text-xs text-gray-500 dark:text-gray-400">Data Usage</div>
+                </div>
+                <div class="text-center p-3 bg-gray-50 dark:bg-slate-700 rounded-lg">
+                  <div class="font-bold text-purple-600 dark:text-purple-400">{{ method.offlineCapable ? 'Yes' : 'No' }}</div>
+                  <div class="text-xs text-gray-500 dark:text-gray-400">Offline</div>
+                </div>
+              </div>
+
+              <!-- Steps -->
+              <div class="space-y-3">
+                <h4 class="font-semibold text-gray-900 dark:text-white">How it works:</h4>
+                <div *ngFor="let step of method.steps; let i = index" class="flex items-start gap-3">
+                  <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span class="text-white text-xs font-bold">{{ i + 1 }}</span>
+                  </div>
+                  <span class="text-gray-700 dark:text-gray-300 text-sm">{{ step }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Offline/Low-Data Story Section -->
+    <section class="py-24 bg-gradient-to-br from-green-900 to-blue-900 text-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold mb-6">Bridging the Digital Divide</h2>
+            <p class="text-xl text-white/80 max-w-3xl mx-auto">
+              AMR works everywhere - from urban hospitals with high-speed internet to rural clinics with basic feature phones
+            </p>
+          </div>
+
+          <div class="grid lg:grid-cols-3 gap-8">
+            <!-- Urban Scenario -->
+            <div class="scenario-card glass rounded-2xl p-8 text-center hover-trust group">
+              <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-500">
+                <i class="ri-building-line text-white text-3xl"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-4">Urban Hospitals</h3>
+              <p class="text-white/70 mb-6">High-speed QR scanning with instant blockchain verification</p>
+              <div class="space-y-2 text-sm text-white/60">
+                <div>• 4G/5G connectivity</div>
+                <div>• Real-time verification</div>
+                <div>• Full credential display</div>
+                <div>• Integration with hospital systems</div>
+              </div>
+            </div>
+
+            <!-- Rural Scenario -->
+            <div class="scenario-card glass rounded-2xl p-8 text-center hover-trust group">
+              <div class="w-20 h-20 bg-gradient-to-r from-green-500 to-emerald-500 rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-500">
+                <i class="ri-leaf-line text-white text-3xl"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-4">Rural Clinics</h3>
+              <p class="text-white/70 mb-6">USSD verification working on 2G networks with basic phones</p>
+              <div class="space-y-2 text-sm text-white/60">
+                <div>• 2G/3G connectivity</div>
+                <div>• USSD menu navigation</div>
+                <div>• SMS result delivery</div>
+                <div>• Feature phone compatible</div>
+              </div>
+            </div>
+
+            <!-- Remote Scenario -->
+            <div class="scenario-card glass rounded-2xl p-8 text-center hover-trust group">
+              <div class="w-20 h-20 bg-gradient-to-r from-orange-500 to-red-500 rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-500">
+                <i class="ri-wifi-off-line text-white text-3xl"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-4">Remote Areas</h3>
+              <p class="text-white/70 mb-6">Offline QR verification using cached practitioner database</p>
+              <div class="space-y-2 text-sm text-white/60">
+                <div>• No internet required</div>
+                <div>• Cached verification data</div>
+                <div>• Periodic sync updates</div>
+                <div>• Emergency verification</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Implementation -->
+    <section class="py-24 bg-white dark:bg-slate-900">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-6">Technical Implementation</h2>
+            <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              Advanced technical architecture ensuring universal access across all network conditions
+            </p>
+          </div>
+
+          <div class="grid lg:grid-cols-2 gap-12">
+            <!-- QR Technology -->
+            <div class="bg-gradient-to-br from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-2xl p-8 border border-green-200/50 dark:border-green-800/50">
+              <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">QR Code Technology</h3>
+              
+              <!-- QR Demo -->
+              <div class="qr-demo bg-white dark:bg-slate-800 rounded-xl p-6 mb-6 text-center">
+                <div class="qr-code-large mx-auto mb-4">
+                  <div class="qr-pattern bg-gray-900 dark:bg-white rounded-lg"></div>
+                  <div class="qr-scanner-beam"></div>
+                </div>
+                <p class="text-gray-600 dark:text-gray-300 text-sm">Live QR Code - Try scanning with your phone</p>
+              </div>
+
+              <div class="space-y-4">
+                <div class="flex items-start gap-3">
+                  <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mt-1">
+                    <i class="ri-qr-scan-line text-green-600 dark:text-green-400"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-gray-900 dark:text-white">Dynamic QR Codes</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">QR codes update automatically with license status changes</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-start gap-3">
+                  <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mt-1">
+                    <i class="ri-shield-check-line text-blue-600 dark:text-blue-400"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-gray-900 dark:text-white">Cryptographic Security</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Each QR code contains encrypted verification data</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-start gap-3">
+                  <div class="w-8 h-8 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mt-1">
+                    <i class="ri-wifi-off-line text-purple-600 dark:text-purple-400"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-gray-900 dark:text-white">Offline Capability</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Cached verification works without internet connection</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- USSD Technology -->
+            <div class="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-2xl p-8 border border-blue-200/50 dark:border-blue-800/50">
+              <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">USSD Technology</h3>
+              
+              <!-- USSD Demo -->
+              <div class="ussd-demo bg-gray-900 rounded-xl p-6 mb-6 text-center">
+                <div class="phone-screen bg-green-400 text-black rounded-lg p-4 font-mono text-sm">
+                  <div class="mb-2">*920*AMR#</div>
+                  <div class="border-t border-black/20 pt-2">
+                    <div>1. Verify Doctor</div>
+                    <div>2. Verify Nurse</div>
+                    <div>3. Verify Pharmacist</div>
+                    <div>4. Report Issue</div>
+                  </div>
+                </div>
+                <p class="text-white text-sm mt-4">USSD Menu Interface</p>
+              </div>
+
+              <div class="space-y-4">
+                <div class="flex items-start gap-3">
+                  <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mt-1">
+                    <i class="ri-phone-line text-blue-600 dark:text-blue-400"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-gray-900 dark:text-white">Universal Compatibility</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Works on every mobile phone, including basic feature phones</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-start gap-3">
+                  <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mt-1">
+                    <i class="ri-signal-tower-line text-green-600 dark:text-green-400"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-gray-900 dark:text-white">2G Network Support</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Functions on the most basic mobile networks</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-start gap-3">
+                  <div class="w-8 h-8 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mt-1">
+                    <i class="ri-message-line text-purple-600 dark:text-purple-400"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-gray-900 dark:text-white">SMS Integration</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Results delivered via SMS for permanent record</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Usage Statistics -->
+    <section class="py-24 bg-white dark:bg-slate-900">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-6">Real-Time Usage Analytics</h2>
+            <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              Live statistics showing verification activity across Africa's healthcare ecosystem
+            </p>
+          </div>
+
+          <!-- Live Stats Dashboard -->
+          <div class="bg-gradient-to-br from-slate-900 to-green-900 rounded-3xl p-8 text-white">
+            <h3 class="text-2xl font-bold mb-8 text-center">Live Verification Activity</h3>
+            
+            <div class="grid lg:grid-cols-6 gap-4 mb-8">
+              <div class="stat-card text-center p-4 bg-white/10 rounded-xl">
+                <div class="text-2xl font-bold text-green-400">{{ usageStats.qrScans | number }}</div>
+                <div class="text-white/80 text-xs">QR Scans</div>
+              </div>
+              <div class="stat-card text-center p-4 bg-white/10 rounded-xl">
+                <div class="text-2xl font-bold text-blue-400">{{ usageStats.ussdQueries | number }}</div>
+                <div class="text-white/80 text-xs">USSD Queries</div>
+              </div>
+              <div class="stat-card text-center p-4 bg-white/10 rounded-xl">
+                <div class="text-2xl font-bold text-purple-400">{{ usageStats.offlineVerifications | number }}</div>
+                <div class="text-white/80 text-xs">Offline Checks</div>
+              </div>
+              <div class="stat-card text-center p-4 bg-white/10 rounded-xl">
+                <div class="text-2xl font-bold text-orange-400">{{ usageStats.averageResponseTime }}</div>
+                <div class="text-white/80 text-xs">Avg Response</div>
+              </div>
+              <div class="stat-card text-center p-4 bg-white/10 rounded-xl">
+                <div class="text-2xl font-bold text-pink-400">{{ usageStats.successRate }}%</div>
+                <div class="text-white/80 text-xs">Success Rate</div>
+              </div>
+              <div class="stat-card text-center p-4 bg-white/10 rounded-xl">
+                <div class="text-2xl font-bold text-cyan-400">{{ usageStats.countriesSupported }}</div>
+                <div class="text-white/80 text-xs">Countries</div>
+              </div>
+            </div>
+
+            <!-- Access Methods Comparison -->
+            <div class="bg-white/10 rounded-2xl p-6">
+              <h4 class="font-bold text-white mb-4 text-center">Access Method Distribution</h4>
+              <div class="grid grid-cols-3 gap-4 text-center">
+                <div class="access-method">
+                  <div class="text-3xl font-bold text-green-400 mb-2">65%</div>
+                  <div class="text-white/80 text-sm">QR Scanning</div>
+                  <div class="text-white/60 text-xs">Smartphone users</div>
+                </div>
+                <div class="access-method">
+                  <div class="text-3xl font-bold text-blue-400 mb-2">30%</div>
+                  <div class="text-white/80 text-sm">USSD Codes</div>
+                  <div class="text-white/60 text-xs">Feature phones</div>
+                </div>
+                <div class="access-method">
+                  <div class="text-3xl font-bold text-purple-400 mb-2">5%</div>
+                  <div class="text-white/80 text-sm">Offline Cache</div>
+                  <div class="text-white/60 text-xs">Remote areas</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 bg-gray-50 dark:bg-slate-800">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-8">
+            Deploy Universal Verification Access
+          </h2>
+          <p class="text-xl text-gray-600 dark:text-gray-300 mb-12">
+            Implement QR and USSD verification for complete population coverage
+          </p>
+          
+          <div class="flex flex-col lg:flex-row justify-center gap-6">
+            <button routerLink="/contact" class="btn-hero bg-gradient-to-r from-green-600 to-blue-500 text-white px-12 py-6 rounded-2xl font-bold text-xl shadow-2xl">
+              <i class="ri-qr-code-line mr-3"></i>
+              Deploy QR/USSD
+            </button>
+            <button routerLink="/verify-practitioner" class="btn-hero glass border-2 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white px-12 py-6 rounded-2xl font-bold text-xl">
+              <i class="ri-play-line mr-3"></i>
+              Try Demo
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <app-footer />
+</div>

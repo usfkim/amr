@@ -1,0 +1,241 @@
+<div class="bg-gray-50 min-h-screen">
+  <app-header />
+  <main class="pt-16">
+    <!-- Header Section -->
+    <section class="bg-white border-b border-gray-200 py-8">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="flex items-center gap-4 mb-6">
+            <button routerLink="/practitioner/dashboard" class="flex items-center gap-2 text-gray-600 hover:text-gray-900">
+              <i class="ri-arrow-left-line"></i>
+              Back to Dashboard
+            </button>
+          </div>
+          <div class="flex flex-col lg:flex-row items-start justify-between gap-8">
+            <div>
+              <h1 class="text-3xl font-bold text-gray-900 mb-2">Continuing Professional Development</h1>
+              <p class="text-gray-600">Maintain your professional competence through lifelong learning</p>
+            </div>
+            
+            <!-- CPD Progress Card -->
+            <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl p-6 min-w-[300px]">
+              <h3 class="text-lg font-semibold mb-4">2025 CPD Progress</h3>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-blue-100">Credits Earned</span>
+                <span class="font-bold">{{ currentCredits }}/{{ requiredCredits }}</span>
+              </div>
+              <div class="w-full bg-blue-400 rounded-full h-3 mb-4">
+                <div class="bg-white h-3 rounded-full transition-all duration-500" [style.width.%]="progressPercentage"></div>
+              </div>
+              <div class="flex items-center justify-between text-sm">
+                <span class="text-blue-100">{{ progressPercentage }}% Complete</span>
+                <span class="text-blue-100">{{ requiredCredits - currentCredits }} credits remaining</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Tabs -->
+    <section class="bg-white border-b border-gray-200">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <nav class="flex space-x-8">
+            <button (click)="setActiveTab('available')" 
+                    [class]="'py-4 px-1 border-b-2 font-medium text-sm transition-colors ' + (activeTab === 'available' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700')">
+              Available Courses
+            </button>
+            <button (click)="setActiveTab('completed')" 
+                    [class]="'py-4 px-1 border-b-2 font-medium text-sm transition-colors ' + (activeTab === 'completed' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700')">
+              Completed Courses
+            </button>
+            <button (click)="setActiveTab('certificates')" 
+                    [class]="'py-4 px-1 border-b-2 font-medium text-sm transition-colors ' + (activeTab === 'certificates' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700')">
+              Certificates
+            </button>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <!-- Available Courses Tab -->
+    <section *ngIf="activeTab === 'available'" class="py-12">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <!-- Filters -->
+          <div class="bg-white rounded-xl border border-gray-200 p-6 mb-8">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Filter Courses</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Category</label>
+                <select [(ngModel)]="selectedCategory" 
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                  <option *ngFor="let category of categories" [value]="category.value">{{ category.label }}</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Format</label>
+                <select [(ngModel)]="selectedFormat" 
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                  <option *ngFor="let format of formats" [value]="format.value">{{ format.label }}</option>
+                </select>
+              </div>
+              <div class="flex items-end">
+                <button class="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                  <i class="ri-search-line mr-2"></i>
+                  Search Courses
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Course Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div *ngFor="let course of getFilteredCourses()" 
+                 class="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300">
+              <img [src]="course.image" [alt]="course.title" class="w-full h-48 object-cover">
+              
+              <div class="p-6">
+                <div class="flex items-center justify-between mb-3">
+                  <span [class]="'px-2 py-1 rounded-full text-xs font-medium ' + getStatusClass(course.status)">
+                    {{ course.status | titlecase }}
+                  </span>
+                  <div class="flex items-center gap-1 text-yellow-500">
+                    <i class="ri-star-fill text-sm"></i>
+                    <span class="text-sm text-gray-600">{{ course.rating }}</span>
+                  </div>
+                </div>
+                
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">{{ course.title }}</h3>
+                <p class="text-gray-600 text-sm mb-4">{{ course.description }}</p>
+                
+                <div class="space-y-2 mb-4">
+                  <div class="flex items-center justify-between text-sm">
+                    <span class="text-gray-500">Provider:</span>
+                    <span class="text-gray-900">{{ course.provider }}</span>
+                  </div>
+                  <div class="flex items-center justify-between text-sm">
+                    <span class="text-gray-500">Credits:</span>
+                    <span class="font-semibold text-blue-600">{{ course.credits }} CPD</span>
+                  </div>
+                  <div class="flex items-center justify-between text-sm">
+                    <span class="text-gray-500">Duration:</span>
+                    <span class="text-gray-900">{{ course.duration }}</span>
+                  </div>
+                  <div class="flex items-center justify-between text-sm">
+                    <span class="text-gray-500">Format:</span>
+                    <div class="flex items-center gap-1">
+                      <i [class]="getFormatIcon(course.format) + ' text-gray-400'"></i>
+                      <span class="text-gray-900">{{ course.format | titlecase }}</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="flex items-center justify-between pt-4 border-t border-gray-200">
+                  <div>
+                    <span class="text-lg font-bold text-gray-900">${{ course.price }}</span>
+                    <p class="text-xs text-gray-500">{{ course.enrolled }} enrolled</p>
+                  </div>
+                  <button (click)="enrollInCourse(course.id)"
+                          [disabled]="course.status === 'full'"
+                          class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+                    {{ course.status === 'full' ? 'Full' : 'Enroll Now' }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Completed Courses Tab -->
+    <section *ngIf="activeTab === 'completed'" class="py-12">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-200">
+              <h3 class="text-lg font-semibold text-gray-900">Completed Courses</h3>
+            </div>
+            
+            <div class="divide-y divide-gray-200">
+              <div *ngFor="let course of completedCourses" class="p-6 hover:bg-gray-50 transition-colors">
+                <div class="flex items-center justify-between">
+                  <div class="flex-1">
+                    <h4 class="text-lg font-semibold text-gray-900 mb-1">{{ course.title }}</h4>
+                    <p class="text-gray-600 mb-2">{{ course.provider }}</p>
+                    <div class="flex items-center gap-4 text-sm text-gray-500">
+                      <span>{{ course.credits }} CPD Credits</span>
+                      <span>•</span>
+                      <span>Completed: {{ course.completionDate }}</span>
+                      <span>•</span>
+                      <span class="font-medium text-green-600">Grade: {{ course.grade }}</span>
+                    </div>
+                  </div>
+                  
+                  <div class="flex items-center gap-3">
+                    <div class="text-center">
+                      <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-1">
+                        <i class="ri-medal-line text-green-600"></i>
+                      </div>
+                      <span class="text-xs text-gray-500">Certified</span>
+                    </div>
+                    
+                    <button (click)="downloadCertificate(course.certificateUrl)"
+                            class="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                      <i class="ri-download-line"></i>
+                      Certificate
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certificates Tab -->
+    <section *ngIf="activeTab === 'certificates'" class="py-12">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div *ngFor="let course of completedCourses" 
+                 class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-all duration-300">
+              <div class="text-center mb-4">
+                <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <i class="ri-award-line text-2xl text-white"></i>
+                </div>
+                <h3 class="font-semibold text-gray-900">{{ course.title }}</h3>
+                <p class="text-gray-600 text-sm">{{ course.provider }}</p>
+              </div>
+              
+              <div class="space-y-2 mb-6">
+                <div class="flex justify-between text-sm">
+                  <span class="text-gray-500">Credits:</span>
+                  <span class="font-medium">{{ course.credits }} CPD</span>
+                </div>
+                <div class="flex justify-between text-sm">
+                  <span class="text-gray-500">Grade:</span>
+                  <span class="font-medium text-green-600">{{ course.grade }}</span>
+                </div>
+                <div class="flex justify-between text-sm">
+                  <span class="text-gray-500">Date:</span>
+                  <span class="font-medium">{{ course.completionDate }}</span>
+                </div>
+              </div>
+              
+              <button (click)="downloadCertificate(course.certificateUrl)"
+                      class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                <i class="ri-download-line mr-2"></i>
+                Download Certificate
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <app-footer />
+</div>

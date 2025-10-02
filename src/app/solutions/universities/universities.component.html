@@ -1,0 +1,163 @@
+<!-- Universities Solution Page -->
+<div class="bg-white dark:bg-slate-900">
+  <app-header />
+  <main class="pt-16">
+    <!-- Hero Section -->
+    <section class="relative h-[480px] flex items-center overflow-hidden">
+      <!-- Animated Background -->
+      <div class="absolute inset-0">
+        <div class="blockchain-grid opacity-20"></div>
+        <div class="trust-ecosystem-bg"></div>
+        
+        <!-- Floating University Elements -->
+        <div class="absolute top-20 left-10 trust-badge animate-float">
+          <div class="w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-xl flex items-center justify-center shadow-lg">
+            <i class="ri-school-line text-white text-xl"></i>
+          </div>
+        </div>
+        <div class="absolute top-40 right-20 trust-badge animate-float" style="animation-delay: 1s;">
+          <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg">
+            <i class="ri-graduation-cap-line text-white"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="max-w-4xl mx-auto text-center">
+          <h1 class="text-6xl lg:text-7xl font-black mb-6">
+            <span class="block text-gray-900 dark:text-white">University</span>
+            <span class="block text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-500 to-pink-600 animate-shimmer">
+              Systems
+            </span>
+          </h1>
+          <p class="text-2xl lg:text-3xl text-gray-600 dark:text-gray-300 font-light leading-relaxed mb-8">
+            Verified graduates. Trusted education. 
+            <span class="font-semibold text-indigo-600 dark:text-indigo-400">Academic excellence assured.</span>
+          </p>
+
+          <!-- Trust Indicators -->
+          <div class="flex justify-center items-center gap-8 mb-12">
+            <div class="trust-indicator glass rounded-full px-6 py-3">
+              <i class="ri-school-line text-indigo-500 mr-2"></i>
+              <span class="text-gray-900 dark:text-white font-bold">150+ Schools</span>
+            </div>
+            <div class="trust-indicator glass rounded-full px-6 py-3">
+              <i class="ri-graduation-cap-line text-purple-500 mr-2"></i>
+              <span class="text-gray-900 dark:text-white font-bold">Academic Integrity</span>
+            </div>
+            <div class="trust-indicator glass rounded-full px-6 py-3">
+              <i class="ri-trophy-line text-pink-500 mr-2"></i>
+              <span class="text-gray-900 dark:text-white font-bold">85% Placement</span>
+            </div>
+          </div>
+
+          <!-- Hero CTAs -->
+          <div class="flex flex-col lg:flex-row justify-center gap-6">
+            <button routerLink="/contact" class="btn-hero bg-gradient-to-r from-indigo-600 to-purple-500 text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-2xl">
+              <i class="ri-school-line mr-3"></i>
+              Get Started
+            </button>
+            <button class="btn-hero glass border-2 border-white/20 text-gray-900 dark:text-white px-8 py-4 rounded-2xl font-bold text-lg">
+              <i class="ri-presentation-line mr-3"></i>
+              Schedule Demo
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- University Features Section -->
+    <section class="py-24 bg-gray-50 dark:bg-slate-800">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-6">University Integration Suite</h2>
+            <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              Complete student and graduate verification solutions
+            </p>
+          </div>
+
+          <div class="grid lg:grid-cols-3 gap-8">
+            <div *ngFor="let feature of universityFeatures" 
+                 class="feature-card card hover-lift group">
+              
+              <!-- Feature Header -->
+              <div class="flex items-center justify-between mb-6">
+                <div class="w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                  <i [class]="feature.icon + ' text-white text-2xl'"></i>
+                </div>
+                <span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-xs font-bold">
+                  {{ feature.target }}
+                </span>
+              </div>
+
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">{{ feature.title }}</h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-6">{{ feature.description }}</p>
+              
+              <!-- Capabilities List -->
+              <div class="space-y-3">
+                <div *ngFor="let capability of feature.capabilities" class="flex items-center gap-3">
+                  <i class="ri-check-line text-green-500"></i>
+                  <span class="text-gray-700 dark:text-gray-300 text-sm">{{ capability }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="py-24 bg-white dark:bg-slate-900">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-6">University Benefits</h2>
+            <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              Enhanced reputation and graduate outcomes through verification
+            </p>
+          </div>
+
+          <div class="grid lg:grid-cols-4 gap-8">
+            <div *ngFor="let benefit of integrationBenefits" 
+                 class="benefit-card card hover-lift text-center group">
+              <div class="w-20 h-20 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-500">
+                <i [class]="benefit.icon + ' text-white text-3xl'"></i>
+              </div>
+              <div class="text-3xl font-black text-indigo-600 dark:text-indigo-400 mb-2">{{ benefit.metric }}</div>
+              <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">{{ benefit.title }}</h3>
+              <p class="text-gray-600 dark:text-gray-300 text-sm mb-2">{{ benefit.description }}</p>
+              <p class="text-gray-500 dark:text-gray-400 text-xs">{{ benefit.metricLabel }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 bg-gradient-to-br from-indigo-900 to-purple-900 text-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-4xl font-bold mb-8">
+            Transform Your University's Verification System
+          </h2>
+          <p class="text-xl text-white/80 mb-12">
+            Join 150+ universities using AMR for student and graduate verification
+          </p>
+          
+          <div class="flex flex-col lg:flex-row justify-center gap-6">
+            <button routerLink="/contact" class="btn-hero bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-12 py-6 rounded-2xl font-bold text-xl shadow-2xl">
+              <i class="ri-school-line mr-3"></i>
+              Start Integration
+            </button>
+            <button class="btn-hero glass border-2 border-white/20 text-white px-12 py-6 rounded-2xl font-bold text-xl">
+              <i class="ri-presentation-line mr-3"></i>
+              Schedule Demo
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <app-footer />
+</div>

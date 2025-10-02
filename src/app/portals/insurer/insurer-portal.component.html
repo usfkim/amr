@@ -1,0 +1,208 @@
+<div class="bg-gray-50 min-h-screen">
+  <app-header />
+  <main class="pt-16">
+    <!-- Insurer Header -->
+    <section class="bg-gradient-to-r from-orange-600 to-red-600 text-white py-12">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="flex flex-col lg:flex-row items-start justify-between gap-8">
+            <div>
+              <h1 class="text-3xl font-bold mb-2">{{ insurerName }}</h1>
+              <p class="text-orange-100 mb-4">Claims Verification & Fraud Prevention Portal</p>
+              <div class="flex items-center gap-6">
+                <div class="flex items-center gap-2">
+                  <i class="ri-shield-check-line"></i>
+                  <span class="font-medium">{{ getFraudPreventionRate() }}% Fraud Detection</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i class="ri-money-dollar-circle-line"></i>
+                  <span class="font-medium">${{ fraudPrevented }}M Fraud Prevented</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Quick Stats -->
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 min-w-[300px]">
+              <h3 class="text-lg font-semibold mb-4">Claims Overview</h3>
+              <div class="space-y-3">
+                <div class="flex justify-between">
+                  <span class="text-orange-100">Total Claims:</span>
+                  <span class="font-bold">{{ totalClaims | number }}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-orange-100">Verified:</span>
+                  <span class="font-bold">{{ verifiedClaims | number }}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-orange-100">Flagged:</span>
+                  <span class="font-bold">{{ flaggedClaims }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Tabs -->
+    <section class="bg-white border-b border-gray-200">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <nav class="flex space-x-8">
+            <button (click)="setActiveTab('dashboard')" 
+                    [class]="'py-4 px-1 border-b-2 font-medium text-sm transition-colors ' + (activeTab === 'dashboard' ? 'border-orange-500 text-orange-600' : 'border-transparent text-gray-500 hover:text-gray-700')">
+              Dashboard
+            </button>
+            <button (click)="setActiveTab('claims')" 
+                    [class]="'py-4 px-1 border-b-2 font-medium text-sm transition-colors ' + (activeTab === 'claims' ? 'border-orange-500 text-orange-600' : 'border-transparent text-gray-500 hover:text-gray-700')">
+              Claims Verification
+            </button>
+            <button (click)="setActiveTab('logs')" 
+                    [class]="'py-4 px-1 border-b-2 font-medium text-sm transition-colors ' + (activeTab === 'logs' ? 'border-orange-500 text-orange-600' : 'border-transparent text-gray-500 hover:text-gray-700')">
+              Verification Logs
+            </button>
+            <button (click)="setActiveTab('analytics')" 
+                    [class]="'py-4 px-1 border-b-2 font-medium text-sm transition-colors ' + (activeTab === 'analytics' ? 'border-orange-500 text-orange-600' : 'border-transparent text-gray-500 hover:text-gray-700')">
+              Fraud Analytics
+            </button>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dashboard Tab -->
+    <section *ngIf="activeTab === 'dashboard'" class="py-12">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="grid lg:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-xl border border-gray-200 p-6 text-center">
+              <div class="text-3xl font-bold text-green-600 mb-2">{{ verifiedClaims | number }}</div>
+              <div class="text-gray-600">Verified Claims</div>
+            </div>
+            <div class="bg-white rounded-xl border border-gray-200 p-6 text-center">
+              <div class="text-3xl font-bold text-red-600 mb-2">{{ flaggedClaims }}</div>
+              <div class="text-gray-600">Flagged Claims</div>
+            </div>
+            <div class="bg-white rounded-xl border border-gray-200 p-6 text-center">
+              <div class="text-3xl font-bold text-blue-600 mb-2">${{ fraudPrevented }}M</div>
+              <div class="text-gray-600">Fraud Prevented</div>
+            </div>
+            <div class="bg-white rounded-xl border border-gray-200 p-6 text-center">
+              <div class="text-3xl font-bold text-purple-600 mb-2">{{ getFraudPreventionRate() }}%</div>
+              <div class="text-gray-600">Detection Rate</div>
+            </div>
+          </div>
+
+          <!-- Recent Fraud Alerts -->
+          <div class="bg-white rounded-xl border border-gray-200 p-8">
+            <h3 class="text-xl font-bold text-gray-900 mb-6">Recent Fraud Alerts</h3>
+            <div class="space-y-4">
+              <div class="flex items-center gap-4 p-4 bg-red-50 rounded-lg border border-red-200">
+                <div class="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center">
+                  <i class="ri-alert-line text-white"></i>
+                </div>
+                <div class="flex-1">
+                  <h4 class="font-medium text-gray-900">High-Risk Claim Detected</h4>
+                  <p class="text-gray-600 text-sm">CLM-2025-001235 - Invalid practitioner license</p>
+                </div>
+                <span class="text-red-600 font-bold">Risk: 95%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Claims Verification Tab -->
+    <section *ngIf="activeTab === 'claims'" class="py-12">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-200">
+              <h3 class="text-lg font-semibold text-gray-900">Claims Requiring Verification</h3>
+            </div>
+            
+            <div class="divide-y divide-gray-200">
+              <div *ngFor="let claim of claimVerifications" class="p-6">
+                <div class="flex items-center justify-between">
+                  <div class="flex-1">
+                    <div class="flex items-center gap-3 mb-2">
+                      <h4 class="font-semibold text-gray-900">{{ claim.claimNumber }}</h4>
+                      <span [class]="'px-3 py-1 rounded-full text-xs font-medium ' + getStatusClass(claim.verificationStatus)">
+                        {{ claim.verificationStatus | titlecase }}
+                      </span>
+                      <span [class]="'px-2 py-1 rounded-full text-xs font-bold ' + getRiskScoreClass(claim.riskScore)">
+                        Risk: {{ claim.riskScore }}%
+                      </span>
+                    </div>
+                    <p class="text-gray-600 mb-1">{{ claim.practitionerName }} • {{ claim.licenseNumber }}</p>
+                    <div class="flex items-center gap-4 text-sm text-gray-500">
+                      <span>Amount: ${{ claim.claimAmount | number }}</span>
+                      <span>•</span>
+                      <span>{{ claim.submittedDate }}</span>
+                    </div>
+                    <div *ngIf="claim.fraudIndicators.length > 0" class="mt-2">
+                      <div class="flex flex-wrap gap-1">
+                        <span *ngFor="let indicator of claim.fraudIndicators" 
+                              class="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs">
+                          {{ indicator }}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="flex gap-3">
+                    <button (click)="flagClaim(claim.id)"
+                            class="bg-red-100 text-red-700 px-4 py-2 rounded-lg hover:bg-red-200 transition-colors">
+                      <i class="ri-flag-line mr-2"></i>
+                      Flag
+                    </button>
+                    <button (click)="approveClaim(claim.id)"
+                            class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                      <i class="ri-check-line mr-2"></i>
+                      Approve
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Verification Logs Tab -->
+    <section *ngIf="activeTab === 'logs'" class="py-12">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-200">
+              <h3 class="text-lg font-semibold text-gray-900">Verification Activity Log</h3>
+            </div>
+            
+            <div class="divide-y divide-gray-200">
+              <div *ngFor="let log of verificationLogs" class="p-6">
+                <div class="flex items-center gap-4">
+                  <div [class]="'w-10 h-10 rounded-full flex items-center justify-center ' + getResultClass(log.result)">
+                    <i class="ri-check-line" *ngIf="log.result === 'success'"></i>
+                    <i class="ri-close-line" *ngIf="log.result === 'failure'"></i>
+                    <i class="ri-alert-line" *ngIf="log.result === 'warning'"></i>
+                  </div>
+                  <div class="flex-1">
+                    <h4 class="font-medium text-gray-900">{{ log.action }}</h4>
+                    <p class="text-gray-600 text-sm">{{ log.practitioner }}</p>
+                    <p class="text-gray-500 text-xs">{{ log.details }}</p>
+                  </div>
+                  <div class="text-right">
+                    <div class="text-gray-500 text-sm">{{ log.timestamp | date:'short' }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <app-footer />
+</div>
